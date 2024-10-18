@@ -12388,7 +12388,7 @@
 											"top": 100,
 											"width": 115.8798828125,
 											"height": 13,
-											"text": "+abre",
+											"text": "+abbre",
 											"horizontalAlignment": 0
 										}
 									],
@@ -17404,8 +17404,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGSmq4CI3HE9/0="
 							},
-							"name": "abre",
-							"type": ""
+							"name": "abbre"
 						}
 					]
 				},
