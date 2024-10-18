@@ -13,10 +13,43 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('lastname');
+            $table->string('firstname');
+            $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('university_id')
+                ->nullable()
+                ->constrained('universities')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('academic_level_id')
+                ->nullable()
+                ->constrained('academic_levels')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('academic_program_id')
+                ->nullable()
+                ->constrained('academic_program_id')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('role_id')
+                ->nullable()
+                ->constrained('user_roles')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('created_by_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('deleted_by_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });
