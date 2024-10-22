@@ -17,7 +17,7 @@ class Moderator extends User
         $role = UserRole::where('name', 'moderator')->first();
 
         if ($role) {
-            // Ajout d'un scope global pour filtrer les administrateurs
+            // Ajout d'un scope global pour filtrer les moderateurs
             static::addGlobalScope('role', function (Builder $builder) use ($role) {
                 $builder->where('role_id', $role->id);
             });

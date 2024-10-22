@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\UserRole;
 use App\Models\University;
 use App\Models\AcademicLevel;
+use InvalidArgumentException;
 use App\Models\AcademicProgram;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -18,10 +19,30 @@ class Uploder extends User
     {
         parent::booted();
 
-        // Ajout d'un scope global pour filtrer les uploder
-        static::addGlobalScope('role', function (Builder $builder) {
-            $role = UserRole::when('name', 'uploder')->first();
-            $builder->where('role_id', $role->id);
+        $role = UserRole::where('name', 'uploder')->first();
+
+        if ($role) {
+            // Ajout d'un scope global pour filtrer les uploders
+            static::addGlobalScope('role', function (Builder $builder) use ($role) {
+                $builder->where('role_id', $role->id);
+            });
+        } else {
+            throw new InvalidArgumentException(Uploder::class . ' is missing role');
+        }
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function ($uploder) {
+            $role = UserRole::where('name', 'uploder')->first();
+
+            if ($role) {
+                $uploder->role_id = $role->id;
+            } else {
+                throw new InvalidArgumentException(Uploder::class . ' is missing role');
+            }
         });
     }
 
