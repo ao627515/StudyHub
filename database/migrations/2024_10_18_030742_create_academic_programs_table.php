@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('academic_programs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('abbreviation')->nullable();
+            $table->string('abb', 20)->nullable()->comment("abbreviation");
             $table->timestamps();
         });
     }
