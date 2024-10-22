@@ -30,16 +30,16 @@ class ModeratorService
     /**
      * Met à jour un moderateur existant.
      */
-    public function updateModerator(Moderator $administrator, array $attributes, array $options = [])
+    public function updateModerator(Moderator $moderator, array $attributes, array $options = [])
     {
-        return $administrator->update($attributes);
+        return $moderator->update($attributes);
     }
 
     /**
      * Supprime un moderateur.
      */
-    public function deleteModerator(Moderator $administrator)
+    public function deleteModerator(Moderator $moderator)
     {
-        $administrator->delete();
+        return $moderator->delete();
     }
 }
