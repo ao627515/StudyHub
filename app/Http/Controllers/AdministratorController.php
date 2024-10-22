@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Administrator;
 use App\Services\AdministratorService;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class AdministratorController extends Controller
 
         $this->adminService->createAdministrator($attributes);
 
-        return to_route("admin.administrators.index")->with("Administrateir creer !!");
+        return to_route("admin.administrators.index")->with("success", "Administrateir creer !!");
     }
 
     /**
@@ -60,15 +61,19 @@ class AdministratorController extends Controller
      */
     public function edit(Administrator $administrator)
     {
-        //
+        return view("admin.administrators.edit", compact("administrator"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Administrator $administrator)
+    public function update(UpdateUserRequest $request, Administrator $administrator)
     {
-        //
+        $attributes = $request->validated();
+
+        $this->adminService->updateAdministrator($administrator, $attributes);
+
+        return to_route("admin.administrators.index")->with("success", "Administrateir modifier !!");
     }
 
     /**
@@ -76,6 +81,8 @@ class AdministratorController extends Controller
      */
     public function destroy(Administrator $administrator)
     {
-        //
+        $this->adminService->deleteAdministrator($administrator);
+
+        return to_route("admin.administrators.index")->with("success", "Administrateir supprimer !!");
     }
 }

@@ -12,6 +12,13 @@
     </div>
     <!-- End Page Title -->
 
+    @session('success')
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ $value }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endsession
+
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
@@ -46,9 +53,9 @@
                                         <td>{{ $administrator->phone }}</td>
                                         <td>{{ $administrator->email }}</td>
                                         <td>
-                                            <a href="{{ route('administrators.edit', $administrator->id) }}"
+                                            <a href="{{ route('admin.administrators.edit', $administrator->id) }}"
                                                 class="btn btn-warning btn-sm">Modifier</a>
-                                            <form action="{{ route('administrators.destroy', $administrator->id) }}"
+                                            <form action="{{ route('admin.administrators.destroy', $administrator->id) }}"
                                                 method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
