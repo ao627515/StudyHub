@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AcademicProgram;
 use App\Services\AcademicProgramService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AcademicProgramController extends Controller
 {
@@ -40,8 +41,8 @@ class AcademicProgramController extends Controller
     {
         // Validation des attributs
         $attributes = $request->validate([
-            'name' => 'required|string|max:255',
-            'abb' => 'nullable|string|max:20',
+            'name' => 'required|string|max:255|unique:academic_programs,id',
+            'abb' => 'nullable|string|max:20|unique:academic_programs,id',
         ]);
 
         $this->academicProgramService->create($attributes);
@@ -72,8 +73,8 @@ class AcademicProgramController extends Controller
     {
         // Validation des attributs
         $attributes = $request->validate([
-            'name' => 'required|string|max:255',
-            'abb' => 'nullable|string|max:20',
+            'name' => 'required|string|max:255|unique:academic_programs,id',
+            'abb' =>  ['nullable', Rule::unique('academic_programs', 'abb')->ignore($academicProgram->id)]
         ]);
 
         $this->academicProgramService->update($academicProgram, $attributes);

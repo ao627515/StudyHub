@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('academic_levels', function (Blueprint $table) {
             $table->id();
-            $table->string('name',  50);
-            $table->string('abb',  20)->nullable()->comment("abbreviation");
+            $table->string('name',  50)->unique();
+            $table->string('abb',  20)->unique()->nullable()->comment("abbreviation");
             $table->string('description');
             $table->timestamps();
         });

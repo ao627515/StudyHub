@@ -70,27 +70,31 @@
           <!-- End moderators Nav -->
 
           <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*uploders*')]) data-bs-target="#uploders-nav" data-bs-toggle="collapse" href="#">
+              <a @class(['nav-link', 'collapsed' => !Route::is('*uploaders*')]) data-bs-target="#uploaders-nav" data-bs-toggle="collapse" href="#">
                   <i class="bi bi-journal-text"></i><span>Uploders</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="uploders-nav" @class(['nav-content', 'collapse', 'show' => Route::is('*uploders*')]) data-bs-parent="#sidebar-nav">
+              <ul id="uploaders-nav" @class([
+                  'nav-content',
+                  'collapse',
+                  'show' => Route::is('*uploaders*'),
+              ]) data-bs-parent="#sidebar-nav">
                   <li>
-                      <a href="{{ route('admin.uploders.create') }}" @class([
-                          'active' => Route::currentRouteNamed('*uploders.create'),
+                      <a href="{{ route('admin.uploaders.create') }}" @class([
+                          'active' => Route::currentRouteNamed('*uploaders.create'),
                       ])>
                           <i class="bi bi-circle"></i><span>Ajouter</span>
                       </a>
                   </li>
                   <li>
-                      <a href="{{ route('admin.uploders.index') }}" @class([
-                          'active' => Route::currentRouteNamed('*uploders.index'),
+                      <a href="{{ route('admin.uploaders.index') }}" @class([
+                          'active' => Route::currentRouteNamed('*uploaders.index'),
                       ])>
                           <i class="bi bi-circle"></i><span>Liste</span>
                       </a>
                   </li>
               </ul>
           </li>
-          <!-- End uploders Nav -->
+          <!-- End uploaders Nav -->
 
           <li class="nav-item">
               <a @class(['nav-link', 'collapsed' => !Route::is('*universities*')]) data-bs-target="#universities-nav" data-bs-toggle="collapse"

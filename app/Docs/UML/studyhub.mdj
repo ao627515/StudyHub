@@ -2692,7 +2692,7 @@
 							"top": 928,
 							"width": 70.578125,
 							"height": 103,
-							"text": "Charger de la gestion des resource qu'iel a uploder"
+							"text": "Charger de la gestion des resource qu'iel a uploader"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -5618,7 +5618,7 @@
 											"top": 1324,
 											"width": 173,
 											"height": 13,
-											"text": "Gestion des uploder"
+											"text": "Gestion des uploader"
 										},
 										{
 											"_type": "LabelView",
@@ -10501,7 +10501,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGSmKDzbcCPuk4="
 					},
-					"name": "Gestion des uploder",
+					"name": "Gestion des uploader",
 					"ownedElements": [
 						{
 							"_type": "UMLInclude",
