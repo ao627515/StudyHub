@@ -31,7 +31,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
             $table->foreignId('academic_program_id')
                 ->nullable()
-                ->constrained('academic_program_id')
+                ->constrained('academic_programs')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('role_id')
