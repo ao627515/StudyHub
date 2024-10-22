@@ -3,24 +3,36 @@
       <ul class="sidebar-nav" id="sidebar-nav">
 
           <li class="nav-item">
-              <a class="nav-link collapsed" href="{{ route('admin.dashboard') }}">
+              <a @class([
+                  'nav-link',
+                  'collapsed' => !Route::currentRouteNamed('admin.dashboard'),
+              ])chref="{{ route('admin.dashboard') }}">
                   <i class="bi bi-grid"></i>
                   <span>Dashboard</span>
               </a>
           </li><!-- End Dashboard Nav -->
 
           <li class="nav-item">
-              <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+              <a @class(['nav-link', 'collapsed' => !Route::is('*administrators*')]) data-bs-target="#administrators-nav" data-bs-toggle="collapse"
+                  href="#">
                   <i class="bi bi-journal-text"></i><span>Adminstrateur</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
-              <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <ul id="administrators-nav" @class([
+                  'nav-content',
+                  'collapse',
+                  'show' => Route::is('*administrators*'),
+              ]) data-bs-parent="#sidebar-nav">
                   <li>
-                      <a href="{{ route('admin.administrators.create') }}">
+                      <a href="{{ route('admin.administrators.create') }}" @class([
+                          'active' => Route::currentRouteNamed('*administrators.create'),
+                      ])>
                           <i class="bi bi-circle"></i><span>Ajouter</span>
                       </a>
                   </li>
                   <li>
-                      <a href="{{ route('admin.administrators.index') }}">
+                      <a href="{{ route('admin.administrators.index') }}" @class([
+                          'active' => Route::currentRouteNamed('*administrators.index'),
+                      ])>
                           <i class="bi bi-circle"></i><span>Liste</span>
                       </a>
                   </li>
