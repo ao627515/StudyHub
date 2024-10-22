@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('universities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('logo')->nullable();
-            $table->string('abb',  20)->nullable()->comment("abbreviation");
+            $table->string('abb',  20)->unique()->nullable()->comment("abbreviation");
             $table->timestamps();
         });
     }

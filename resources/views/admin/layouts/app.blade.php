@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
@@ -8,6 +8,7 @@
     <title>Components / Accordion - NiceAdmin Bootstrap Template</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
@@ -19,7 +20,11 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('fonts/vendor/bootstrap-icons/bootstrap-icons.woff') }}">
+    <link rel="stylesheet" href="{{ asset('fonts/vendor/bootstrap-icons/bootstrap-icons.woff2') }}">
+
+    @yield('styles')
 
 </head>
 
@@ -46,7 +51,11 @@
             class="bi bi-arrow-up-short"></i></a>
 
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ mix('js/app.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/main.js') }}"></script>
+    <script src="{{ asset('assets/global/global.js') }}"></script>
+
+    @yield('scripts')
 
 </body>
 

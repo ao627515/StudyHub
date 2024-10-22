@@ -32,7 +32,7 @@ class ModeratorService
      */
     public function updateModerator(Moderator $moderator, array $attributes, array $options = [])
     {
-        return $moderator->update($attributes);
+        return $moderator->update($attributes, $options);
     }
 
     /**
