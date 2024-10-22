@@ -15,7 +15,7 @@ Route::middleware("auth")->group(function () {
         Route::resource('administrators', AdministratorController::class);
         Route::resource('moderators', ModeratorController::class);
         Route::resource('uploders', UploderController::class);
-        Route::resource('universities', UniversityController::class);
-        Route::resource('academic_programs', AcademicProgramController::class);
+        Route::resource('universities', UniversityController::class)->except(['edit', 'create', 'show']);
+        Route::resource('academic_programs', AcademicProgramController::class)->except(['edit', 'create', 'show']);
     });
 });

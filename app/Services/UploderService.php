@@ -14,15 +14,15 @@ class UploderService
         //
     }
 
-    public function getAllUploders()
+    public function getAll()
     {
-        return Uploder::all();
+        return Uploder::latest()->get();
     }
 
     /**
      * Crée un nouvel moderateur.
      */
-    public function createUploder(array $attributes)
+    public function create(array $attributes)
     {
         return Uploder::create($attributes);
     }
@@ -30,7 +30,7 @@ class UploderService
     /**
      * Met à jour un moderateur existant.
      */
-    public function updateUploder(Uploder $uploder, array $attributes, array $options = [])
+    public function update(Uploder $uploder, array $attributes, array $options = [])
     {
         return $uploder->update($attributes);
     }
@@ -38,7 +38,7 @@ class UploderService
     /**
      * Supprime un moderateur.
      */
-    public function deleteUploder(Uploder $uploder)
+    public function delete(Uploder $uploder)
     {
         return $uploder->delete();
     }

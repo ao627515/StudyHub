@@ -102,13 +102,13 @@
                   'collapse',
                   'show' => Route::is('*universities*'),
               ]) data-bs-parent="#sidebar-nav">
-                  <li>
+                  {{-- <li>
                       <a href="{{ route('admin.universities.create') }}" @class([
                           'active' => Route::currentRouteNamed('*universities.create'),
                       ])>
                           <i class="bi bi-circle"></i><span>Ajouter</span>
                       </a>
-                  </li>
+                  </li> --}}
                   <li>
                       <a href="{{ route('admin.universities.index') }}" @class([
                           'active' => Route::currentRouteNamed('*universities.index'),
@@ -120,26 +120,25 @@
           </li>
           <!-- End universities Nav -->
 
-          {{-- academic_programs --}}
 
 
           <li class="nav-item">
               <a @class(['nav-link', 'collapsed' => !Route::is('*academic_programs*')]) data-bs-target="#academic_programs-nav" data-bs-toggle="collapse"
                   href="#">
-                  <i class="bi bi-journal-text"></i><span>Universites</span><i class="bi bi-chevron-down ms-auto"></i>
+                  <i class="bi bi-journal-text"></i><span>Filieres</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
               <ul id="academic_programs-nav" @class([
                   'nav-content',
                   'collapse',
                   'show' => Route::is('*academic_programs*'),
               ]) data-bs-parent="#sidebar-nav">
-                  <li>
+                  {{-- <li>
                       <a href="{{ route('admin.academic_programs.create') }}" @class([
                           'active' => Route::currentRouteNamed('*academic_programs.create'),
                       ])>
                           <i class="bi bi-circle"></i><span>Ajouter</span>
                       </a>
-                  </li>
+                  </li> --}}
                   <li>
                       <a href="{{ route('admin.academic_programs.index') }}" @class([
                           'active' => Route::currentRouteNamed('*academic_programs.index'),

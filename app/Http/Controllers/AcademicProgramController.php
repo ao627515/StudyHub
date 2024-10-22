@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\AcademicProgram;
+use App\Services\AcademicProgramService;
 use Illuminate\Http\Request;
 
 class AcademicProgramController extends Controller
 {
+    private AcademicProgramService $academicProgramService;
+
+    public function __construct(AcademicProgramService $academicProgramService)
+    {
+        $this->academicProgramService = $academicProgramService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $programs = $this->academicProgramService->getAll();
+
+        return view("admin.academic_programs.index", compact("programs"));
     }
 
     /**
@@ -20,7 +30,7 @@ class AcademicProgramController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.academic_programs.create");
     }
 
     /**
@@ -28,7 +38,15 @@ class AcademicProgramController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validation des attributs
+        $attributes = $request->validate([
+            'name' => 'required|string|max:255',
+            'abb' => 'nullable|string|max:20',
+        ]);
+
+        $this->academicProgramService->create($attributes);
+
+        return to_route("admin.academic_programs.index")->with("success", "Programme académique créé avec succès !");
     }
 
     /**
@@ -44,7 +62,7 @@ class AcademicProgramController extends Controller
      */
     public function edit(AcademicProgram $academicProgram)
     {
-        //
+        return view("admin.academic_programs.edit", compact("academicProgram"));
     }
 
     /**
@@ -52,7 +70,15 @@ class AcademicProgramController extends Controller
      */
     public function update(Request $request, AcademicProgram $academicProgram)
     {
-        //
+        // Validation des attributs
+        $attributes = $request->validate([
+            'name' => 'required|string|max:255',
+            'abb' => 'nullable|string|max:20',
+        ]);
+
+        $this->academicProgramService->update($academicProgram, $attributes);
+
+        return to_route("admin.academic_programs.index")->with("success", "Programme académique mis à jour avec succès !");
     }
 
     /**
@@ -60,6 +86,8 @@ class AcademicProgramController extends Controller
      */
     public function destroy(AcademicProgram $academicProgram)
     {
-        //
+        $this->academicProgramService->delete($academicProgram);
+
+        return to_route("admin.academic_programs.index")->with("success", "Programme académique supprimé avec succès !");
     }
 }
