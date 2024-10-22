@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('admin.pages.dashboard');
-});
+Route::redirect('/', 'admin/dashboard', 301);
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/admin_auth.php';

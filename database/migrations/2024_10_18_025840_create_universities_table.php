@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('logo')->nullable();
-            $table->string('abbreviation')->nullable();
+            $table->string('abb',  20)->nullable()->comment("abbreviation");
             $table->timestamps();
         });
     }
