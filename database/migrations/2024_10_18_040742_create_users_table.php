@@ -35,7 +35,6 @@ return new class extends Migration
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('role_id')
-                ->nullable()
                 ->constrained('user_roles')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

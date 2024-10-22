@@ -8,17 +8,39 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use InvalidArgumentException;
 
 class Administrator extends User
 {
+    protected $table = "users";
+
     protected static function booted(): void
     {
         parent::booted();
 
-        // Ajout d'un scope global pour filtrer les administrateurs
-        static::addGlobalScope('role', function (Builder $builder) {
-            $role = UserRole::when('name', 'administrator')->first();
-            $builder->where('role_id', $role->id);
+        $role = UserRole::where('name', 'administrator')->first();
+
+        if ($role) {
+            static::addGlobalScope('role', function (Builder $builder) use ($role) {
+                $builder->where('role_id', $role->id);
+            });
+        } else {
+            throw new InvalidArgumentException(Administrator::class . ' is missing role');
+        }
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function ($administrator) {
+            $role = UserRole::where('name', 'administrator')->first();
+
+            if ($role) {
+                $administrator->role_id = $role->id;
+            } else {
+                throw new InvalidArgumentException(Administrator::class . ' is missing role');
+            }
         });
     }
 

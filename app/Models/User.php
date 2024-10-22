@@ -13,11 +13,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;
+
+    protected $table = "users";
+
 
     /**
      * The attributes that are mass assignable.
@@ -52,6 +56,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    // hook conf
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            // Hash the password if it's not null or empty
+            if (!empty($model->password)) {
+                $model->password = Hash::make($model->password);
+            } else {
+                $model->password = "zKVjSSW12LljLpB";
+            }
+        });
+    }
+
 
     // relashionship
 
