@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Modifier un Administrateur</h1>
+        <h1>Créer un Moderateur</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Accueil</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('admin.administrators.index') }}">Administrateurs</a></li>
-                <li class="breadcrumb-item active">Modifier</li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.administrators.index') }}">Moderateurs</a></li>
+                <li class="breadcrumb-item active">Créer</li>
             </ol>
         </nav>
     </div>
@@ -19,24 +19,21 @@
                 <div class="col-lg-10">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Informations sur l'administrateur</h5>
+                            <h5 class="card-title">Informations sur l'moderateurs</h5>
 
-                            <form method="POST" action="{{ route('admin.administrators.update', $administrator->id) }}">
+                            <form method="POST" action="{{ route('admin.moderators.store') }}">
                                 @csrf
-                                @method('PUT') <!-- Méthode PUT pour la mise à jour -->
-
-                                <x-user-form :user="$administrator" />
-
+                                <x-user-form :user="null" />
                                 <div class="row mb-3">
                                     <div class="col-sm-10 offset-sm-2">
-                                        <button type="submit" class="btn btn-primary">Mettre à jour
-                                            l'administrateur</button>
+                                        <button type="submit" class="btn btn-primary">Créer un moderateur</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </section>

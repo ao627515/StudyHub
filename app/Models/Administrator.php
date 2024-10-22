@@ -12,7 +12,6 @@ use InvalidArgumentException;
 
 class Administrator extends User
 {
-    protected $table = "users";
 
     protected static function booted(): void
     {

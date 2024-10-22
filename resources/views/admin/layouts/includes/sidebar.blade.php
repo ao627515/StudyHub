@@ -10,7 +10,8 @@
                   <i class="bi bi-grid"></i>
                   <span>Dashboard</span>
               </a>
-          </li><!-- End Dashboard Nav -->
+          </li>
+          <!-- End Dashboard Nav -->
 
           <li class="nav-item">
               <a @class(['nav-link', 'collapsed' => !Route::is('*administrators*')]) data-bs-target="#administrators-nav" data-bs-toggle="collapse"
@@ -38,7 +39,34 @@
                   </li>
               </ul>
           </li>
-          <!-- End Forms Nav -->
+          <!-- End administrators Nav -->
+
+          <li class="nav-item">
+              <a @class(['nav-link', 'collapsed' => !Route::is('*moderators*')]) data-bs-target="#moderators-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-journal-text"></i><span>Moderateur</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="moderators-nav" @class([
+                  'nav-content',
+                  'collapse',
+                  'show' => Route::is('*moderators*'),
+              ]) data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('admin.moderators.create') }}" @class([
+                          'active' => Route::currentRouteNamed('*moderators.create'),
+                      ])>
+                          <i class="bi bi-circle"></i><span>Ajouter</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="{{ route('admin.moderators.index') }}" @class([
+                          'active' => Route::currentRouteNamed('*moderators.index'),
+                      ])>
+                          <i class="bi bi-circle"></i><span>Liste</span>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+          <!-- End moderators Nav -->
 
 
           <li class="nav-heading">Pages</li>

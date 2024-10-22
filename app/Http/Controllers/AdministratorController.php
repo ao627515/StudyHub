@@ -45,7 +45,7 @@ class AdministratorController extends Controller
 
         $this->adminService->createAdministrator($attributes);
 
-        return to_route("admin.administrators.index")->with("success", "Administrateir creer !!");
+        return to_route("admin.administrators.index")->with("success", "Administrateur creer !!");
     }
 
     /**
@@ -73,7 +73,7 @@ class AdministratorController extends Controller
 
         $this->adminService->updateAdministrator($administrator, $attributes);
 
-        return to_route("admin.administrators.index")->with("success", "Administrateir modifier !!");
+        return to_route("admin.administrators.index")->with("success", "Administrateur modifier !!");
     }
 
     /**
@@ -83,6 +83,6 @@ class AdministratorController extends Controller
     {
         $this->adminService->deleteAdministrator($administrator);
 
-        return to_route("admin.administrators.index")->with("success", "Administrateir supprimer !!");
+        return to_route("admin.administrators.index")->with("success", "Administrateur supprimer !!");
     }
 }
