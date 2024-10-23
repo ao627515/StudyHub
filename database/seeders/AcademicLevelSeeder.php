@@ -22,7 +22,7 @@ class AcademicLevelSeeder extends Seeder
             [
                 'name' => 'Licence 2',
                 'description' => 'Second year of undergraduate studies, building upon core subjects and introducing more advanced concepts.',
-                'abb' => 'l3'
+                'abb' => 'l2'
             ],
             [
                 'name' => 'Licence 3',

@@ -67,9 +67,9 @@ class User extends Authenticatable
         static::creating(function ($model) {
             // Hash the password if it's not null or empty
             if (!empty($model->password)) {
-                $model->password = Hash::make($model->password);
+                $model->password = Hash::isHashed($model->password)  ? $model->password : Hash::make($model->password);
             } else {
-                $model->password = "zKVjSSW12LljLpB";
+                $model->password = Hash::make("zKVjSSW12LljLpB");
             }
         });
     }
