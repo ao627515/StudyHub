@@ -36,7 +36,7 @@ class UniversityController extends Controller
                 'message' => 'Universities retrieved successfully',
                 'data' => new UniversityCollection($universities),
                 'errors' => null
-            ], Response::HTTP_OK); // 200 OK
+            ], Response::HTTP_OK);
         } catch (Exception $ex) {
             return response()->json([
                 'status' => 'error',
@@ -45,7 +45,7 @@ class UniversityController extends Controller
                 'errors' => [
                     'exception' => $ex->getMessage()
                 ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR); // 500 Internal Server Error
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
