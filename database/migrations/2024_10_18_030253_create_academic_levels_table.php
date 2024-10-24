@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('abb',  20)->unique()->nullable()->comment("abbreviation");
             $table->string('description');
             $table->foreignId('created_by_id')
+                ->nullable()
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

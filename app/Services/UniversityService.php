@@ -25,8 +25,8 @@ class UniversityService
         return DB::transaction(function () use ($attributes) {
             if (isset($attributes['logo']) && $attributes['logo'] instanceof UploadedFile) {
                 $attributes['logo'] = $attributes['logo']->store('universities', 'public');
-                $attibutes['created_by_id'] = Auth::id();
             }
+            $attributes['created_by_id'] = Auth::id();
 
             return University::create($attributes);
         });
@@ -58,6 +58,8 @@ class UniversityService
         if ($path) {
             return Storage::disk('public')->delete($path);
         }
+
+
 
         return false;
     }

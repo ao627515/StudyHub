@@ -42,6 +42,8 @@ class ModeratorService
      */
     public function deleteModerator(Moderator $moderator)
     {
+        $this->updateModerator($moderator, ['deleted_by_id' => Auth::id()]);
+
         return $moderator->delete();
     }
 }

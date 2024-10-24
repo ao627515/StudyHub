@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\AcademicProgram;
+use Illuminate\Support\Facades\Auth;
 
 class AcademicProgramService
 {
@@ -24,6 +25,7 @@ class AcademicProgramService
      */
     public function create(array $attributes)
     {
+        $attributes['created_by_id'] = Auth::id();
         return AcademicProgram::create($attributes);
     }
 

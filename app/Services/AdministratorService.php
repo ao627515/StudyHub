@@ -37,6 +37,8 @@ class AdministratorService
      */
     public function deleteAdministrator(Administrator $administrator)
     {
+        $this->updateAdministrator($administrator, ['deleted_by_id' => Auth::id()]);
+
         $administrator->delete();
     }
 }

@@ -25,7 +25,7 @@ class UploaderService
      */
     public function create(array $attributes)
     {
-        $attibutes['created_by_id'] = Auth::id();
+        $attributes['created_by_id'] = Auth::id();
         return Uploader::create($attributes);
     }
 
@@ -42,6 +42,8 @@ class UploaderService
      */
     public function delete(Uploader $uploader)
     {
+        $this->update($uploader, ['deleted_by_id' => Auth::id()]);
+
         return $uploader->delete();
     }
 
