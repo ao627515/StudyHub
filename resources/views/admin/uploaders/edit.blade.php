@@ -1,5 +1,12 @@
 @extends('admin.layouts.app')
 
+@section('styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+@endsection
+
+
 @section('content')
     <div class="pagetitle">
         <h1>Modifier l'Uploader</h1>
@@ -23,8 +30,8 @@
                         <x-user-form :user="$uploader" />
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="university_id" class="form-label">Université</label>
-                                <select class="form-select @error('university_id') is-invalid @enderror" id="university_id"
+                                <label for="universities" class="form-label">Université</label>
+                                <select class="form-select @error('university_id') is-invalid @enderror" id="universities"
                                     name="university_id">
                                     <option value="">Sélectionnez une Université</option>
                                     @foreach ($universities as $university)
@@ -55,9 +62,9 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label for="academic_program_id" class="form-label">Programme académique</label>
+                                <label for="academic_programs" class="form-label">Programme académique</label>
                                 <select class="form-select @error('academic_program_id') is-invalid @enderror"
-                                    id="academic_program_id" name="academic_program_id">
+                                    id="academic_programs" name="academic_program_id">
                                     <option value="">Sélectionnez un Programme Académique</option>
                                     @foreach ($academicPrograms as $program)
                                         <option value="{{ $program->id }}" @selected(old('academic_program_id', $uploader->academic_program_id) == $program->id)>
@@ -77,4 +84,27 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Call the function to initialize Select2 with specific options
+            initializeSelect2WithCreate({
+                selectId: '#universities',
+                apiUrl: 'http://127.0.0.1:8000/api/universities', // API endpoint
+                placeholder: 'Search for a university...',
+                noResultsMessage: 'No results found' // Custom no results message
+            });
+
+            initializeSelect2WithCreate({
+                selectId: '#academic_programs',
+                apiUrl: 'http://127.0.0.1:8000/api/academic_programs', // API endpoint
+                placeholder: 'Search for a academic_programs...',
+                noResultsMessage: 'No results found' // Custom no results message
+            });
+        });
+    </script>
 @endsection
