@@ -75,4 +75,14 @@ class AuthenticatedSessionController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function fail()
+    {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Failed to log out.',
+            'data' => null,
+            'errors' => []
+        ], Response::HTTP_UNAUTHORIZED);
+    }
 }

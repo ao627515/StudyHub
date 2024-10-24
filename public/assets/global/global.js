@@ -112,15 +112,23 @@ function initializeSelect2WithCreate({ selectId, apiUrl, resource = 'option', pl
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
+                credentials: 'same-origin'
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
                 .then(result => handleApiResponse(result, selectId, resource))
                 .catch(error => handleApiError(error, resource));
         }
     });
+
 }
 
 function handleApiResponse(result, selectId, resource) {
