@@ -128,7 +128,22 @@
           </li>
           <!-- End academic programs Nav -->
 
-          <!-- End academic_programs Nav -->
+          <li class="nav-item">
+              <a @class(['nav-link', 'collapsed' => !Route::is('*teachers*')]) data-bs-target="#teachers-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-book"></i><span>Professeur</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="teachers-nav" @class(['nav-content', 'collapse', 'show' => Route::is('*teachers*')]) data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('admin.teachers.index') }}" @class([
+                          'active' => Route::currentRouteNamed('*teachers.index'),
+                      ])>
+                          <i class="bi bi-list-ul"></i><span>Liste</span>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+          <!-- End teacher Nav -->
+
           <li class="nav-heading">Pages</li>
 
           <li class="nav-item">

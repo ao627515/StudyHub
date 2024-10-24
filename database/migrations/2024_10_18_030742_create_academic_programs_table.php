@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('abb', 20)->unique()->nullable()->comment("abbreviation");
+            $table->foreignId('created_by_id')
+                ->constrained('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }

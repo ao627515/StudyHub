@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Administrator;
+use Illuminate\Support\Facades\Auth;
 
 class AdministratorService
 {
@@ -19,6 +20,7 @@ class AdministratorService
      */
     public function createAdministrator(array $attributes)
     {
+        $attibutes['created_by_id'] = Auth::id();
         return Administrator::create($attributes);
     }
 

@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('universities', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('logo')->nullable();
-            $table->string('abb',  20)->unique()->nullable()->comment("abbreviation");
+            $table->string('name');
             $table->foreignId('created_by_id')
                 ->constrained('users')
                 ->cascadeOnDelete()
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('universities');
+        Schema::dropIfExists('teachers');
     }
 };

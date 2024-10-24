@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Moderator;
+use Illuminate\Support\Facades\Auth;
 
 class ModeratorService
 {
@@ -24,6 +25,7 @@ class ModeratorService
      */
     public function createModerator(array $attributes)
     {
+        $attibutes['created_by_id'] = Auth::id();
         return Moderator::create($attributes);
     }
 

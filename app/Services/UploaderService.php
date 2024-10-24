@@ -6,6 +6,7 @@ use App\Models\Uploader;
 use App\Models\University;
 use App\Models\AcademicLevel;
 use App\Models\AcademicProgram;
+use Illuminate\Support\Facades\Auth;
 
 class UploaderService
 {
@@ -24,6 +25,7 @@ class UploaderService
      */
     public function create(array $attributes)
     {
+        $attibutes['created_by_id'] = Auth::id();
         return Uploader::create($attributes);
     }
 

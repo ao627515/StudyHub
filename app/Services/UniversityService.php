@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\University;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class UniversityService
@@ -24,6 +25,7 @@ class UniversityService
         return DB::transaction(function () use ($attributes) {
             if (isset($attributes['logo']) && $attributes['logo'] instanceof UploadedFile) {
                 $attributes['logo'] = $attributes['logo']->store('universities', 'public');
+                $attibutes['created_by_id'] = Auth::id();
             }
 
             return University::create($attributes);
