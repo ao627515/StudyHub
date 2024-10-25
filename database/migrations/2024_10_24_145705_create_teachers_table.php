@@ -19,16 +19,6 @@ return new class extends Migration
                 ->constrained('universities')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('academic_level_id')
-                ->nullable()
-                ->constrained('academic_levels')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('academic_program_id')
-                ->nullable()
-                ->constrained('academic_programs')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
             $table->foreignId('created_by_id')
                 ->nullable()
                 ->constrained('users')

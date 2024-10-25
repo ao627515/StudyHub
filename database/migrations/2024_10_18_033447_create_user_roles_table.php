@@ -16,16 +16,6 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('description')->nullable();
             $table->string('abb',  20)->nullable()->comment("abbreviation");
-            $table->foreignId('created_by_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('deleted_by_id')
-                ->nullable()
-                ->constrained('users')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
             $table->softDeletes();
             $table->timestamps();
         });

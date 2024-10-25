@@ -11,22 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('academic_programs', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->string('abb', 20)->unique()->nullable()->comment("abbreviation");
-            $table->foreignId('university_id')
+        Schema::table('academic_levels', function (Blueprint $table) {
+            $table->foreignId('created_by_id')
                 ->nullable()
-                ->constrained('universities')
+                ->constrained('users')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('academic_level_id')
+            $table->foreignId('deleted_by_id')
                 ->nullable()
-                ->constrained('academic_levels')
+                ->constrained('users')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
-            $table->softDeletes();
-            $table->timestamps();
         });
     }
 
@@ -35,6 +30,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('academic_programs');
+        Schema::table('academic_levels', function (Blueprint $table) {
+            $table->dropForeign('created_by_id');
+            $table->dropForeign('deleted_by_id');
+        });
     }
 };
