@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('academic_programs', function (Blueprint $table) {
+        Schema::create('course_modules', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('abb', 20)->unique()->nullable()->comment("abbreviation");
+            $table->string('name');
             $table->foreignId('university_id')
                 ->nullable()
                 ->constrained('universities')
@@ -41,7 +40,7 @@ return new class extends Migration
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->softDeletes();
-            $table->timestamps();
+            $table->$table->timestamps();
         });
     }
 
@@ -50,6 +49,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('academic_programs');
+        Schema::dropIfExists('course_modules');
     }
 };

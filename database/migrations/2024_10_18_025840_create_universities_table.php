@@ -17,9 +17,16 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->string('abb',  20)->unique()->nullable()->comment("abbreviation");
             $table->foreignId('created_by_id')
+                ->nullable()
                 ->constrained('users')
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
+            $table->foreignId('deleted_by_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

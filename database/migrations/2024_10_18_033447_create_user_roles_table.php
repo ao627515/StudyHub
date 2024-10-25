@@ -19,8 +19,14 @@ return new class extends Migration
             $table->foreignId('created_by_id')
                 ->nullable()
                 ->constrained('users')
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
+            $table->foreignId('deleted_by_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
