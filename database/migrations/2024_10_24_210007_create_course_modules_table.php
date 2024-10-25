@@ -40,7 +40,7 @@ return new class extends Migration
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->softDeletes();
-            $table->$table->timestamps();
+            $table->timestamps();
         });
     }
 
