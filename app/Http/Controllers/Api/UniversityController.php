@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\ErrorResponseResource;
+use App\Http\Resources\ResponseResource;
 use Exception;
 use App\Models\University;
 use Illuminate\Http\Request;
@@ -26,26 +28,16 @@ class UniversityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index()
     {
         try {
-            $universities = $this->universityService->getAll();
+            $universities = $this->universityService->getAll(relations: []);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Universities retrieved successfully',
-                'data' => new UniversityCollection($universities),
-                'errors' => null
-            ], Response::HTTP_OK);
+            return new ResponseResource(message: 'Universities retrieved successfully', data: new UniversityCollection($universities));
         } catch (Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to retrieve universities',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage()
-                ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return (new ErrorResponseResource('Failed to retrieve universities', [
+                'exception' => $ex->getMessage()
+            ]))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 

@@ -8,14 +8,17 @@ use App\Services\UploaderService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Services\UniversityService;
 
 class UploaderController extends Controller
 {
     private UploaderService $uploaderService;
+    private UniversityService $universityService;
 
-    public function __construct(UploaderService $uploaderService)
+    public function __construct(UploaderService $uploaderService, UniversityService $universityService)
     {
         $this->uploaderService = $uploaderService;
+        $this->universityService = $universityService;
     }
 
     /**
@@ -34,7 +37,7 @@ class UploaderController extends Controller
     public function create()
     {
         // Récupérez les données nécessaires pour le formulaire de création
-        $universities = $this->uploaderService->getUniversities();
+        $universities = $this->universityService->getAll();
         $academicLevels = $this->uploaderService->getAcademicLevels();
         $academicPrograms = $this->uploaderService->getAcademicPrograms();
 

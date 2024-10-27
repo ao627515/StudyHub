@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\AcademicProgram;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,5 +22,10 @@ class University extends Model
     public function getLogoUrl()
     {
         return $this->logo === null ? null : asset('storage/' . $this->logo);
+    }
+
+    public function academicPrograms()
+    {
+        return $this->hasMany(AcademicProgram::class, 'university_id');
     }
 }

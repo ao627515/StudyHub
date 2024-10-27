@@ -7,6 +7,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+
 
 class UniversityService
 {
@@ -15,9 +17,23 @@ class UniversityService
         // Service constructor
     }
 
-    public function getAll()
+    public function getAll($paginate = 0, array $relations = [])
     {
-        return University::latest()->get();
+        $query = University::query();
+
+        if (!empty($relations)) {
+            $query->with(relations: $relations);
+        }
+
+        // dd($relations);
+
+
+
+        if ($paginate) {
+            return $query->paginate($paginate);
+        }
+
+        return $query->latest()->get();
     }
 
     public function create(array $attributes)

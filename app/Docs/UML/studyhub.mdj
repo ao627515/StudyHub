@@ -3288,7 +3288,7 @@
 									"font": "Arial;13;0",
 									"left": 723.5,
 									"top": 509,
-									"width": 183.875,
+									"width": 183,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGSmLcbteJFhts="
@@ -8500,7 +8500,7 @@
 									"font": "Arial;13;0",
 									"left": 743,
 									"top": 1189,
-									"width": 149.4326171875,
+									"width": 149,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGSmooVHgt65XY="
@@ -8969,7 +8969,7 @@
 									"font": "Arial;13;0",
 									"left": 772,
 									"top": 949,
-									"width": 134.24267578125,
+									"width": 133,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGSmorUwx+4OKo="
