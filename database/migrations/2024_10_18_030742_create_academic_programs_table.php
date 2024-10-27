@@ -20,11 +20,6 @@ return new class extends Migration
                 ->constrained('universities')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('academic_level_id')
-                ->nullable()
-                ->constrained('academic_levels')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
             $table->softDeletes();
             $table->timestamps();
         });

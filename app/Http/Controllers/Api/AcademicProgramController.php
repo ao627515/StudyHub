@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\AcademicProgram;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAcademicProgramRequest;
+use App\Http\Requests\UpdateAcademicProgramRequest;
 use App\Http\Resources\AcademicProgramCollection;
 use App\Http\Resources\AcademicProgramResource;
+use App\Http\Resources\ResponseResource;
+use App\Http\Resources\ErrorResponseResource;
 use App\Services\AcademicProgramService;
 use Symfony\Component\HttpFoundation\Response;
 use Exception;
@@ -29,83 +33,61 @@ class AcademicProgramController extends Controller
         try {
             $programs = $this->academicProgramService->getAll();
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Academic programs retrieved successfully',
-                'data' => new AcademicProgramCollection($programs),
-                'errors' => null
-            ], Response::HTTP_OK);
+            return new ResponseResource(
+                data: new AcademicProgramCollection(new AcademicProgramCollection($programs)),
+                message: 'Academic programs retrieved successfully'
+            );
         } catch (Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to retrieve academic programs',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage()
-                ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return (new ErrorResponseResource(
+                message: 'Failed to retrieve academic programs',
+                errors: ['exception' => $ex->getMessage()]
+            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAcademicProgramRequest $request)
     {
         try {
-            $attributes = $request->validate([
-                'name' => 'required|string|max:255|unique:academic_programs,name',
-                'abb' => 'nullable|string|max:20|unique:academic_programs,abb',
-            ]);
+            $attributes = $request->validated();
 
             $program = $this->academicProgramService->create($attributes);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Academic program created successfully',
-                'data' => new AcademicProgramResource($program),
-                'errors' => null
-            ], Response::HTTP_CREATED);
+            return new ResponseResource(
+                data: new AcademicProgramResource(
+                    new AcademicProgramResource($program)
+                ),
+                message: 'Academic program created successfully'
+            );
         } catch (Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to create academic program',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage()
-                ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return (new ErrorResponseResource(
+                message: 'Failed to create academic program',
+                errors: ['exception' => $ex->getMessage()]
+            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);;
         }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AcademicProgram $academicProgram)
+    public function update(UpdateAcademicProgramRequest $request, AcademicProgram $academicProgram)
     {
         try {
-            $attributes = $request->validate([
-                'name' => 'required|string|max:255|unique:academic_programs,name,' . $academicProgram->id,
-                'abb' => ['nullable', Rule::unique('academic_programs', 'abb')->ignore($academicProgram->id)],
-            ]);
+            $attributes = $request->validated();
 
             $program = $this->academicProgramService->update($academicProgram, $attributes);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Academic program updated successfully',
-                'data' => new AcademicProgramResource($program),
-                'errors' => null
-            ], Response::HTTP_OK);
+            return new ResponseResource(
+                data: new AcademicProgramResource(new AcademicProgramResource($program)),
+                message: 'Academic program updated successfully'
+            );
         } catch (Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to update academic program',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage()
-                ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return (new ErrorResponseResource(
+                message: 'Failed to update academic program',
+                errors: ['exception' => $ex->getMessage()]
+            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);;
         }
     }
 
@@ -117,21 +99,15 @@ class AcademicProgramController extends Controller
         try {
             $this->academicProgramService->delete($academicProgram);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Academic program deleted successfully',
-                'data' => null,
-                'errors' => null
-            ], Response::HTTP_OK);
+            return new ResponseResource(
+                data: null,
+                message: 'Academic program deleted successfully'
+            );
         } catch (Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to delete academic program',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage()
-                ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return (new ErrorResponseResource(
+                message: 'Failed to delete academic program',
+                errors: ['exception' => $ex->getMessage(), 'validation' => null]
+            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);;
         }
     }
 }

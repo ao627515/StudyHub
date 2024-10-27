@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AcademicProgram;
-use App\Services\AcademicProgramService;
 use Illuminate\Http\Request;
+use App\Models\AcademicProgram;
 use Illuminate\Validation\Rule;
+use App\Services\UniversityService;
+use App\Services\AcademicProgramService;
+use App\Http\Requests\StoreAcademicProgramRequest;
 
 class AcademicProgramController extends Controller
 {
     private AcademicProgramService $academicProgramService;
+    private UniversityService  $universityService;
 
-    public function __construct(AcademicProgramService $academicProgramService)
+    public function __construct(AcademicProgramService $academicProgramService,  UniversityService  $universityService)
     {
         $this->academicProgramService = $academicProgramService;
+        $this->universityService = $universityService;
     }
 
     /**
@@ -22,8 +26,10 @@ class AcademicProgramController extends Controller
     public function index()
     {
         $programs = $this->academicProgramService->getAll();
+        $universities = $this->universityService->getAll();
 
-        return view("admin.academic_programs.index", compact("programs"));
+
+        return view("admin.academic_programs.index", compact("programs", "universities"));
     }
 
     /**
@@ -37,13 +43,10 @@ class AcademicProgramController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAcademicProgramRequest $request)
     {
         // Validation des attributs
-        $attributes = $request->validate([
-            'name' => 'required|string|max:255|unique:academic_programs,id',
-            'abb' => 'nullable|string|max:20|unique:academic_programs,id',
-        ]);
+        $attributes = $request->validated();
 
         $this->academicProgramService->create($attributes);
 

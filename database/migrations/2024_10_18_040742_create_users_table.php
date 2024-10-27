@@ -19,16 +19,16 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('university_id')
-                ->nullable()
-                ->constrained('universities')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId('academic_level_id')
-                ->nullable()
-                ->constrained('academic_levels')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
+            // $table->foreignId('university_id')
+            //     ->nullable()
+            //     ->constrained('universities')
+            //     ->nullOnDelete()
+            //     ->cascadeOnUpdate();
+            // $table->foreignId('academic_level_id')
+            //     ->nullable()
+            //     ->constrained('academic_levels')
+            //     ->nullOnDelete()
+            //     ->cascadeOnUpdate();
             $table->foreignId('academic_program_id')
                 ->nullable()
                 ->constrained('academic_programs')
