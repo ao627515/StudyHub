@@ -31,7 +31,14 @@ class UniversityController extends Controller
     public function index()
     {
         try {
-            $universities = $this->universityService->getAll(relations: []);
+
+            $relations = [];
+
+            if (request()->filled('relations')) {
+                $relations = request('relations');
+            }
+
+            $universities = $this->universityService->getAll(relations: $relations);
 
             return new ResponseResource(message: 'Universities retrieved successfully', data: new UniversityCollection($universities));
         } catch (Exception $ex) {
