@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('academic_program_level', function (Blueprint $table) {
+        Schema::create('academic_program_levels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('academic_level_id')
                 ->nullable()
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('academic_program_level');
+        Schema::dropIfExists('academic_program_levels');
     }
 };

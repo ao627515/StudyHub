@@ -8,8 +8,10 @@ use App\Models\University;
 use App\Models\AcademicLevel;
 use InvalidArgumentException;
 use App\Models\AcademicProgram;
+use App\Models\AcademicProgramLevel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -46,18 +48,32 @@ class Uploader extends User
         });
     }
 
-    public function university(): BelongsTo
+    public function university(): Attribute
     {
-        return $this->belongsTo(University::class, 'university_id');
+        return Attribute::make(
+            get: fn(): University|null => $this->academicProgramLevel->academicProgram->university
+        );
     }
 
-    public function academicLevel(): BelongsTo
+    public function academicLevel(): Attribute
     {
-        return $this->belongsTo(AcademicLevel::class, 'academic_level_id');
+        return Attribute::make(
+            get: fn(): AcademicLevel|null => $this->academicProgramLevel->academincLevel
+        );
     }
 
-    public function academicProgram(): BelongsTo
+    public function academicProgram(): Attribute
     {
-        return $this->belongsTo(AcademicProgram::class, 'academic_program_id');
+        return Attribute::make(
+            get: fn(): AcademicProgram|null => $this->academicProgramLevel->academicProgram
+        );
+    }
+
+    public function academicProgramLevel(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: AcademicProgramLevel::class,
+            foreignKey: 'academic_program_level_id'
+        );
     }
 }

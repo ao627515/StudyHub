@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('academic_program_level_id')
                 ->nullable()
-                ->constrained('academic_program_level')
+                ->constrained('academic_program_levels')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('created_by_id')
