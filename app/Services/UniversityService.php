@@ -36,6 +36,16 @@ class UniversityService
         return $query->latest()->get();
     }
 
+    public function getUniversity(int $universityId, array $relations = [])
+    {
+        $university = University::findOrFail($universityId);
+
+        $university->loadMissing($relations);
+
+
+        return $university;
+    }
+
     public function create(array $attributes)
     {
         return DB::transaction(function () use ($attributes) {

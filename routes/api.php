@@ -11,7 +11,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::resource("universities", UniversityController::class)->except(['create', 'show', 'edit']);
+    Route::resource("universities", UniversityController::class)->except(['create', 'edit']);
     Route::resource("academic_programs", AcademicProgramController::class)->except(['create', 'show', 'edit']);
 });
 

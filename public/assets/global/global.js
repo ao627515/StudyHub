@@ -78,77 +78,81 @@ function initializeModalForm(modalSelector, formSelector, callback) {
     });
 }
 
-function initializeSelect2WithCreate({ selectId, apiUrl, resource = 'option', placeholder = "Select an option", noResultsMessage = "Option not found" }) {
-    // Initialize Select2
+function initializeSelect2WithCreate({
+    selectId,
+    apiUrl,
+    resource = 'option',
+    placeholder = "Select an option",
+    noResultsMessage = "Option not found",
+    fetchOptions = () => null,
+    afterSelectCallback = () => { }
+}) {
     $(selectId).select2({
         theme: 'bootstrap-5',
         placeholder: placeholder,
         allowClear: true,
+        ajax: fetchOptions(apiUrl),
         language: {
             noResults: function () {
                 return `
-                            <div>
-                                <p>${noResultsMessage}</p>
-                                <button id="create-btn-${selectId.replace('#', '')}" class="btn btn-primary mt-2">Create new ${resource}</button>
-                            </div>
-                        `;
+                        <div>
+                            <p>${noResultsMessage}</p>
+                            <button id="create-btn-${selectId.replace('#', '')}" class="btn btn-primary mt-2">Create new ${resource}</button>
+                        </div>
+                    `;
             }
         },
         escapeMarkup: function (markup) {
-            return markup; // Let Select2 handle the markup as-is
+            return markup;
         }
     });
 
-    // Event listener for the create button click
+    // Création d'une nouvelle option lorsque le bouton "Create new" est cliqué
     $(document).on('click', `#create-btn-${selectId.replace('#', '')}`, function () {
-        const searchValue = $('.select2-search__field').val(); // Get the search term
-
+        const searchValue = $('.select2-search__field').val();
         if (searchValue) {
-            // Create the data to send
-            const data = { name: searchValue };
-
-            // Send the API request
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                body: JSON.stringify(data),
-                credentials: 'same-origin'
+            createNewResource(apiUrl, {
+                name: searchValue
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(result => handleApiResponse(result, selectId, resource))
-                .catch(error => handleApiError(error, resource));
+                .then(data => addOptionToSelect(selectId, data, resource, afterSelectCallback))
+                .catch(error => handleError(error, resource));
         }
     });
-
 }
 
-function handleApiResponse(result, selectId, resource) {
+// Fonction pour créer une nouvelle ressource via une requête POST
+function createNewResource(apiUrl, data) {
+    return fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        body: JSON.stringify(data),
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        });
+}
+
+// Ajout de l'option créée au select et déclenchement d'une action après sélection
+function addOptionToSelect(selectId, result, resource, afterSelectCallback) {
     if (result.status === 'success') {
-        // Add the new option to the select element
         const newOption = new Option(result.data.name, result.data.id, false, true);
-        $(selectId).append(newOption);
-
-        // Alert the user and select the new option
+        $(selectId).append(newOption).val(result.data.id).trigger('change');
         alert(`New ${resource} "${result.data.name}" created successfully!`);
-        $(selectId).val(result.data.id).trigger('change'); // Select the new option
-
-        // Clear the search field
-        $('.select2-search__field').val('').trigger('input'); // Clear the search input
+        $('.select2-search__field').val('').trigger('input');
+        afterSelectCallback();
     } else {
         alert('Error: ' + result.message);
     }
 }
 
-function handleApiError(error, resource) {
+// Gestion des erreurs de création d'option
+function handleError(error, resource) {
     console.error('Error:', error);
     alert(`Failed to create the ${resource}.`);
 }

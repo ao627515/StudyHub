@@ -13,6 +13,7 @@ use App\Http\Resources\UniversityResource;
 use App\Http\Resources\UniversityCollection;
 use App\Http\Requests\StoreUniversityRequest;
 use App\Http\Requests\UpdateUniversityRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
 
@@ -33,12 +34,17 @@ class UniversityController extends Controller
         try {
 
             $relations = [];
+            $paginate = 0;
 
             if (request()->filled('relations')) {
                 $relations = request('relations');
             }
 
-            $universities = $this->universityService->getAll(relations: $relations);
+            if (request()->filled('paginate') && request('paginate', 0) !== 0) {
+                $paginate = request('paginate');
+            }
+
+            $universities = $this->universityService->getAll(paginate: $paginate, relations: $relations);
 
             return new ResponseResource(message: 'Universities retrieved successfully', data: new UniversityCollection($universities));
         } catch (Exception $ex) {
@@ -72,6 +78,30 @@ class UniversityController extends Controller
                     'exception' => $ex->getMessage()
                 ]
             ], Response::HTTP_INTERNAL_SERVER_ERROR); // 500 Internal Server Error
+        }
+    }
+
+    public function show(int $id)
+    {
+        try {
+
+            $relations = [];
+
+            if (request()->filled('relations')) {
+                $relations = request('relations');
+            }
+
+            $universities = $this->universityService->getUniversity(universityId: $id, relations: $relations);
+
+            return new ResponseResource(message: 'Universities retrieved successfully', data: new UniversityResource($universities));
+        } catch (Exception $ex) {
+            return (new ErrorResponseResource('Failed to retrieve universities', [
+                'exception' => $ex->getMessage()
+            ]))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (ModelNotFoundException $ex) {
+            return (new ErrorResponseResource('university not found', [
+                'exception' => $ex->getMessage()
+            ]))->response()->setStatusCode(Response::HTTP_NOT_FOUND);
         }
     }
 

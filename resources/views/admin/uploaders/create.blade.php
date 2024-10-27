@@ -31,7 +31,8 @@
                                 <label for="universities" class="form-label">Université</label>
                                 <select class="form-select @error('university_id') is-invalid @enderror" id="universities"
                                     name="university_id">
-                                    <option value="">Sélectionnez une Université</option>
+                                    <option value="0" @selected(true) @disabled(true)>
+                                        Sélectionnez une Université</option>
                                     @foreach ($universities as $university)
                                         <option value="{{ $university->id }}" @selected(old('university_id') == $university->id)>
                                             {{ $university->name }}
@@ -47,7 +48,8 @@
                                 <label for="academic_levels" class="form-label">Niveau académique</label>
                                 <select class="form-select @error('academic_level_id') is-invalid @enderror"
                                     id="academic_levels" name="academic_level_id">
-                                    <option value="">Sélectionnez un Niveau Académique</option>
+                                    <option value="0" @selected(true) @disabled(true)>
+                                        Sélectionnez un Niveau Académique</option>
                                     @foreach ($academicLevels as $level)
                                         <option value="{{ $level->id }}" @selected(old('academic_level_id') == $level->id)>
                                             {{ $level->name }}
@@ -59,7 +61,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            {{-- <div class="col-md-6 mb-3">
                                 <label for="academic_programs" class="form-label">Filiere</label>
                                 <select class="form-select @error('academic_program_id') is-invalid @enderror"
                                     id="academic_programs" name="academic_program_id">
@@ -69,6 +71,19 @@
                                             {{ $program->name }}
                                         </option>
                                     @endforeach
+                                </select>
+                                @error('academic_program_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div> --}}
+
+                            <div class="col-md-6 mb-3">
+                                <label for="academic_programs" class="form-label">Filiere</label>
+                                <select class="form-select @error('academic_program_id') is-invalid @enderror"
+                                    id="academic_programs" name="academic_program_id">
+                                    <option value="0">Sélectionnez une Filiere @selected(true)
+                                        @disabled(true)</option>
                                 </select>
                                 @error('academic_program_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -90,19 +105,53 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Call the function to initialize Select2 with specific options
+            // Fonction générique d'initialisation de Select2 avec création dynamique d'options
+
+            // Initialisation des champs avec Select2
             initializeSelect2WithCreate({
                 selectId: '#universities',
-                apiUrl: 'http://127.0.0.1:8000/api/universities', // API endpoint
+                apiUrl: 'http://127.0.0.1:8000/api/universities',
+                resource: 'university',
                 placeholder: 'Search for a university...',
-                noResultsMessage: 'No results found' // Custom no results message
+                noResultsMessage: 'No results found'
             });
 
             initializeSelect2WithCreate({
                 selectId: '#academic_programs',
-                apiUrl: 'http://127.0.0.1:8000/api/academic_programs', // API endpoint
-                placeholder: 'Search for a academic_programs...',
-                noResultsMessage: 'No results found' // Custom no results message
+                apiUrl: 'http://127.0.0.1:8000/api/universities',
+                resource: 'academic program',
+                placeholder: 'Search for an academic program...',
+                noResultsMessage: 'No results found',
+                fetchOptions: function(apiUrl) {
+                    return {
+                        url: function() {
+                            const universityId = $('#universities').val();
+                            return `${apiUrl}/${universityId}`;
+                        },
+                        dataType: 'json',
+                        delay: 250,
+                        data: {
+                            relations: ["academicPrograms"]
+                        },
+                        processResults: function(response) {
+                            const programs = response.data.academicPrograms || [];
+                            return {
+                                results: programs.map(program => ({
+                                    id: program.id,
+                                    text: program.name
+                                }))
+                            };
+                        }
+                    };
+                },
+                afterSelectCallback: function() {
+                    $('#academic_programs').val(null).trigger('change');
+                }
+            });
+
+            // Réinitialiser les programmes académiques chaque fois que l'université change
+            $('#universities').on('change', function() {
+                $('#academic_programs').val(null).trigger('change');
             });
         });
     </script>
