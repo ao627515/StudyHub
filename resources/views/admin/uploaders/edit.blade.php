@@ -145,15 +145,13 @@
                                     text: program.name
                                 }))
                             };
-                        }
+                        },
+                        cache: true
                     };
                 },
 
                 afterSelectCallback: function() {
                     $('#academic_programs').val(null).trigger('change');
-                    // $('#academic_programs').val(@json($uploader->academicProgram->id)).trigger('change');
-
-
                 }
             });
 
