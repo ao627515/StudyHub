@@ -28,6 +28,8 @@ class TeacherService
 
     public function deleteTeacher(Teacher $teacher)
     {
+        $this->updateTeacher($teacher, ['deleted_by_id' => Auth::id()]);
+
         $teacher->delete();
     }
 }

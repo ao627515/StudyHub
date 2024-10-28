@@ -76,6 +76,8 @@ class UniversityService
             $this->deleteUniversityLogo($university->logo);
         }
 
+        $this->update($university, ['deleted_by_id' => Auth::id()]);
+
         return $university->delete();
     }
 

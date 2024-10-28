@@ -45,6 +45,8 @@ class AcademicProgramService
      */
     public function delete(AcademicProgram $academicProgram)
     {
+        $this->update($academicProgram, ['deleted_by_id' => Auth::id()]);
+
         return DB::transaction(function () use ($academicProgram) {
             $academicProgram->delete();
             return true;

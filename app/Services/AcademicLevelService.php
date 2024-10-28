@@ -53,6 +53,8 @@ class AcademicLevelService
     {
         $academicLevel = $this->show($academicLevel);
 
+        $this->update($academicLevel, ['deleted_by_id' => Auth::id()]);
+
         return DB::transaction(fn() => $academicLevel->delete());
     }
 }
