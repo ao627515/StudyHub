@@ -85,7 +85,7 @@ class UploaderController extends Controller
     {
         $attributes = $request->validated();
 
-        dd($attributes);
+        // dd($attributes);
 
         $this->uploaderService->update($uploader, $attributes);
 
