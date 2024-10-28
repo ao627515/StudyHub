@@ -136,7 +136,9 @@ function createNewResource(apiUrl, data) {
         credentials: 'same-origin'
     })
         .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            };
             return response.json();
         });
 }
@@ -190,6 +192,33 @@ async function fetchUniversities(endpoint, params = {}) {
     }
 }
 
+async function fetchUniversity(endpoint, params = {}) {
+    try {
+        const urlWithParams = buildUrlWithParams(endpoint, params);
+        const response = await fetch(urlWithParams, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+
+            // console.log(await response.json());
+
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data.data || null;
+    } catch (error) {
+        console.error('Error fetching university data:', error);
+        return null;
+    }
+}
+
 // Transformer les données pour Select2
 function mapToSelect2Options(data, labelKey = 'name') {
     return data.map(item => ({
@@ -200,10 +229,11 @@ function mapToSelect2Options(data, labelKey = 'name') {
 
 // Initialiser Select2 avec des données
 async function initializeSelect2Fields(apiUri) {
-    const endpoint = `${apiUri}/api/universities`;
+    const endpoint = `${apiUri} / api / universities`;
     const params = {
         relations: ['academicPrograms']
     };
+
     const universitiesData = await fetchUniversities(endpoint, params);
 
     // Initialiser le champ des universités
@@ -222,7 +252,7 @@ async function initializeSelect2Fields(apiUri) {
     // Initialiser le champ des niveaux académiques
     initializeSelect2WithCreate({
         selectId: '#academic_levels',
-        apiUrl: `${apiUri}/api/academic_levels`,
+        apiUrl: `${apiUri} / api / academic_levels`,
         newResourceData: {
             name: () => $('.select2-search__field').val()
         },
@@ -234,7 +264,7 @@ async function initializeSelect2Fields(apiUri) {
     // Initialiser le champ des programmes académiques sans données
     const academicProgramsSelect = initializeSelect2WithCreate({
         selectId: '#academic_programs',
-        apiUrl: `${apiUri}/api/academic_programs`,
+        apiUrl: `${apiUri} / api / academic_programs`,
         newResourceData: {
             name: () => $('.select2-search__field').val(),
             university_id: () => $('#universities').val()
@@ -258,10 +288,96 @@ async function initializeSelect2Fields(apiUri) {
         $('#academic_programs').val(null).trigger('change');
 
         // Afficher le champ des programmes si une université est sélectionnée
-        if (programsData.length) {
+        // if (programsData.length) {
+        //     $('#academic_programs').closest('.d-none').removeClass('d-none');
+        // } else {
+        //     $('#academic_programs').closest('.d-none').addClass('d-none');
+        // }
+
+        if ($('#academic_programs').closest('.d-none').hasClass('d-none')) {
             $('#academic_programs').closest('.d-none').removeClass('d-none');
-        } else {
-            $('#academic_programs').closest('.d-none').addClass('d-none');
         }
     });
 }
+
+
+// edit.js
+async function edit({
+    appUrl,
+    universitiesSelectId,
+    academicLevelsSelectId,
+    academicProgramsSelectId,
+    initialProgramId = null,
+    select2InitFunction
+}) {
+    // Initialise Select2 pour les universités
+    select2InitFunction({
+        selectId: universitiesSelectId,
+        apiUrl: `${appUrl}/api/universities`,
+        newResourceData: {
+            name: () => $('.select2-search__field').val()
+        },
+        resource: 'university',
+        placeholder: 'Search for a university...',
+        noResultsMessage: 'No results found'
+    });
+
+    // Initialise Select2 pour les niveaux académiques
+    select2InitFunction({
+        selectId: academicLevelsSelectId,
+        apiUrl: `${appUrl}/api/academic_levels`,
+        newResourceData: {
+            name: () => $('.select2-search__field').val()
+        },
+        resource: 'academic level',
+        placeholder: 'Search for an academic level...',
+        noResultsMessage: 'No results found'
+    });
+
+    // Initialise Select2 pour les programmes académiques
+    const academicProgramsSelect = select2InitFunction({
+        selectId: academicProgramsSelectId,
+        apiUrl: `${appUrl}/api/academic_programs`,
+        newResourceData: {
+            name: () => $('.select2-search__field').val(),
+            university_id: () => $(universitiesSelectId).val()
+        },
+        resource: 'academic program',
+        placeholder: 'Search for an academic program...',
+        noResultsMessage: 'No results found',
+        data: []
+    });
+
+    // Fetch et définir les options pour les programmes académiques
+    async function fetchUniversityPrograms(universityId) {
+        const endpoint = `${appUrl}/api/universities/${universityId}`;
+        const params = { relations: ['academicPrograms'] };
+        const university = await fetchUniversity(endpoint, params);
+
+        if (university) {
+            const programsData = mapToSelect2Options(university.academicPrograms);
+            academicProgramsSelect.empty().trigger('change');
+            programsData.forEach(option => {
+                academicProgramsSelect.append(new Option(option.text, option.id));
+            });
+            if (initialProgramId) {
+                $(academicProgramsSelectId).val(initialProgramId).trigger('change');
+            }
+        }
+    }
+
+    // Chargement initial des programmes académiques si une université est sélectionnée
+    const initialUniversityId = $(universitiesSelectId).val();
+    if (initialUniversityId) {
+        await fetchUniversityPrograms(initialUniversityId);
+    }
+
+    // Mettre à jour les programmes académiques lorsque l'université change
+    $(universitiesSelectId).on('change', async function () {
+        const universityId = $(this).val();
+        await fetchUniversityPrograms(universityId);
+        $(academicProgramsSelectId).val(initialProgramId).trigger('change');
+    });
+}
+
+// window.edit = edit; // Expose la fonction au global si nécessaire

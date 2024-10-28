@@ -45,9 +45,17 @@ class UniversityService
         return $query->latest()->get();
     }
 
-    public function getUniversity(int $universityId, array $relations = [])
+    public function getUniversity(int $universityId, array|string $relations = [])
     {
         $university = University::findOrFail($universityId);
+
+        if (is_string($relations)) {
+            $relations = json_decode($relations);
+            // Vérification que la conversion a réussi
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new InvalidArgumentException('request relations parameter is invalid json string');
+            }
+        }
 
         $university->loadMissing($relations);
 
