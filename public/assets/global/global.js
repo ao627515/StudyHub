@@ -131,10 +131,15 @@ function initializeSelect2WithCreate({
 
 // Fonction pour créer une nouvelle ressource via une requête POST
 function createNewResource(apiUrl, data) {
+    console.log(data);
 
     const keys = Object.keys(data);
 
-    keys.forEach(key => data[key] = data[key]());
+    keys.forEach(key => {
+        if (typeof data[key] == 'function') {
+            data[key] = data[key]()
+        }
+    });
 
     return fetch(apiUrl, {
         method: 'POST',
@@ -238,78 +243,78 @@ function mapToSelect2Options(data, labelKey = 'name') {
     }));
 }
 
-// Initialiser Select2 avec des données
-async function initializeSelect2Fields(apiUri) {
-    const endpoint = `${apiUri} / api / universities`;
-    const params = {
-        relations: ['academicPrograms']
-    };
+// // Initialiser Select2 avec des données
+// async function initializeSelect2Fields(apiUri) {
+//     const endpoint = `${apiUri} / api / universities`;
+//     const params = {
+//         relations: ['academicPrograms']
+//     };
 
-    const universitiesData = await fetchUniversities(endpoint, params);
+//     const universitiesData = await fetchUniversities(endpoint, params);
 
-    // Initialiser le champ des universités
-    initializeSelect2WithCreate({
-        selectId: '#universities',
-        apiUrl: endpoint,
-        newResourceData: {
-            name: $('.select2-search__field').val()
-        },
-        resource: 'university',
-        placeholder: 'Search for a university...',
-        noResultsMessage: 'No results found',
-        data: mapToSelect2Options(universitiesData)
-    });
+//     // Initialiser le champ des universités
+//     initializeSelect2WithCreate({
+//         selectId: '#universities',
+//         apiUrl: endpoint,
+//         newResourceData: {
+//             name: $('.select2-search__field').val()
+//         },
+//         resource: 'university',
+//         placeholder: 'Search for a university...',
+//         noResultsMessage: 'No results found',
+//         data: mapToSelect2Options(universitiesData)
+//     });
 
-    // Initialiser le champ des niveaux académiques
-    initializeSelect2WithCreate({
-        selectId: '#academic_levels',
-        apiUrl: `${apiUri} / api / academic_levels`,
-        newResourceData: {
-            name: $('.select2-search__field').val()
-        },
-        resource: 'academic level',
-        placeholder: 'Search for an academic level...',
-        noResultsMessage: 'No results found'
-    });
+//     // Initialiser le champ des niveaux académiques
+//     initializeSelect2WithCreate({
+//         selectId: '#academic_levels',
+//         apiUrl: `${apiUri} / api / academic_levels`,
+//         newResourceData: {
+//             name: $('.select2-search__field').val()
+//         },
+//         resource: 'academic level',
+//         placeholder: 'Search for an academic level...',
+//         noResultsMessage: 'No results found'
+//     });
 
-    // Initialiser le champ des programmes académiques sans données
-    const academicProgramsSelect = initializeSelect2WithCreate({
-        selectId: '#academic_programs',
-        apiUrl: `${apiUri} / api / academic_programs`,
-        newResourceData: {
-            name: $('.select2-search__field').val(),
-            university_id: $('#universities').val()
-        },
-        resource: 'academic program',
-        placeholder: 'Search for an academic program...',
-        noResultsMessage: 'No results found',
-        data: []
-    });
+//     // Initialiser le champ des programmes académiques sans données
+//     const academicProgramsSelect = initializeSelect2WithCreate({
+//         selectId: '#academic_programs',
+//         apiUrl: `${apiUri} / api / academic_programs`,
+//         newResourceData: {
+//             name: $('.select2-search__field').val(),
+//             university_id: $('#universities').val()
+//         },
+//         resource: 'academic program',
+//         placeholder: 'Search for an academic program...',
+//         noResultsMessage: 'No results found',
+//         data: []
+//     });
 
-    // Mettre à jour les programmes académiques en fonction de l'université sélectionnée
-    $('#universities').on('change', function () {
-        const selectedUniversity = universitiesData.find(u => u.id == $(this).val());
-        const programsData = selectedUniversity ? mapToSelect2Options(selectedUniversity
-            .academicPrograms) : [];
+//     // Mettre à jour les programmes académiques en fonction de l'université sélectionnée
+//     $('#universities').on('change', function () {
+//         const selectedUniversity = universitiesData.find(u => u.id == $(this).val());
+//         const programsData = selectedUniversity ? mapToSelect2Options(selectedUniversity
+//             .academicPrograms) : [];
 
-        academicProgramsSelect.empty().trigger('change');
-        programsData.forEach(option => {
-            academicProgramsSelect.append(new Option(option.text, option.id));
-        });
-        $('#academic_programs').val(null).trigger('change');
+//         academicProgramsSelect.empty().trigger('change');
+//         programsData.forEach(option => {
+//             academicProgramsSelect.append(new Option(option.text, option.id));
+//         });
+//         $('#academic_programs').val(null).trigger('change');
 
-        // Afficher le champ des programmes si une université est sélectionnée
-        // if (programsData.length) {
-        //     $('#academic_programs').closest('.d-none').removeClass('d-none');
-        // } else {
-        //     $('#academic_programs').closest('.d-none').addClass('d-none');
-        // }
+//         // Afficher le champ des programmes si une université est sélectionnée
+//         // if (programsData.length) {
+//         //     $('#academic_programs').closest('.d-none').removeClass('d-none');
+//         // } else {
+//         //     $('#academic_programs').closest('.d-none').addClass('d-none');
+//         // }
 
-        if ($('#academic_programs').closest('.d-none').hasClass('d-none')) {
-            $('#academic_programs').closest('.d-none').removeClass('d-none');
-        }
-    });
-}
+//         if ($('#academic_programs').closest('.d-none').hasClass('d-none')) {
+//             $('#academic_programs').closest('.d-none').removeClass('d-none');
+//         }
+//     });
+// }
 
 // window.edit = edit; // Expose la fonction au global si nécessaire
 // });
