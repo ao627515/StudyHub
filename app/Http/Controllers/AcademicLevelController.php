@@ -33,7 +33,7 @@ class AcademicLevelController extends Controller
     public function store(StoreAcademicLevelRequest $request): RedirectResponse
     {
         $this->academicLevelService->store($request->validated());
-        return to_route('academic_programs.index')->with('success', 'Academic Level created successfully.');
+        return to_route('admin.academic_levels.index')->with('success', 'Academic Level created successfully.');
     }
 
     /**
@@ -42,7 +42,7 @@ class AcademicLevelController extends Controller
     public function update(UpdateAcademicLevelRequest $request, AcademicLevel $academicLevel): RedirectResponse
     {
         $this->academicLevelService->update($academicLevel, $request->validated());
-        return to_route('academic_programs.index')->with('success', 'Academic Level updated successfully.');
+        return to_route('admin.academic_levels.index')->with('success', 'Academic Level updated successfully.');
     }
 
     /**
@@ -51,6 +51,6 @@ class AcademicLevelController extends Controller
     public function destroy(AcademicLevel $academicLevel): RedirectResponse
     {
         $this->academicLevelService->destroy($academicLevel);
-        return to_route('academic_programs.index')->with('success', 'Academic Level deleted successfully.');
+        return to_route('admin.academic_levels.index')->with('success', 'Academic Level deleted successfully.');
     }
 }
