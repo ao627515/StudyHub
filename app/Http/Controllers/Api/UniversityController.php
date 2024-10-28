@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\ErrorResponseResource;
-use App\Http\Resources\ResponseResource;
 use Exception;
 use App\Models\University;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Services\UniversityService;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ResponseResource;
 use App\Http\Resources\UniversityResource;
 use App\Http\Resources\UniversityCollection;
 use App\Http\Requests\StoreUniversityRequest;
+use App\Http\Resources\ErrorResponseResource;
 use App\Http\Requests\UpdateUniversityRequest;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UniversityController extends Controller
 {
@@ -29,29 +28,15 @@ class UniversityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        try {
-
-            $relations = [];
-            $paginate = 0;
-
-            if (request()->filled('relations')) {
-                $relations = request('relations');
-            }
-
-            if (request()->filled('paginate') && request('paginate', 0) !== 0) {
-                $paginate = request('paginate');
-            }
-
+        return $this->handleRequest(function () {
+            $relations = request('relations', []);
+            $paginate = request('paginate', 0);
             $universities = $this->universityService->getAll(paginate: $paginate, relations: $relations);
 
-            return new ResponseResource(message: 'Universities retrieved successfully', data: new UniversityCollection($universities));
-        } catch (Exception $ex) {
-            return (new ErrorResponseResource('Failed to retrieve universities', [
-                'exception' => $ex->getMessage()
-            ]))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+            return new ResponseResource('Universities retrieved successfully', new UniversityCollection($universities));
+        });
     }
 
     /**
@@ -59,50 +44,25 @@ class UniversityController extends Controller
      */
     public function store(StoreUniversityRequest $request): JsonResponse
     {
-        try {
+        return $this->handleRequest(function () use ($request) {
             $attributes = $request->validated();
             $university = $this->universityService->create($attributes);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'University created successfully',
-                'data' => new UniversityResource($university),
-                'errors' => null
-            ], Response::HTTP_CREATED); // 201 Created
-        } catch (Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to create university',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage()
-                ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR); // 500 Internal Server Error
-        }
+            return new ResponseResource('University created successfully', new UniversityResource($university));
+        }, Response::HTTP_CREATED);
     }
 
-    public function show(int $id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(int $id): JsonResponse
     {
-        try {
+        return $this->handleRequest(function () use ($id) {
+            $relations = request('relations', []);
+            $university = $this->universityService->getUniversity(universityId: $id, relations: $relations);
 
-            $relations = [];
-
-            if (request()->filled('relations')) {
-                $relations = request('relations');
-            }
-
-            $universities = $this->universityService->getUniversity(universityId: $id, relations: $relations);
-
-            return new ResponseResource(message: 'Universities retrieved successfully', data: new UniversityResource($universities));
-        } catch (Exception $ex) {
-            return (new ErrorResponseResource('Failed to retrieve universities', [
-                'exception' => $ex->getMessage()
-            ]))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
-        } catch (ModelNotFoundException $ex) {
-            return (new ErrorResponseResource('university not found', [
-                'exception' => $ex->getMessage()
-            ]))->response()->setStatusCode(Response::HTTP_NOT_FOUND);
-        }
+            return new ResponseResource('University retrieved successfully', new UniversityResource($university));
+        });
     }
 
     /**
@@ -110,26 +70,12 @@ class UniversityController extends Controller
      */
     public function update(UpdateUniversityRequest $request, University $university): JsonResponse
     {
-        try {
+        return $this->handleRequest(function () use ($request, $university) {
             $attributes = $request->validated();
-            $university = $this->universityService->update($university, $attributes);
+            $updatedUniversity = $this->universityService->update($university, $attributes);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'University updated successfully',
-                'data' => new UniversityResource($university),
-                'errors' => null
-            ], Response::HTTP_OK); // 200 OK
-        } catch (Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to update university',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage()
-                ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR); // 500 Internal Server Error
-        }
+            return new ResponseResource('University updated successfully', new UniversityResource($updatedUniversity));
+        });
     }
 
     /**
@@ -137,24 +83,26 @@ class UniversityController extends Controller
      */
     public function destroy(University $university): JsonResponse
     {
-        try {
+        return $this->handleRequest(function () use ($university) {
             $this->universityService->delete($university);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'University deleted successfully',
-                'data' => null,
-                'errors' => null
-            ], Response::HTTP_OK); // 200 OK
+            return new ResponseResource('University deleted successfully', null);
+        });
+    }
+
+    /**
+     * Centralized error handling for all requests in this controller.
+     */
+    private function handleRequest(callable $callback, int $status = Response::HTTP_OK): JsonResponse
+    {
+        try {
+            return response()->json(data: $callback(), status: $status);
+        } catch (ModelNotFoundException $ex) {
+            return (new ErrorResponseResource('University not found', ['exception' => $ex->getMessage()]))
+                ->response()->setStatusCode(Response::HTTP_NOT_FOUND);
         } catch (Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to delete university',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage()
-                ]
-            ], Response::HTTP_INTERNAL_SERVER_ERROR); // 500 Internal Server Error
+            return (new ErrorResponseResource('An error occurred', ['exception' => $ex->getMessage()]))
+                ->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

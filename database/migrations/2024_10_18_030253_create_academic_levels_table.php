@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',  50)->unique();
             $table->string('abb',  20)->unique()->nullable()->comment("abbreviation");
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

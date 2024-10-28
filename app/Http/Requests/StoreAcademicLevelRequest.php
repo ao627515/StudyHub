@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
-class StoreUserRequest extends FormRequest
+class StoreAcademicLevelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +26,9 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lastname' => ['required', 'string', 'max:255'],
-            'firstname' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'unique:users', 'max:15'],
-            'email' => ['required', 'email', 'unique:users'],
-            'password' => ['sometimes', 'required', 'string', 'min:8', 'confirmed'],
-            'university_id' => ['sometimes', 'required', 'exists:universities,id'],
-            'academic_level_id' => ['sometimes', 'required', 'exists:academic_levels,id'],
-            'academic_program_id' => ['sometimes', 'required', 'exists:academic_programs,id'],
-            'role_id' => ['sometimes', 'required', 'exists:user_roles,id']
+            'name' => 'required|string|max:50|unique:academic_levels,name',
+            'abb' => 'nullable|string|max:20|unique:academic_levels,abb',
+            'description' => 'nullable|string|max:255',
         ];
     }
 

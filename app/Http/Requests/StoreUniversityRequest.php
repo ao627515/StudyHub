@@ -3,6 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Resources\ErrorResponseResource;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class StoreUniversityRequest extends FormRequest
 {
@@ -43,5 +47,27 @@ class StoreUniversityRequest extends FormRequest
             'logo.max' => 'La taille du logo ne doit pas dépasser 2 Mo.',
             'abb.unique' => 'Une université avec cette abréviation existe déjà.',
         ];
+    }
+
+    /**
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        if ($this->is('*api*')) {
+            $response = (new ErrorResponseResource(
+                message: 'Failed to store academic program',
+                errors: ['validation' => $validator->errors()]
+            ))->response()->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
+
+            throw new ValidationException($validator, $response);
+        }
+
+        parent::failedValidation($validator);
     }
 }

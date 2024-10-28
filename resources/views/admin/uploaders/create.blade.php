@@ -117,6 +117,14 @@
             });
 
             initializeSelect2WithCreate({
+                selectId: '#academic_levels',
+                apiUrl: 'http://127.0.0.1:8000/api/academic_levels',
+                resource: 'academic levels',
+                placeholder: 'Search for a academic_levels...',
+                noResultsMessage: 'No results found'
+            });
+
+            initializeSelect2WithCreate({
                 selectId: '#academic_programs',
                 apiUrl: 'http://127.0.0.1:8000/api/universities',
                 resource: 'academic program',
