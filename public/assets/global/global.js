@@ -1,3 +1,6 @@
+// document.addEventListener('DOMContentLoaded', function () {
+
+
 function logout(event, route, csrfToken) {
     // Prévenir le comportement par défaut du formulaire ou du lien
     event.preventDefault();
@@ -114,7 +117,10 @@ function initializeSelect2WithCreate({
     $(document).on('click', `#create-btn-${selectId.replace('#', '')}`, function () {
         const searchValue = $('.select2-search__field').val();
         if (searchValue) {
+            // console.log(newResourceData);
+
             createNewResource(apiUrl, newResourceData)
+
                 .then(data => addOptionToSelect(selectId, data, resource, afterSelectCallback))
                 .catch(error => handleError(error, resource));
         }
@@ -125,6 +131,11 @@ function initializeSelect2WithCreate({
 
 // Fonction pour créer une nouvelle ressource via une requête POST
 function createNewResource(apiUrl, data) {
+
+    const keys = Object.keys(data);
+
+    keys.forEach(key => data[key] = data[key]());
+
     return fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -241,7 +252,7 @@ async function initializeSelect2Fields(apiUri) {
         selectId: '#universities',
         apiUrl: endpoint,
         newResourceData: {
-            name: () => $('.select2-search__field').val()
+            name: $('.select2-search__field').val()
         },
         resource: 'university',
         placeholder: 'Search for a university...',
@@ -254,7 +265,7 @@ async function initializeSelect2Fields(apiUri) {
         selectId: '#academic_levels',
         apiUrl: `${apiUri} / api / academic_levels`,
         newResourceData: {
-            name: () => $('.select2-search__field').val()
+            name: $('.select2-search__field').val()
         },
         resource: 'academic level',
         placeholder: 'Search for an academic level...',
@@ -266,8 +277,8 @@ async function initializeSelect2Fields(apiUri) {
         selectId: '#academic_programs',
         apiUrl: `${apiUri} / api / academic_programs`,
         newResourceData: {
-            name: () => $('.select2-search__field').val(),
-            university_id: () => $('#universities').val()
+            name: $('.select2-search__field').val(),
+            university_id: $('#universities').val()
         },
         resource: 'academic program',
         placeholder: 'Search for an academic program...',
@@ -301,21 +312,21 @@ async function initializeSelect2Fields(apiUri) {
 }
 
 
-// edit.js
 async function edit({
     appUrl,
     universitiesSelectId,
     academicLevelsSelectId,
     academicProgramsSelectId,
     initialProgramId = null,
-    select2InitFunction
+    select2InitFunction,
+    searchTerm = () => null
 }) {
     // Initialise Select2 pour les universités
     select2InitFunction({
         selectId: universitiesSelectId,
         apiUrl: `${appUrl}/api/universities`,
         newResourceData: {
-            name: () => $('.select2-search__field').val()
+            name: searchTerm
         },
         resource: 'university',
         placeholder: 'Search for a university...',
@@ -327,7 +338,7 @@ async function edit({
         selectId: academicLevelsSelectId,
         apiUrl: `${appUrl}/api/academic_levels`,
         newResourceData: {
-            name: () => $('.select2-search__field').val()
+            name: searchTerm
         },
         resource: 'academic level',
         placeholder: 'Search for an academic level...',
@@ -339,7 +350,7 @@ async function edit({
         selectId: academicProgramsSelectId,
         apiUrl: `${appUrl}/api/academic_programs`,
         newResourceData: {
-            name: () => $('.select2-search__field').val(),
+            name: searchTerm,
             university_id: () => $(universitiesSelectId).val()
         },
         resource: 'academic program',
@@ -381,3 +392,4 @@ async function edit({
 }
 
 // window.edit = edit; // Expose la fonction au global si nécessaire
+// });

@@ -91,14 +91,20 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
+
+
             edit({
                 appUrl: '{{ config('app.url') }}',
                 universitiesSelectId: '#universities',
                 academicLevelsSelectId: '#academic_levels',
                 academicProgramsSelectId: '#academic_programs',
                 initialProgramId: @json($uploader->academicProgram->id),
-                select2InitFunction: initializeSelect2WithCreate
+                select2InitFunction: initializeSelect2WithCreate,
+                searchTerm: () => $('.select2-search__field').val()
             });
+
+            // console.log($('.select2-search__field').val());
+
         });
     </script>
 @endsection
