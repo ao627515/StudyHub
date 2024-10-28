@@ -85,6 +85,8 @@ class UploaderController extends Controller
     {
         $attributes = $request->validated();
 
+        dd($attributes);
+
         $this->uploaderService->update($uploader, $attributes);
 
         return to_route("admin.uploaders.index")->with("success", "Uploader modifié avec succès !");
