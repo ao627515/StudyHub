@@ -35,6 +35,8 @@ class UploaderService
         return DB::transaction(function () use ($attributes) {
             $attributes['created_by_id'] = Auth::id();
 
+            // dd($attributes);
+
             // Récupérer le programme académique
             $program = AcademicProgram::with('academicLevels')->find($attributes['academic_program_id']);
 

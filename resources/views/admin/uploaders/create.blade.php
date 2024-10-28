@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+    @dump($errors->all())
     <div class="pagetitle">
         <h1>Ajouter un Uploader</h1>
         <nav>
@@ -78,12 +79,12 @@
                             </div>
                         </div> --}}
 
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3 {{ old('academic_program_id') ? '' : 'd-none' }}">
                                 <label for="academic_programs" class="form-label">Filiere</label>
                                 <select class="form-select @error('academic_program_id') is-invalid @enderror"
                                     id="academic_programs" name="academic_program_id">
-                                    <option value="0">Sélectionnez une Filiere @selected(true)
-                                        @disabled(true)</option>
+                                    <option value="0" @selected(true) @disabled(true)>
+                                        Sélectionnez une Filiere</option>
                                 </select>
                                 @error('academic_program_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -111,6 +112,9 @@
             initializeSelect2WithCreate({
                 selectId: '#universities',
                 apiUrl: 'http://127.0.0.1:8000/api/universities',
+                newResourceData: {
+                    name: () => $('.select2-search__field').val()
+                },
                 resource: 'university',
                 placeholder: 'Search for a university...',
                 noResultsMessage: 'No results found'
@@ -119,6 +123,9 @@
             initializeSelect2WithCreate({
                 selectId: '#academic_levels',
                 apiUrl: 'http://127.0.0.1:8000/api/academic_levels',
+                newResourceData: {
+                    name: () => $('.select2-search__field').val()
+                },
                 resource: 'academic levels',
                 placeholder: 'Search for a academic_levels...',
                 noResultsMessage: 'No results found'
@@ -126,7 +133,11 @@
 
             initializeSelect2WithCreate({
                 selectId: '#academic_programs',
-                apiUrl: 'http://127.0.0.1:8000/api/universities',
+                apiUrl: '{{ config('app.url') }}/academic_programs',
+                newResourceData: {
+                    name: () => $('.select2-search__field').val(),
+                    university_id: () => $('#universities').val()
+                },
                 resource: 'academic program',
                 placeholder: 'Search for an academic program...',
                 noResultsMessage: 'No results found',
@@ -134,7 +145,7 @@
                     return {
                         url: function() {
                             const universityId = $('#universities').val();
-                            return `${apiUrl}/${universityId}`;
+                            return `http://127.0.0.1:8000/api/universities/${universityId}`;
                         },
                         dataType: 'json',
                         delay: 250,
@@ -152,6 +163,7 @@
                         }
                     };
                 },
+
                 afterSelectCallback: function() {
                     $('#academic_programs').val(null).trigger('change');
                 }
@@ -159,8 +171,13 @@
 
             // Réinitialiser les programmes académiques chaque fois que l'université change
             $('#universities').on('change', function() {
+                if ($('#universities').val() && $('#academic_programs').closest('.d-none').length) {
+                    $('#academic_programs').closest('.d-none').removeClass('d-none');
+                }
                 $('#academic_programs').val(null).trigger('change');
             });
+
+
         });
     </script>
 @endsection

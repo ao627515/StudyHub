@@ -25,12 +25,13 @@ class StoreUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        // dd($this->all());
         return [
             'lastname' => ['required', 'string', 'max:255'],
             'firstname' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'unique:users', 'max:15'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['sometimes', 'required', 'string', 'min:8', 'confirmed'],
+            'password' => ['sometimes', 'nullable', 'string', 'min:8', 'confirmed'],
             'university_id' => ['sometimes', 'required', 'exists:universities,id'],
             'academic_level_id' => ['sometimes', 'required', 'exists:academic_levels,id'],
             'academic_program_id' => ['sometimes', 'required', 'exists:academic_programs,id'],

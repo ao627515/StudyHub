@@ -81,11 +81,12 @@ function initializeModalForm(modalSelector, formSelector, callback) {
 function initializeSelect2WithCreate({
     selectId,
     apiUrl,
+    newResourceData = {},
     resource = 'option',
     placeholder = "Select an option",
     noResultsMessage = "Option not found",
     fetchOptions = () => null,
-    afterSelectCallback = () => { }
+    afterSelectCallback = () => null
 }) {
     $(selectId).select2({
         theme: 'bootstrap-5',
@@ -111,9 +112,7 @@ function initializeSelect2WithCreate({
     $(document).on('click', `#create-btn-${selectId.replace('#', '')}`, function () {
         const searchValue = $('.select2-search__field').val();
         if (searchValue) {
-            createNewResource(apiUrl, {
-                name: searchValue
-            })
+            createNewResource(apiUrl, newResourceData)
                 .then(data => addOptionToSelect(selectId, data, resource, afterSelectCallback))
                 .catch(error => handleError(error, resource));
         }
@@ -156,3 +155,4 @@ function handleError(error, resource) {
     console.error('Error:', error);
     alert(`Failed to create the ${resource}.`);
 }
+
