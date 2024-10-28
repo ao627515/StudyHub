@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use InvalidArgumentException;
 
 
 class UniversityService
@@ -17,9 +18,17 @@ class UniversityService
         // Service constructor
     }
 
-    public function getAll($paginate = 0, array $relations = [])
+    public function getAll($paginate = 0, array|string $relations = [])
     {
         $query = University::query();
+
+        if (is_string($relations)) {
+            $relations = json_decode($relations);
+            // Vérification que la conversion a réussi
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new InvalidArgumentException('request relations parameter is invalid json string');
+            }
+        }
 
         if (!empty($relations)) {
             $query->with(relations: $relations);

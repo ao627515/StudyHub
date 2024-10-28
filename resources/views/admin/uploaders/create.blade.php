@@ -106,78 +106,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Fonction générique d'initialisation de Select2 avec création dynamique d'options
-
-            // Initialisation des champs avec Select2
-            initializeSelect2WithCreate({
-                selectId: '#universities',
-                apiUrl: 'http://127.0.0.1:8000/api/universities',
-                newResourceData: {
-                    name: () => $('.select2-search__field').val()
-                },
-                resource: 'university',
-                placeholder: 'Search for a university...',
-                noResultsMessage: 'No results found'
-            });
-
-            initializeSelect2WithCreate({
-                selectId: '#academic_levels',
-                apiUrl: 'http://127.0.0.1:8000/api/academic_levels',
-                newResourceData: {
-                    name: () => $('.select2-search__field').val()
-                },
-                resource: 'academic levels',
-                placeholder: 'Search for a academic_levels...',
-                noResultsMessage: 'No results found'
-            });
-
-            initializeSelect2WithCreate({
-                selectId: '#academic_programs',
-                apiUrl: '{{ config('app.url') }}/academic_programs',
-                newResourceData: {
-                    name: () => $('.select2-search__field').val(),
-                    university_id: () => $('#universities').val()
-                },
-                resource: 'academic program',
-                placeholder: 'Search for an academic program...',
-                noResultsMessage: 'No results found',
-                fetchOptions: function(apiUrl) {
-                    return {
-                        url: function() {
-                            const universityId = $('#universities').val();
-                            return `http://127.0.0.1:8000/api/universities/${universityId}`;
-                        },
-                        dataType: 'json',
-                        delay: 250,
-                        data: {
-                            relations: ["academicPrograms"]
-                        },
-                        processResults: function(response) {
-                            const programs = response.data.academicPrograms || [];
-                            return {
-                                results: programs.map(program => ({
-                                    id: program.id,
-                                    text: program.name
-                                }))
-                            };
-                        }
-                    };
-                },
-
-                afterSelectCallback: function() {
-                    $('#academic_programs').val(null).trigger('change');
-                }
-            });
-
-            // Réinitialiser les programmes académiques chaque fois que l'université change
-            $('#universities').on('change', function() {
-                if ($('#universities').val() && $('#academic_programs').closest('.d-none').length) {
-                    $('#academic_programs').closest('.d-none').removeClass('d-none');
-                }
-                $('#academic_programs').val(null).trigger('change');
-            });
-
-
+            initializeSelect2Fields(@json(config('app.url')));
         });
     </script>
 @endsection
