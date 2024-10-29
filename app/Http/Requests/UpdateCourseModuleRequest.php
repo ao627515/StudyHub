@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\CourseModule;
+use App\Models\AcademicProgramLevel;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Resources\ErrorResponseResource;
 use Illuminate\Contracts\Validation\Validator;
@@ -29,6 +31,26 @@ class UpdateCourseModuleRequest extends FormRequest
             'name' => 'required|string|max:255',
             'academic_program_level_id' => 'required|exists:academic_program_levels,id'
         ];
+    }
+
+    public function withValidator(Validator $validator): void
+    {
+        $validator->after(function ($validator) {
+            $academicProgramLevel = AcademicProgramLevel::where('id', $this->academic_program_level_id)->first();
+            if (!$academicProgramLevel) {
+                $validator->errors()->add('academic_program_level_id', 'Le niveau académique n\'existe pas.');
+            }
+
+            $existingModule = CourseModule::where('name', $this->name)
+                ->whereHas('academicProgramLevel', function ($query) use ($academicProgramLevel) {
+                    $query->where('academic_program_id', $academicProgramLevel->academic_program_id);
+                })
+                ->exists();
+
+            if ($existingModule) {
+                $validator->errors()->add('name', 'A module with this name already exists in the selected academic program level.');
+            }
+        });
     }
 
     /**
