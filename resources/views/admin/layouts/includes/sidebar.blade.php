@@ -167,6 +167,27 @@
           </li>
           <!-- End academic_levels Nav -->
 
+          <li class="nav-item">
+              <a @class(['nav-link', 'collapsed' => !Route::is('*course_modules*')]) data-bs-target="#course_modules-nav" data-bs-toggle="collapse"
+                  href="#">
+                  <i class="bi bi-bar-chart"></i><span>Modules</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="course_modules-nav" @class([
+                  'nav-content',
+                  'collapse',
+                  'show' => Route::is('*course_modules*'),
+              ]) data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('admin.course_modules.index') }}" @class([
+                          'active' => Route::currentRouteNamed('*course_modules.index'),
+                      ])>
+                          <i class="bi bi-list-ul"></i><span>Liste</span>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+          <!-- End course_modules Nav -->
+
 
           <li class="nav-heading">Pages</li>
 

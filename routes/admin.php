@@ -4,6 +4,7 @@ use App\Http\Controllers\AcademicLevelController;
 use App\Http\Controllers\AcademicProgramController;
 use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\AdminPagesController;
+use App\Http\Controllers\CourseModuleController;
 use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UniversityController;
@@ -21,5 +22,6 @@ Route::middleware("auth")->group(function () {
         Route::resource('academic_programs', AcademicProgramController::class)->except(['edit', 'create', 'show']);
         Route::resource("teachers", TeacherController::class)->except(['create', 'show', 'edit']);
         Route::resource("academic_levels", AcademicLevelController::class)->except(['create', 'show', 'edit']);
+        Route::resource("course_modules", CourseModuleController::class)->except(['create', 'show', 'edit']);
     });
 });

@@ -58,7 +58,7 @@ class Uploader extends User
     public function academicLevel(): Attribute
     {
         return Attribute::make(
-            get: fn(): AcademicLevel|null => $this->academicProgramLevel->academincLevel
+            get: fn(): AcademicLevel|null => $this->academicProgramLevel->academicLevel
         );
     }
 

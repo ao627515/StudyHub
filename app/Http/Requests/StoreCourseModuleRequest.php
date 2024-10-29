@@ -15,7 +15,7 @@ class StoreCourseModuleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,8 @@ class StoreCourseModuleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'academic_program_level_id' => 'required|exists:academic_program_levels,id'
         ];
     }
 

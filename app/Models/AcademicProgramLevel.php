@@ -24,7 +24,7 @@ class AcademicProgramLevel extends Pivot
         return $this->belongsTo(AcademicProgram::class, 'academic_program_id');
     }
 
-    public function academincLevel()
+    public function academicLevel()
     {
         return $this->belongsTo(AcademicLevel::class, 'academic_level_id');
     }

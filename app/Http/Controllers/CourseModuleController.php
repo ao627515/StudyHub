@@ -4,24 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCourseModuleRequest;
 use App\Http\Requests\UpdateCourseModuleRequest;
+use App\Models\AcademicProgramLevel;
+use App\Services\CourseModuleService;
 use App\Models\CourseModule;
 
 class CourseModuleController extends Controller
 {
+    private CourseModuleService $courseModuleService;
+
+    public function __construct(CourseModuleService $courseModuleService)
+    {
+        $this->courseModuleService = $courseModuleService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $modules = $this->courseModuleService->index(relations: ['createdBy', 'academicProgramLevel.academicProgram.university', 'academicProgramLevel.academicLevel']);
+        $academicProgramLevels = AcademicProgramLevel::with(['academicProgram', 'academicLevel'])->latest()->get();
+        return view('admin.course_modules.index', compact('modules', 'academicProgramLevels'));
     }
 
     /**
@@ -29,23 +32,8 @@ class CourseModuleController extends Controller
      */
     public function store(StoreCourseModuleRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(CourseModule $courseModule)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CourseModule $courseModule)
-    {
-        //
+        $this->courseModuleService->store($request->validated());
+        return to_route('admin.course_modules.index')->with('success', 'Module created successfully.');
     }
 
     /**
@@ -53,7 +41,8 @@ class CourseModuleController extends Controller
      */
     public function update(UpdateCourseModuleRequest $request, CourseModule $courseModule)
     {
-        //
+        $this->courseModuleService->update($courseModule, $request->validated());
+        return to_route('admin.course_modules.index')->with('success', 'Module updated successfully.');
     }
 
     /**
@@ -61,6 +50,7 @@ class CourseModuleController extends Controller
      */
     public function destroy(CourseModule $courseModule)
     {
-        //
+        $this->courseModuleService->delete($courseModule);
+        return to_route('admin.course_modules.index')->with('success', 'Module deleted successfully.');
     }
 }
