@@ -65,7 +65,7 @@ class AcademicProgramController extends Controller
             return (new ErrorResponseResource(
                 message: 'Failed to create academic program',
                 errors: ['exception' => $ex->getMessage()]
-            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);;
+            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -87,7 +87,7 @@ class AcademicProgramController extends Controller
             return (new ErrorResponseResource(
                 message: 'Failed to update academic program',
                 errors: ['exception' => $ex->getMessage()]
-            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);;
+            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -107,7 +107,7 @@ class AcademicProgramController extends Controller
             return (new ErrorResponseResource(
                 message: 'Failed to delete academic program',
                 errors: ['exception' => $ex->getMessage(), 'validation' => null]
-            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);;
+            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

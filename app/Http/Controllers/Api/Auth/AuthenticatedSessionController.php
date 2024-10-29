@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Http\Resources\ErrorResponseResource;
+use App\Http\Resources\ResponseResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -14,38 +16,30 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): JsonResponse
+    public function store(LoginRequest $request)
     {
         try {
             // Authentifier l'utilisateur
             $token = $request->authenticate(true); // true pour indiquer que c'est une requête API
 
             // Répondre avec le token et un message de succès
-            return response()->json([
-                'status' => 'success',
-                'message' => trans('auth.login.success'),
-                'data' => [
-                    'token' => $token,
-                ],
-                'errors' => null,
-            ], Response::HTTP_OK);
+            return new ResponseResource(
+                message: trans('auth.login.success'),
+                data: ['token' => $token],
+            );
         } catch (\Exception $ex) {
             // Gérer les erreurs d'authentification
-            return response()->json([
-                'status' => 'error',
-                'message' => trans('auth.failed'),
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage(),
-                ],
-            ], Response::HTTP_UNAUTHORIZED);
+            return (new ErrorResponseResource(
+                message: trans('auth.failed'),
+                errors: ['exception' => $ex->getMessage()],
+            ))->response()->setStatusCode(Response::HTTP_UNAUTHORIZED);
         }
     }
 
     /**
      * Destroy an authenticated session.
      */
-    public function destroy(Request $request): JsonResponse
+    public function destroy(Request $request)
     {
         try {
             Auth::guard('web')->logout();
@@ -57,32 +51,23 @@ class AuthenticatedSessionController extends Controller
             $request->user()->currentAccessToken()->delete();
 
             // Répondre avec un message de succès
-            return response()->json([
-                'status' => 'success',
-                'message' => trans('auth.logout.success'),
-                'data' => null,
-                'errors' => null,
-            ], Response::HTTP_OK);
+            return new ResponseResource(
+                message: trans('auth.logout.success')
+            );
         } catch (\Exception $ex) {
             // Gérer les erreurs lors de la déconnexion
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to log out.',
-                'data' => null,
-                'errors' => [
-                    'exception' => $ex->getMessage(),
-                ],
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+
+            return (new ErrorResponseResource(
+                message: 'Failed to log out.',
+                errors: ['exception' => $ex->getMessage()],
+            ))->response()->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     public function fail()
     {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Failed to log out.',
-            'data' => null,
-            'errors' => []
-        ], Response::HTTP_UNAUTHORIZED);
+        return (new ErrorResponseResource(
+            message: 'you are not login',
+        ))->response()->setStatusCode(Response::HTTP_UNAUTHORIZED);
     }
 }
