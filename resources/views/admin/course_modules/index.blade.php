@@ -91,17 +91,29 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="name" class="form-label">Module Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                name="name" required>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="academic_program_level_id" class="form-label">Academic Program</label>
-                            <select class="form-select" id="academic_program_level_id" name="academic_program_level_id">
-                                <!-- Charger dynamiquement les options de programme académique -->
+                            <select class="form-select @error('academic_program_level_id') is-invalid @enderror"
+                                id="academic_program_level_id" name="academic_program_level_id" required>
+                                <option value="">Select an academic program</option>
                                 @foreach ($academicProgramLevels as $programLevel)
                                     <option value="{{ $programLevel->id }}">{{ $programLevel->academicProgram->name }} -
                                         {{ $programLevel->academicLevel->name }}</option>
                                 @endforeach
                             </select>
+                            @error('academic_program_level_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -127,17 +139,32 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="edit-name" class="form-label">Module Name</label>
-                            <input type="text" class="form-control" id="edit-name" name="name" required>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="edit-name"
+                                name="name" value="{{ old('name', $module->name) }}" required>
+                            @error('name')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label for="edit-academic_program_level_id" class="form-label">Academic Program</label>
-                            <select class="form-select" id="edit-academic_program_level_id"
-                                name="academic_program_level_id">
+                            <select class="form-select @error('academic_program_level_id') is-invalid @enderror"
+                                id="edit-academic_program_level_id" name="academic_program_level_id" required>
+                                <option value="">Select an academic program</option>
                                 @foreach ($academicProgramLevels as $programLevel)
-                                    <option value="{{ $programLevel->id }}">{{ $programLevel->academicProgram->name }} -
-                                        {{ $programLevel->academicLevel->name }}</option>
+                                    <option value="{{ $programLevel->id }}"
+                                        {{ $module->academic_program_level_id == $programLevel->id ? 'selected' : '' }}>
+                                        {{ $programLevel->academicProgram->name }} -
+                                        {{ $programLevel->academicLevel->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                            @error('academic_program_level_id')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -145,6 +172,7 @@
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -152,7 +180,16 @@
 
 @section('scripts')
     <script>
-        // Remplissage du modal d'édition avec les données du module sélectionné
+        // Fonction pour remplir le modal d'édition avec les données du module sélectionné
+        function fillEditModal(moduleId, moduleName, programId) {
+            document.getElementById('edit-name').value = moduleName;
+            document.getElementById('edit-academic_program_level_id').value = programId;
+
+            // Mise à jour de l'action du formulaire d'édition avec l'ID du module
+            document.getElementById('editForm').action = `{{ config('app.url') }}/admin/course_modules/${moduleId}`;
+        }
+
+        // Événement pour le remplissage du modal lors de l'initialisation du document
         document.addEventListener('DOMContentLoaded', function() {
             const editBtns = document.querySelectorAll('.edit-btn');
 
@@ -162,12 +199,7 @@
                     const moduleName = this.getAttribute('data-name');
                     const programId = this.getAttribute('data-academic-program-id');
 
-                    document.getElementById('edit-name').value = moduleName;
-                    document.getElementById('edit-academic_program_level_id').value = programId;
-
-                    // Mise à jour de l'action du formulaire d'édition avec l'ID du module
-                    document.getElementById('editForm').action =
-                        `{{ config('app.url') }}/admin/course_modules/${moduleId}`;
+                    fillEditModal(moduleId, moduleName, programId);
                 });
             });
         });
