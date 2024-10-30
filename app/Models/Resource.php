@@ -9,4 +9,10 @@ class Resource extends Model
 {
     /** @use HasFactory<\Database\Factories\ResourceFactory> */
     use HasFactory;
+
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
 }
