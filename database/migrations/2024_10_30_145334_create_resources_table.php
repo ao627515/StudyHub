@@ -33,6 +33,11 @@ return new class extends Migration
             $table->float('file_size')->nullable();
             $table->unsignedInteger('view_count')->default(0);
             $table->unsignedInteger('download_count')->default(0);
+            $table->foreignId('teacher_id')
+                ->nullable()
+                ->constrained('teachers')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('created_by_id')
                 ->nullable()
                 ->constrained('users')
