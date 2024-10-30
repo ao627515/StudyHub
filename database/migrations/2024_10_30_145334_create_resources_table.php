@@ -16,38 +16,48 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();
-            $table->string('category');
-            $table->foreignId('course_module_id')
-                ->constrained()
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->integer('version')->default(1);
-            $table->foreignId('resource_id')
-                ->nullable()
-                ->constrained('resources')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
             $table->date('publication_date')->nullable();
             $table->string('file_type')->nullable();
             $table->string('download_url')->nullable();
             $table->float('file_size')->nullable();
             $table->unsignedInteger('view_count')->default(0);
             $table->unsignedInteger('download_count')->default(0);
+
+            $table->foreignId('resource_id')
+                ->nullable()
+                ->constrained('resources')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->foreignId('category_id')
+                ->constrained('category_resources')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreignId('course_module_id')
+                ->constrained('course_modules')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->foreignId('teacher_id')
                 ->nullable()
                 ->constrained('teachers')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
+
             $table->foreignId('created_by_id')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
+
             $table->foreignId('deleted_by_id')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
+
             $table->timestamps();
         });
     }
