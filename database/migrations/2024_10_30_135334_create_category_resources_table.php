@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('category_resources', function (Blueprint $table) {
+            $table->id();
             $table->string('name')->unique();
             $table->text('description')->nullable();
             $table->timestamps();

@@ -5,23 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryResourceRequest;
 use App\Http\Requests\UpdateCategoryResourceRequest;
 use App\Models\CategoryResource;
+use App\Services\CategoryResourceService;
 
 class CategoryResourceController extends Controller
 {
+    private CategoryResourceService $categoryResourceService;
+
+    public function __construct(CategoryResourceService $categoryResourceService)
+    {
+        $this->categoryResourceService = $categoryResourceService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
+        $paginate = request('paginate', 0);
+        $relations = request('relations', []);
+        $categories = $this->categoryResourceService->index($paginate, $relations);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('admin.category_resources.index', compact('categories'));
     }
 
     /**
@@ -29,23 +33,9 @@ class CategoryResourceController extends Controller
      */
     public function store(StoreCategoryResourceRequest $request)
     {
-        //
-    }
+        $this->categoryResourceService->store($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(CategoryResource $categoryResource)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(CategoryResource $categoryResource)
-    {
-        //
+        return to_route('admin.category_resources.index')->with('success', 'Category created successfully.');
     }
 
     /**
@@ -53,7 +43,9 @@ class CategoryResourceController extends Controller
      */
     public function update(UpdateCategoryResourceRequest $request, CategoryResource $categoryResource)
     {
-        //
+        $this->categoryResourceService->update($categoryResource, $request->validated());
+
+        return to_route('admin.category_resources.index')->with('success', 'Category updated successfully.');
     }
 
     /**
@@ -61,6 +53,8 @@ class CategoryResourceController extends Controller
      */
     public function destroy(CategoryResource $categoryResource)
     {
-        //
+        $this->categoryResourceService->destroy($categoryResource);
+
+        return to_route('admin.category_resources.index')->with('success', 'Category deleted successfully.');
     }
 }
