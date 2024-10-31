@@ -68,28 +68,14 @@
                                     <option value="">Sélectionner un module</option>
                                     <!-- Ajoutez ici les options de module de cours dynamiquement -->
                                     @foreach ($courseModules as $courseModule)
-                                        <option value="{{ $courseModule->id }}">{{ $courseModule->name }}</option>
+                                        <option value="{{ $courseModule->id }}" @selected(old('course_module_id') === $courseModule->id)>
+                                            {{ $courseModule->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('course_module_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
-                            {{-- <div class="mb-3">
-                                <label for="resource_id" class="form-label">Ressource Parent</label>
-                                <select name="resource_id" class="form-select @error('resource_id') is-invalid @enderror"
-                                    id="resource_id">
-                                    <option value="">Aucune</option>
-                                    <!-- Ajoutez ici les options de ressources dynamiquement -->
-                                    @foreach ([] as $parentResource)
-                                        <option value="{{ $parentResource->id }}">{{ $parentResource->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('resource_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
 
                             <div class="mb-3">
                                 <label for="category_id" class="form-label">Catégorie de Ressource</label>
@@ -98,7 +84,8 @@
                                     <option value="">Sélectionner une catégorie</option>
                                     <!-- Ajoutez ici les options de catégorie de ressource dynamiquement -->
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" @selected(old('category_id') === $category->id)>
+                                            {{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('category_id')
