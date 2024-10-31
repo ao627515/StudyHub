@@ -6,6 +6,8 @@ use App\Models\Resource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ResourceService
 {
@@ -36,10 +38,12 @@ class ResourceService
 
         // Gestion du fichier image
         if (isset($attributes['image'])) {
-            $attributes['image_url'] = $attributes['image']->store('resources/images', 'public'); // Assurez-vous que le disque 'public' est configuré
-            $attributes['file_type'] = $attributes['image']->getClientOriginalExtension(); // Type de fichier
-            $attributes['file_size'] = $attributes['image']->getSize(); // Taille du fichier
+            $attributes['image_url'] = $attributes['image']->store('resources/images', 'public');
         }
+
+        $attributes['file_url'] = $attributes['file']->store('resources/file', 'public');
+        $attributes['file_type'] = $attributes['file']->getClientOriginalExtension();
+        $attributes['file_size'] = $attributes['file']->getSize();
 
         if (isset($attributes['resource_id'])) {
             $oldVersion = Resource::where('id', $attributes['resource_id'])->first()->version;
@@ -70,10 +74,17 @@ class ResourceService
         if (isset($attributes['image'])) {
 
             Storage::disk('public')->delete($resource->image_url);
+            $attributes['image_url'] = $attributes['image']->store('resources/files', 'public');
+        }
 
-            $attributes['image_url'] = $attributes['image']->store('resources/images', 'public');
-            $attributes['file_type'] = $attributes['image']->getClientOriginalExtension();
-            $attributes['file_size'] = $attributes['image']->getSize();
+        if (isset($attributes['resource'])) {
+
+            Storage::disk('public')->delete($resource->file_url);
+
+            $attributes['file_url'] = $attributes['file']->store('resources/files', 'public');
+            $attributes['file_type'] = $attributes['file']->getClientOriginalExtension();
+            $attributes['file_size'] = $attributes['file']->getSize();
+            $attributes['download_url'] = asset('storage/' . $attributes['file_url']);
         }
 
         if (isset($attributes['resource_id'])) {
@@ -92,9 +103,20 @@ class ResourceService
     {
         $resource = $this->show($resource);
 
+        $this->deleteFiles([$resource->image_url, $resource->file_url]);
+
         // Optionnel : Marquer la ressource comme supprimée
         $this->update($resource, ['deleted_by_id' => Auth::id()]);
 
         return DB::transaction(fn() => $resource->delete());
+    }
+
+    private function deleteFiles(array $paths = [])
+    {
+
+        foreach ($paths as $path) {
+
+            Storage::disk('public')->delete($paths);
+        }
     }
 }

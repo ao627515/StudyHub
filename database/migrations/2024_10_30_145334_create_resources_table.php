@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('resource');
+            $table->string('file_url');
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();
             $table->integer('version')->default(1);
-            $table->date('publication_date')->nullable();
             $table->string('file_type')->nullable();
             $table->string('download_url')->nullable();
             $table->float('file_size')->nullable();

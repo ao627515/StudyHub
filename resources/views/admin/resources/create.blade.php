@@ -52,10 +52,10 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="resource" class="form-label">Resource</label>
-                                <input type="file" name="resource"
-                                    class="form-control @error('resource') is-invalid @enderror" id="resource">
-                                @error('resource')
+                                <label for="file" class="form-label">Resource</label>
+                                <input type="file" name="file"
+                                    class="form-control @error('file') is-invalid @enderror" id="file">
+                                @error('file')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
