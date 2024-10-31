@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('resource');
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();
             $table->integer('version')->default(1);

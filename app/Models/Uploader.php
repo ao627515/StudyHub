@@ -51,21 +51,21 @@ class Uploader extends User
     public function university(): Attribute
     {
         return Attribute::make(
-            get: fn(): University|null => $this->academicProgramLevel->academicProgram->university
+            get: fn(): University|null => $this->academicProgramLevel?->academicProgram?->university
         );
     }
 
     public function academicLevel(): Attribute
     {
         return Attribute::make(
-            get: fn(): AcademicLevel|null => $this->academicProgramLevel->academicLevel
+            get: fn(): AcademicLevel|null => $this->academicProgramLevel?->academicLevel
         );
     }
 
     public function academicProgram(): Attribute
     {
         return Attribute::make(
-            get: fn(): AcademicProgram|null => $this->academicProgramLevel->academicProgram
+            get: fn(): AcademicProgram|null => $this->academicProgramLevel?->academicProgram
         );
     }
 
@@ -74,6 +74,7 @@ class Uploader extends User
         return $this->belongsTo(
             related: AcademicProgramLevel::class,
             foreignKey: 'academic_program_level_id'
+
         );
     }
 }

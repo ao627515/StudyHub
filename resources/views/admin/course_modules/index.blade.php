@@ -11,14 +11,13 @@
         </nav>
     </div>
     <!-- End Page Title -->
-    {{-- @dump($errors->all()) --}}
 
-    @session('success')
+    @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ $value }}
+            {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endsession
+    @endif
 
     <section class="section">
         <div class="row">
@@ -27,11 +26,11 @@
                     <div class="card-body">
                         <h5 class="card-title">Course Modules List</h5>
 
-                        <!-- Bouton pour ouvrir le modal de création -->
                         <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal"
                             data-bs-target="#createModal">
                             Add New Module
                         </button>
+
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -52,7 +51,6 @@
                                         <td>{{ $module->academicLevel->name ?? 'N/A' }}</td>
                                         <td>{{ $module->university->name ?? 'N/A' }}</td>
                                         <td>
-                                            <!-- Bouton pour ouvrir le modal de modification -->
                                             <button type="button" class="btn btn-primary btn-sm edit-btn"
                                                 data-bs-toggle="modal" data-bs-target="#editModal"
                                                 data-id="{{ $module->id }}" data-name="{{ $module->name }}"
@@ -78,7 +76,7 @@
         </div>
     </section>
 
-    <!-- Modal pour la création d'un module -->
+    <!-- Modal for creating a new module -->
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -125,7 +123,7 @@
         </div>
     </div>
 
-    <!-- Modal pour la modification d'un module -->
+    <!-- Edit Module Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -140,7 +138,7 @@
                         <div class="mb-3">
                             <label for="edit-name" class="form-label">Module Name</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="edit-name"
-                                name="name" value="{{ old('name', $module->name) }}" required>
+                                name="name" required>
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -153,11 +151,8 @@
                                 id="edit-academic_program_level_id" name="academic_program_level_id" required>
                                 <option value="">Select an academic program</option>
                                 @foreach ($academicProgramLevels as $programLevel)
-                                    <option value="{{ $programLevel->id }}"
-                                        {{ $module->academic_program_level_id == $programLevel->id ? 'selected' : '' }}>
-                                        {{ $programLevel->academicProgram->name }} -
-                                        {{ $programLevel->academicLevel->name }}
-                                    </option>
+                                    <option value="{{ $programLevel->id }}">{{ $programLevel->academicProgram->name }} -
+                                        {{ $programLevel->academicLevel->name }}</option>
                                 @endforeach
                             </select>
                             @error('academic_program_level_id')
@@ -172,7 +167,6 @@
                         <button type="submit" class="btn btn-primary">Save Changes</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -180,26 +174,17 @@
 
 @section('scripts')
     <script>
-        // Fonction pour remplir le modal d'édition avec les données du module sélectionné
         function fillEditModal(moduleId, moduleName, programId) {
             document.getElementById('edit-name').value = moduleName;
             document.getElementById('edit-academic_program_level_id').value = programId;
-
-            // Mise à jour de l'action du formulaire d'édition avec l'ID du module
-            document.getElementById('editForm').action = `{{ config('app.url') }}/admin/course_modules/${moduleId}`;
+            document.getElementById('editForm').action = `{{ url('admin/course_modules') }}/${moduleId}`;
         }
 
-        // Événement pour le remplissage du modal lors de l'initialisation du document
         document.addEventListener('DOMContentLoaded', function() {
-            const editBtns = document.querySelectorAll('.edit-btn');
-
-            editBtns.forEach(button => {
+            document.querySelectorAll('.edit-btn').forEach(button => {
                 button.addEventListener('click', function() {
-                    const moduleId = this.getAttribute('data-id');
-                    const moduleName = this.getAttribute('data-name');
-                    const programId = this.getAttribute('data-academic-program-id');
-
-                    fillEditModal(moduleId, moduleName, programId);
+                    fillEditModal(this.dataset.id, this.dataset.name, this.dataset
+                        .academicProgramId);
                 });
             });
         });
