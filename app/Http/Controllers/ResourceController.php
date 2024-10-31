@@ -84,7 +84,25 @@ class ResourceController extends Controller
      */
     public function edit(Resource $resource)
     {
-        return view('admin.resources.edit', compact('resource'));
+        $authUploader = Uploader::find(Auth::id());
+        $authUserAcademicProgramId  = $authUploader->academicProgramLevel->academicProgram->id;
+        $authUserUniversityId = $authUploader->university->id;
+        $authUserAcademicLevelId = $authUploader->academicLevel->id;
+
+        $courseModules = CourseModule::latest()->whereHas('academicProgramLevel', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId, $authUserAcademicLevelId) {
+            $query->whereHas('academicProgram', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId) {
+                $query->where('id', $authUserAcademicProgramId)
+                    ->where('university_id', $authUserUniversityId);
+            })
+                ->whereHas('academicLevel', function ($query) use ($authUserAcademicLevelId) {
+                    $query->where('id', $authUserAcademicLevelId);
+                });
+        })->get();
+
+        $categories = CategoryResource::latest()->get();
+
+
+        return view('admin.resources.edit', compact('resource', "courseModules", "categories"));
     }
 
     /**
