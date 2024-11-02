@@ -72,7 +72,7 @@
                                 @if ($resource->file_url)
                                     <div class="mt-2">
                                         <strong>Fichier actuel :</strong>
-                                        <a href="{{ asset($resource->file_url) }}" target="_blank">Voir le fichier
+                                        <a href="{{ $resource->getFileUrl() }}" target="_blank">Voir le fichier
                                             actuel</a>
                                     </div>
                                 @endif

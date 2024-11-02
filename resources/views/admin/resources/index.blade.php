@@ -41,7 +41,7 @@
                                     <tr>
                                         <td>{{ $resource->name }}</td>
                                         <td>{{ $resource->description ?? 'N/A' }}</td>
-                                        <td><a href="{{ $resource->file_url }}" target="_blank">View File</a></td>
+                                        <td><a href="{{ $resource->getFileUrl() }}" target="_blank">View File</a></td>
                                         <td>{{ $resource->version }}</td>
                                         <td>{{ $resource->download_count }}</td>
                                         <td>

@@ -62,4 +62,9 @@ class Resource extends Model
             foreignKey: 'teacher_id'
         );
     }
+
+    public function getFileUrl()
+    {
+        return asset('storage/' . $this->file_url);
+    }
 }

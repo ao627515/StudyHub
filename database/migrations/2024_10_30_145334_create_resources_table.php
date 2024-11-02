@@ -23,6 +23,7 @@ return new class extends Migration
             $table->float('file_size')->nullable();
             $table->unsignedInteger('view_count')->default(0);
             $table->unsignedInteger('download_count')->default(0);
+            $table->string('school_year')->nullable();
 
             $table->foreignId('resource_id')
                 ->nullable()
