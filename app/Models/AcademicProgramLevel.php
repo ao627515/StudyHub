@@ -28,9 +28,4 @@ class AcademicProgramLevel extends Pivot
     {
         return $this->belongsTo(AcademicLevel::class, 'academic_level_id');
     }
-
-    public function courseModule()
-    {
-        return $this->hasMany(CourseModule::class, 'academic_program_level_id');
-    }
 }

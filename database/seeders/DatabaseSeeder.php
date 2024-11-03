@@ -25,8 +25,12 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'email' => 'ao@ex.com',
-            'phone' => "85471073",
             'role_id' => UserRole::where('name', "super-administrator")->first()->id
+        ]);
+
+        User::factory()->create([
+            'email' => 'uploader@ex.com',
+            'role_id' => UserRole::where('name', "uploader")->first()->id
         ]);
     }
 }

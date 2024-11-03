@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AcademicLevelController;
 use App\Http\Controllers\AcademicProgramController;
+use App\Http\Controllers\AcademicProgramLevelController;
 use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\AdminPagesController;
 use App\Http\Controllers\CategoryResourceController;
@@ -27,6 +28,6 @@ Route::middleware("auth")->group(function () {
         Route::resource("course_modules", CourseModuleController::class)->except(['create', 'show', 'edit']);
         Route::resource("resources", ResourceController::class);
         Route::resource("category_resources", CategoryResourceController::class)->except(['create', 'show', 'edit']);
-        Route::resource("academic_program_levels", CategoryResourceController::class)->except(['create', 'show', 'edit']);
+        Route::resource("academic_program_levels", AcademicProgramLevelController::class)->except(['create', 'show', 'edit']);
     });
 });

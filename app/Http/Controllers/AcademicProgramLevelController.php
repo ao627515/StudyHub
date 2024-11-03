@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Uploader;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Models\AcademicLevel;
+use App\Models\AcademicProgram;
 use App\Http\Controllers\Controller;
 use App\Models\AcademicProgramLevel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Services\AcademicProgramLevelService;
 use App\Http\Requests\AcademicProgramLevelRequest;
@@ -24,8 +28,14 @@ class AcademicProgramLevelController extends Controller
      */
     public function index(): View
     {
-        $academicProgramLevels = $this->academicProgramLevel->index();
-        return view('admin.academic_program_levels.index', compact('academicProgramLevels'));
+        $programLevels = $this->academicProgramLevel->index();
+        $programs = AcademicProgram::where('university_id', Uploader::find(Auth::id())->university->id)->get();
+        $levels = AcademicLevel::latest()->get();
+
+        return view(
+            'admin.academic_program_levels.index',
+            compact('programLevels', 'programs', 'levels')
+        );
     }
 
     /**

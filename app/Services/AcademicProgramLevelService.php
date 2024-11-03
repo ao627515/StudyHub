@@ -78,7 +78,7 @@ class AcademicProgramLevelService
         $academicProgramLevel = $this->show($academicProgramLevel);
 
         return DB::transaction(function () use ($academicProgramLevel) {
-            $academicProgramLevel->update(['deleted_by_id' => Auth::id()]);
+            // $academicProgramLevel->update(['deleted_by_id' => Auth::id()]);
             $academicProgramLevel->delete();
             return $academicProgramLevel;
         });

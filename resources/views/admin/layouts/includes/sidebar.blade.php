@@ -166,6 +166,31 @@
           <!-- End academic_levels Nav -->
 
           <li class="nav-item">
+              <a @class([
+                  'nav-link',
+                  'collapsed' => !Route::is('*academic_program_levels*'),
+              ]) data-bs-target="#academic_program_levels-nav" data-bs-toggle="collapse"
+                  href="#">
+                  <i class="bi bi-bar-chart-line"></i><span>Filiere - Niveau academique</span><i
+                      class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="academic_program_levels-nav" @class([
+                  'nav-content',
+                  'collapse',
+                  'show' => Route::is('*academic_program_levels*'),
+              ]) data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('admin.academic_program_levels.index') }}" @class([
+                          'active' => Route::currentRouteNamed('*academic_program_levels.index'),
+                      ])>
+                          <i class="bi bi-list-check"></i><span>Liste</span>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+          <!-- End academic_program_levels Nav -->
+
+          <li class="nav-item">
               <a @class(['nav-link', 'collapsed' => !Route::is('*course_modules*')]) data-bs-target="#course_modules-nav" data-bs-toggle="collapse"
                   href="#">
                   <i class="bi bi-box-seam"></i><span>Modules</span><i class="bi bi-chevron-down ms-auto"></i>
