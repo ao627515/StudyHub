@@ -23,7 +23,7 @@ class CourseModuleController extends Controller
     public function index()
     {
         $modules = $this->courseModuleService->index(relations: ['createdBy', 'academicProgramLevel.academicProgram.university', 'academicProgramLevel.academicLevel']);
-        $academicProgramLevels = AcademicProgramLevelController::with(['academicProgram', 'academicLevel'])->latest()->get();
+        $academicProgramLevels = AcademicProgramLevel::with(['academicProgram', 'academicLevel'])->latest()->get();
         return view('admin.course_modules.index', compact('modules', 'academicProgramLevels'));
     }
 

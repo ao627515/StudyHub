@@ -95,6 +95,26 @@ class User extends Authenticatable
         return $this->belongsTo(UserRole::class, 'role_id');
     }
 
+    public function isSuperAdmin()
+    {
+        return $this->role->abb == 'superadmin';
+    }
+
+    public function isAdmin()
+    {
+        return $this->role->abb == 'admin' || $this->isSuperAdmin();
+    }
+
+    public function isUploader()
+    {
+        return $this->role->abb == 'upldr';
+    }
+
+    public function isMooderator()
+    {
+        return $this->role->abb == 'mod';
+    }
+
     public function created_by()
     {
         return $this->belongsTo(User::class, 'created_by_id');

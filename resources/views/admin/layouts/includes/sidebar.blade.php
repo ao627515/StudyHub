@@ -13,82 +13,86 @@
           </li>
           <!-- End Dashboard Nav -->
 
-          <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*administrators*')]) data-bs-target="#administrators-nav" data-bs-toggle="collapse"
-                  href="#">
-                  <i class="bi bi-person-lock"></i><span>Administrateurs</span><i
-                      class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="administrators-nav" @class([
-                  'nav-content',
-                  'collapse',
-                  'show' => Route::is('*administrators*'),
-              ]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.administrators.create') }}" @class([
-                          'active' => Route::currentRouteNamed('*administrators.create'),
-                      ])>
-                          <i class="bi bi-person-plus"></i><span>Ajouter</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('admin.administrators.index') }}" @class([
-                          'active' => Route::currentRouteNamed('*administrators.index'),
-                      ])>
-                          <i class="bi bi-person-lines-fill"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End administrators Nav -->
+          @if (Auth::user()->isAdmin())
+              <li class="nav-item">
+                  <a @class(['nav-link', 'collapsed' => !Route::is('*administrators*')]) data-bs-target="#administrators-nav" data-bs-toggle="collapse"
+                      href="#">
+                      <i class="bi bi-person-lock"></i><span>Administrateurs</span><i
+                          class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="administrators-nav" @class([
+                      'nav-content',
+                      'collapse',
+                      'show' => Route::is('*administrators*'),
+                  ]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.administrators.create') }}" @class([
+                              'active' => Route::currentRouteNamed('*administrators.create'),
+                          ])>
+                              <i class="bi bi-person-plus"></i><span>Ajouter</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.administrators.index') }}" @class([
+                              'active' => Route::currentRouteNamed('*administrators.index'),
+                          ])>
+                              <i class="bi bi-person-lines-fill"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End administrators Nav -->
 
-          <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*moderators*')]) data-bs-target="#moderators-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-person-bounding-box"></i><span>Modérateurs</span><i
-                      class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="moderators-nav" @class([
-                  'nav-content',
-                  'collapse',
-                  'show' => Route::is('*moderators*'),
-              ]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.moderators.create') }}" @class(['active' => Route::currentRouteNamed('*moderators.create')])>
-                          <i class="bi bi-person-plus-fill"></i><span>Ajouter</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('admin.moderators.index') }}" @class(['active' => Route::currentRouteNamed('*moderators.index')])>
-                          <i class="bi bi-people-fill"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End moderators Nav -->
+              <li class="nav-item">
+                  <a @class(['nav-link', 'collapsed' => !Route::is('*moderators*')]) data-bs-target="#moderators-nav" data-bs-toggle="collapse"
+                      href="#">
+                      <i class="bi bi-person-bounding-box"></i><span>Modérateurs</span><i
+                          class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="moderators-nav" @class([
+                      'nav-content',
+                      'collapse',
+                      'show' => Route::is('*moderators*'),
+                  ]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.moderators.create') }}" @class(['active' => Route::currentRouteNamed('*moderators.create')])>
+                              <i class="bi bi-person-plus-fill"></i><span>Ajouter</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.moderators.index') }}" @class(['active' => Route::currentRouteNamed('*moderators.index')])>
+                              <i class="bi bi-people-fill"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End moderators Nav -->
 
-          <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*uploaders*')]) data-bs-target="#uploaders-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-cloud-arrow-up"></i><span>Uploaders</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="uploaders-nav" @class([
-                  'nav-content',
-                  'collapse',
-                  'show' => Route::is('*uploaders*'),
-              ]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.uploaders.create') }}" @class(['active' => Route::currentRouteNamed('*uploaders.create')])>
-                          <i class="bi bi-cloud-upload-fill"></i><span>Ajouter</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a href="{{ route('admin.uploaders.index') }}" @class(['active' => Route::currentRouteNamed('*uploaders.index')])>
-                          <i class="bi bi-archive"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End uploaders Nav -->
-
+              <li class="nav-item">
+                  <a @class(['nav-link', 'collapsed' => !Route::is('*uploaders*')]) data-bs-target="#uploaders-nav" data-bs-toggle="collapse"
+                      href="#">
+                      <i class="bi bi-cloud-arrow-up"></i><span>Uploaders</span><i
+                          class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="uploaders-nav" @class([
+                      'nav-content',
+                      'collapse',
+                      'show' => Route::is('*uploaders*'),
+                  ]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.uploaders.create') }}" @class(['active' => Route::currentRouteNamed('*uploaders.create')])>
+                              <i class="bi bi-cloud-upload-fill"></i><span>Ajouter</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a href="{{ route('admin.uploaders.index') }}" @class(['active' => Route::currentRouteNamed('*uploaders.index')])>
+                              <i class="bi bi-archive"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End uploaders Nav -->
+          @endif
           <li class="nav-item">
               <a @class(['nav-link', 'collapsed' => !Route::is('*universities*')]) data-bs-target="#universities-nav" data-bs-toggle="collapse"
                   href="#">
@@ -130,20 +134,6 @@
           <!-- End academic programs Nav -->
 
           <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*teachers*')]) data-bs-target="#teachers-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-person-video3"></i><span>Professeurs</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="teachers-nav" @class(['nav-content', 'collapse', 'show' => Route::is('*teachers*')]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.teachers.index') }}" @class(['active' => Route::currentRouteNamed('*teachers.index')])>
-                          <i class="bi bi-list-check"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End teacher Nav -->
-
-          <li class="nav-item">
               <a @class(['nav-link', 'collapsed' => !Route::is('*academic_levels*')]) data-bs-target="#academic_levels-nav" data-bs-toggle="collapse"
                   href="#">
                   <i class="bi bi-bar-chart-line"></i><span>Niveaux Académiques</span><i
@@ -164,6 +154,20 @@
               </ul>
           </li>
           <!-- End academic_levels Nav -->
+
+          <li class="nav-item">
+              <a @class(['nav-link', 'collapsed' => !Route::is('*teachers*')]) data-bs-target="#teachers-nav" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-person-video3"></i><span>Professeurs</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="teachers-nav" @class(['nav-content', 'collapse', 'show' => Route::is('*teachers*')]) data-bs-parent="#sidebar-nav">
+                  <li>
+                      <a href="{{ route('admin.teachers.index') }}" @class(['active' => Route::currentRouteNamed('*teachers.index')])>
+                          <i class="bi bi-list-check"></i><span>Liste</span>
+                      </a>
+                  </li>
+              </ul>
+          </li>
+          <!-- End teacher Nav -->
 
           <li class="nav-item">
               <a @class([

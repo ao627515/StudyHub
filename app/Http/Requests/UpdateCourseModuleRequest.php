@@ -36,7 +36,7 @@ class UpdateCourseModuleRequest extends FormRequest
     public function withValidator(Validator $validator): void
     {
         $validator->after(function ($validator) {
-            $academicProgramLevel = AcademicProgramLevelController::where('id', $this->academic_program_level_id)->first();
+            $academicProgramLevel = AcademicProgramLevel::where('id', $this->academic_program_level_id)->first();
             if (!$academicProgramLevel) {
                 $validator->errors()->add('academic_program_level_id', 'Le niveau académique n\'existe pas.');
             }
