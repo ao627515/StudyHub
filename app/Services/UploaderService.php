@@ -50,7 +50,7 @@ class UploaderService
 
             if (!$programLevel) {
                 // Récupérer ou créer le niveau académique associé au programme
-                $programLevel = AcademicProgramLevel::firstOrCreate(attributes: [
+                $programLevel = AcademicProgramLevelController::firstOrCreate(attributes: [
                     'academic_program_id' => $attributes['academic_program_id'],
                     'academic_level_id' => $attributes['academic_level_id'],
                 ]);
@@ -59,7 +59,7 @@ class UploaderService
 
             // la methode firstOrCreate ne renvoie pas l'id donc je refait une requete
             if (!$programLevel->id) {
-                $programLevel = AcademicProgramLevel::where('academic_program_id', $attributes['academic_program_id'])
+                $programLevel = AcademicProgramLevelController::where('academic_program_id', $attributes['academic_program_id'])
                     ->where('academic_level_id', $attributes['academic_level_id'])
                     ->first();
             }
@@ -98,7 +98,7 @@ class UploaderService
 
             if (!$programLevel) {
                 // Récupérer ou créer le niveau académique associé au programme
-                $programLevel = AcademicProgramLevel::firstOrCreate([
+                $programLevel = AcademicProgramLevelController::firstOrCreate([
                     'academic_program_id' => $attributes['academic_program_id'],
                     'academic_level_id' => $attributes['academic_level_id'],
                 ]);
@@ -106,7 +106,7 @@ class UploaderService
 
             // la methode firstOrCreate ne renvoie pas l'id donc je refait une requete
             if (!$programLevel->id) {
-                $programLevel = AcademicProgramLevel::where('academic_program_id', $attributes['academic_program_id'])
+                $programLevel = AcademicProgramLevelController::where('academic_program_id', $attributes['academic_program_id'])
                     ->where('academic_level_id', $attributes['academic_level_id'])
                     ->first();
             }

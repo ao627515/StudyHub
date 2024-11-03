@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UniversityController;
+use App\Http\Controllers\CategoryResourceController;
 use App\Http\Controllers\Api\AcademicLevelController;
 use App\Http\Controllers\Api\AcademicProgramController;
 use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
@@ -15,6 +16,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::resource("universities", UniversityController::class)->except(['create', 'edit']);
     Route::resource("academic_programs", AcademicProgramController::class)->except(['create', 'show', 'edit']);
     Route::resource("academic_levels", AcademicLevelController::class)->except(['create', 'edit']);
+    Route::resource("academic_program_levels", CategoryResourceController::class)->except(['create', 'edit']);
 });
 
 

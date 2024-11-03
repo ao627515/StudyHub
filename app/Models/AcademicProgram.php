@@ -29,13 +29,13 @@ class AcademicProgram extends Model
 
     public function academicProgramLevels(): HasMany
     {
-        return $this->hasMany(related: AcademicProgramLevel::class, foreignKey: 'academic_program_id');
+        return $this->hasMany(related: AcademicProgramLevelController::class, foreignKey: 'academic_program_id');
     }
 
     public function academicLevels(): BelongsToMany
     {
         return $this->belongsToMany(related: AcademicLevel::class, table: 'academic_program_levels', foreignPivotKey: 'academic_program_id', relatedPivotKey: 'academic_level_id')
-            ->using(class: AcademicProgramLevel::class)
+            ->using(class: AcademicProgramLevelController::class)
             ->withTimestamps();
     }
 }

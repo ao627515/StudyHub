@@ -23,6 +23,16 @@ return new class extends Migration
                 ->constrained('academic_programs')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
+            $table->foreignId('created_by_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('deleted_by_id')
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamps();
         });
     }

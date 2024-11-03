@@ -53,7 +53,7 @@ class CourseModule extends Model
     public function academicProgramLevel(): BelongsTo
     {
         return $this->belongsTo(
-            related: AcademicProgramLevel::class,
+            related: AcademicProgramLevelController::class,
             foreignKey: 'academic_program_level_id',
         );
     }

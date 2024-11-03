@@ -27,5 +27,6 @@ Route::middleware("auth")->group(function () {
         Route::resource("course_modules", CourseModuleController::class)->except(['create', 'show', 'edit']);
         Route::resource("resources", ResourceController::class);
         Route::resource("category_resources", CategoryResourceController::class)->except(['create', 'show', 'edit']);
+        Route::resource("academic_program_levels", CategoryResourceController::class)->except(['create', 'show', 'edit']);
     });
 });

@@ -2,16 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Models\CourseModule;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Resources\ErrorResponseResource;
-use App\Models\AcademicProgramLevel;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-// use Illuminate\Validation\Validator;
 
-class StoreCourseModuleRequest extends FormRequest
+class AcademicProgramLevelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,35 +26,9 @@ class StoreCourseModuleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'academic_program_level_id' => 'required|exists:academic_program_levels,id'
+            'academic_level_id' => 'required|exists:academic_levels,id',
+            'academic_program_id' => 'required|exists:academic_programs,id',
         ];
-    }
-
-    /**
-     * Configure the validator instance.
-     *
-     * @param  \Illuminate\Validation\Validator  $validator
-     * @return void
-     */
-    public function withValidator(Validator $validator): void
-    {
-        $validator->after(function ($validator) {
-            $academicProgramLevel = AcademicProgramLevelController::where('id', $this->academic_program_level_id)->first();
-            if (!$academicProgramLevel) {
-                $validator->errors()->add('academic_program_level_id', 'Le niveau académique n\'existe pas.');
-            }
-
-            $existingModule = CourseModule::where('name', $this->name)
-                ->whereHas('academicProgramLevel', function ($query) use ($academicProgramLevel) {
-                    $query->where('academic_program_id', $academicProgramLevel->academic_program_id);
-                })
-                ->exists();
-
-            if ($existingModule) {
-                $validator->errors()->add('name', 'A module with this name already exists in the selected academic program level.');
-            }
-        });
     }
 
     /**
