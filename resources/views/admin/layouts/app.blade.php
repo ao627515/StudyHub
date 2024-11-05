@@ -20,9 +20,14 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
-    <link href="{{ mix('css/app.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('fonts/vendor/bootstrap-icons/bootstrap-icons.woff') }}">
-    <link rel="stylesheet" href="{{ asset('fonts/vendor/bootstrap-icons/bootstrap-icons.woff2') }}">
+    {{-- <link href="{{ mix('css/app.min.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('assets/admin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/bootstrap-icons/bootstrap-icons.min.css') }} " rel="stylesheet">
+    <link href=" {{ asset('assets/admin/simple-datatables/style.css') }}" rel="stylesheet">
+    <link href=" {{ asset('assets/admin/css/style.css') }}" rel="stylesheet">
+
+    {{-- <link rel="stylesheet" href="{{ asset('fonts/vendor/bootstrap-icons/bootstrap-icons.woff') }}">
+    <link rel="stylesheet" href="{{ asset('fonts/vendor/bootstrap-icons/bootstrap-icons.woff2') }}"> --}}
 
     @yield('styles')
 
@@ -51,9 +56,12 @@
             class="bi bi-arrow-up-short"></i></a>
 
 
-    <script src="{{ mix('js/app.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/main.js') }}"></script>
+    {{-- <script src="{{ mix('js/app.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/admin/js/main.js') }}"></script>
     <script src="{{ asset('assets/global/global.js') }}"></script>
+    <script src="{{ asset('assets/admin/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/admin/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
 
     @yield('scripts')
 
