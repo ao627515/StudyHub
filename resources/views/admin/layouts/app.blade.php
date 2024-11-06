@@ -21,9 +21,9 @@
         rel="stylesheet">
 
     {{-- <link href="{{ mix('css/app.min.css') }}" rel="stylesheet"> --}}
-    <link href="{{ asset('assets/admin/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/admin/bootstrap-icons/bootstrap-icons.min.css') }} " rel="stylesheet">
-    <link href=" {{ asset('assets/admin/simple-datatables/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/vendor/bootstrap-icons/bootstrap-icons.min.css') }} " rel="stylesheet">
+    <link href=" {{ asset('assets/admin/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     <link href=" {{ asset('assets/admin/css/style.css') }}" rel="stylesheet">
 
     {{-- <link rel="stylesheet" href="{{ asset('fonts/vendor/bootstrap-icons/bootstrap-icons.woff') }}">
@@ -57,10 +57,10 @@
 
 
     {{-- <script src="{{ mix('js/app.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/admin/vendor/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/admin/js/main.js') }}"></script>
     <script src="{{ asset('assets/global/global.js') }}"></script>
-    <script src="{{ asset('assets/admin/simple-datatables/simple-datatables.js') }}"></script>
-    <script src="{{ asset('assets/admin/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 
     @yield('scripts')
