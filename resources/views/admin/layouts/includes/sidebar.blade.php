@@ -92,107 +92,136 @@
                   </ul>
               </li>
               <!-- End uploaders Nav -->
+
+              <li class="nav-item">
+                  <a @class(['nav-link', 'collapsed' => !Route::is('*universities*')]) data-bs-target="#universities-nav" data-bs-toggle="collapse"
+                      href="#">
+                      <i class="bi bi-building-fill"></i><span>Universités</span><i
+                          class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="universities-nav" @class([
+                      'nav-content',
+                      'collapse',
+                      'show' => Route::is('*universities*'),
+                  ]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.universities.index') }}" @class(['active' => Route::currentRouteNamed('*universities.index')])>
+                              <i class="bi bi-list-task"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End universities Nav -->
+
+              <li class="nav-item">
+                  <a @class(['nav-link', 'collapsed' => !Route::is('*academic_programs*')]) data-bs-target="#academic_programs-nav" data-bs-toggle="collapse"
+                      href="#">
+                      <i class="bi bi-journal"></i><span>Filières</span><i class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="academic_programs-nav" @class([
+                      'nav-content',
+                      'collapse',
+                      'show' => Route::is('*academic_programs*'),
+                  ]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.academic_programs.index') }}" @class([
+                              'active' => Route::currentRouteNamed('*academic_programs.index'),
+                          ])>
+                              <i class="bi bi-list-ul"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End academic programs Nav -->
+
+              <li class="nav-item">
+                  <a @class(['nav-link', 'collapsed' => !Route::is('*academic_levels*')]) data-bs-target="#academic_levels-nav" data-bs-toggle="collapse"
+                      href="#">
+                      <i class="bi bi-bar-chart-line"></i><span>Niveaux Académiques</span><i
+                          class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="academic_levels-nav" @class([
+                      'nav-content',
+                      'collapse',
+                      'show' => Route::is('*academic_levels*'),
+                  ]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.academic_levels.index') }}" @class([
+                              'active' => Route::currentRouteNamed('*academic_levels.index'),
+                          ])>
+                              <i class="bi bi-list-check"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End academic_levels Nav -->
+
+              <li class="nav-item">
+                  <a @class(['nav-link', 'collapsed' => !Route::is('*teachers*')]) data-bs-target="#teachers-nav" data-bs-toggle="collapse"
+                      href="#">
+                      <i class="bi bi-person-video3"></i><span>Professeurs</span><i
+                          class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="teachers-nav" @class(['nav-content', 'collapse', 'show' => Route::is('*teachers*')]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.teachers.index') }}" @class(['active' => Route::currentRouteNamed('*teachers.index')])>
+                              <i class="bi bi-list-check"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End teacher Nav -->
+
+              <li class="nav-item">
+                  <a @class([
+                      'nav-link',
+                      'collapsed' => !Route::is('*academic_program_levels*'),
+                  ]) data-bs-target="#academic_program_levels-nav"
+                      data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-bar-chart-line"></i><span>Filiere - Niveau academique</span><i
+                          class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="academic_program_levels-nav" @class([
+                      'nav-content',
+                      'collapse',
+                      'show' => Route::is('*academic_program_levels*'),
+                  ]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.academic_program_levels.index') }}" @class([
+                              'active' => Route::currentRouteNamed('*academic_program_levels.index'),
+                          ])>
+                              <i class="bi bi-list-check"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End academic_program_levels Nav -->
+
+              <li class="nav-item">
+                  <a @class([
+                      'nav-link',
+                      'collapsed' => !Route::is('*category_resources*'),
+                  ]) data-bs-target="#category_resources-nav" data-bs-toggle="collapse"
+                      href="#">
+                      <i class="bi bi-folder-symlink"></i><span>Catégories de Ressources</span><i
+                          class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="category_resources-nav" @class([
+                      'nav-content',
+                      'collapse',
+                      'show' => Route::is('*category_resources*'),
+                  ]) data-bs-parent="#sidebar-nav">
+                      <li>
+                          <a href="{{ route('admin.category_resources.index') }}" @class([
+                              'active' => Route::currentRouteNamed('*category_resources.index'),
+                          ])>
+                              <i class="bi bi-list-check"></i><span>Liste</span>
+                          </a>
+                      </li>
+                  </ul>
+              </li>
+              <!-- End category_resources Nav -->
           @endif
-          <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*universities*')]) data-bs-target="#universities-nav" data-bs-toggle="collapse"
-                  href="#">
-                  <i class="bi bi-building-fill"></i><span>Universités</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="universities-nav" @class([
-                  'nav-content',
-                  'collapse',
-                  'show' => Route::is('*universities*'),
-              ]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.universities.index') }}" @class(['active' => Route::currentRouteNamed('*universities.index')])>
-                          <i class="bi bi-list-task"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End universities Nav -->
-
-          <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*academic_programs*')]) data-bs-target="#academic_programs-nav" data-bs-toggle="collapse"
-                  href="#">
-                  <i class="bi bi-journal"></i><span>Filières</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="academic_programs-nav" @class([
-                  'nav-content',
-                  'collapse',
-                  'show' => Route::is('*academic_programs*'),
-              ]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.academic_programs.index') }}" @class([
-                          'active' => Route::currentRouteNamed('*academic_programs.index'),
-                      ])>
-                          <i class="bi bi-list-ul"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End academic programs Nav -->
-
-          <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*academic_levels*')]) data-bs-target="#academic_levels-nav" data-bs-toggle="collapse"
-                  href="#">
-                  <i class="bi bi-bar-chart-line"></i><span>Niveaux Académiques</span><i
-                      class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="academic_levels-nav" @class([
-                  'nav-content',
-                  'collapse',
-                  'show' => Route::is('*academic_levels*'),
-              ]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.academic_levels.index') }}" @class([
-                          'active' => Route::currentRouteNamed('*academic_levels.index'),
-                      ])>
-                          <i class="bi bi-list-check"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End academic_levels Nav -->
-
-          <li class="nav-item">
-              <a @class(['nav-link', 'collapsed' => !Route::is('*teachers*')]) data-bs-target="#teachers-nav" data-bs-toggle="collapse" href="#">
-                  <i class="bi bi-person-video3"></i><span>Professeurs</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="teachers-nav" @class(['nav-content', 'collapse', 'show' => Route::is('*teachers*')]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.teachers.index') }}" @class(['active' => Route::currentRouteNamed('*teachers.index')])>
-                          <i class="bi bi-list-check"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End teacher Nav -->
-
-          <li class="nav-item">
-              <a @class([
-                  'nav-link',
-                  'collapsed' => !Route::is('*academic_program_levels*'),
-              ]) data-bs-target="#academic_program_levels-nav" data-bs-toggle="collapse"
-                  href="#">
-                  <i class="bi bi-bar-chart-line"></i><span>Filiere - Niveau academique</span><i
-                      class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="academic_program_levels-nav" @class([
-                  'nav-content',
-                  'collapse',
-                  'show' => Route::is('*academic_program_levels*'),
-              ]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.academic_program_levels.index') }}" @class([
-                          'active' => Route::currentRouteNamed('*academic_program_levels.index'),
-                      ])>
-                          <i class="bi bi-list-check"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End academic_program_levels Nav -->
 
           <li class="nav-item">
               <a @class(['nav-link', 'collapsed' => !Route::is('*course_modules*')]) data-bs-target="#course_modules-nav" data-bs-toggle="collapse"
@@ -216,31 +245,6 @@
           <!-- End course_modules Nav -->
 
           <li class="nav-item">
-              <a @class([
-                  'nav-link',
-                  'collapsed' => !Route::is('*category_resources*'),
-              ]) data-bs-target="#category_resources-nav" data-bs-toggle="collapse"
-                  href="#">
-                  <i class="bi bi-folder-symlink"></i><span>Catégories de Ressources</span><i
-                      class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="category_resources-nav" @class([
-                  'nav-content',
-                  'collapse',
-                  'show' => Route::is('*category_resources*'),
-              ]) data-bs-parent="#sidebar-nav">
-                  <li>
-                      <a href="{{ route('admin.category_resources.index') }}" @class([
-                          'active' => Route::currentRouteNamed('*category_resources.index'),
-                      ])>
-                          <i class="bi bi-list-check"></i><span>Liste</span>
-                      </a>
-                  </li>
-              </ul>
-          </li>
-          <!-- End category_resources Nav -->
-
-          <li class="nav-item">
               <a @class(['nav-link', 'collapsed' => !Route::is('*resources*')]) data-bs-target="#resources-nav" data-bs-toggle="collapse"
                   href="#">
                   <i class="bi bi-file-earmark"></i><span>Ressources</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -255,16 +259,16 @@
                           <i class="bi bi-collection"></i><span>Liste</span>
                       </a>
                   </li>
-                  <li>
-                      <a href="{{ route('admin.resources.create') }}" @class(['active' => Route::currentRouteNamed('*resources.create')])>
-                          <i class="bi bi-file-earmark-plus"></i><span>Créer</span>
-                      </a>
-                  </li>
+                  @if (Auth::user()->isUploader())
+                      <li>
+                          <a href="{{ route('admin.resources.create') }}" @class(['active' => Route::currentRouteNamed('*resources.create')])>
+                              <i class="bi bi-file-earmark-plus"></i><span>Créer</span>
+                          </a>
+                      </li>
+                  @endif
               </ul>
           </li>
           <!-- End resources Nav -->
-
-
 
           <li class="nav-heading">Pages</li>
 

@@ -58,13 +58,15 @@
                                                 Edit
                                             </button>
 
-                                            <form action="{{ route('admin.course_modules.destroy', $module) }}"
-                                                method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure?')">Delete</button>
-                                            </form>
+                                            @unless (Auth::user()->isUploader())
+                                                <form action="{{ route('admin.course_modules.destroy', $module) }}"
+                                                    method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Are you sure?')">Delete</button>
+                                                </form>
+                                            @endunless
                                         </td>
                                     </tr>
                                 @endforeach

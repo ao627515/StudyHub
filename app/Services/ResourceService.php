@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Resource;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -18,19 +19,16 @@ class ResourceService
     {
         $query = Resource::query()->with($relations);
 
+        $query = Auth::user()->isUploader() ? $query->where('created_by_id', Auth::id()) : $query;
+
         return $paginate ? $query->paginate($paginate) : $query->latest()->get();
     }
+
+    private  function getResourcesByUserAuth(Builder $builder) {}
 
     /**
      * Crée une nouvelle ressource avec les attributs spécifiés.
      */
-    // public function store(array $attributes): Resource
-    // {
-    //     $attributes['created_by_id'] = Auth::id();
-
-    //     return DB::transaction(fn() => Resource::create($attributes));
-    // }
-
     public function store(array $attributes): Resource
     {
         // Ajout de l'ID de l'utilisateur connecté

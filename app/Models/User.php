@@ -4,10 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\UserRole;
+use App\Models\Moderator;
 use App\Models\University;
 use App\Models\AcademicLevel;
+use App\Models\Administrator;
 use App\Models\AcademicProgram;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -95,6 +98,17 @@ class User extends Authenticatable
         return $this->belongsTo(UserRole::class, 'role_id');
     }
 
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by_id');
+    }
+
+    public function deleted_by(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'deleted_by_id');
+    }
+
+    // methode
     public function isSuperAdmin()
     {
         return $this->role->abb == 'superadmin';
@@ -115,13 +129,18 @@ class User extends Authenticatable
         return $this->role->abb == 'mod';
     }
 
-    public function created_by()
+    public function AuthUploader()
     {
-        return $this->belongsTo(User::class, 'created_by_id');
+        return Uploader::find(Auth::id());
     }
 
-    public function deleted_by(): BelongsTo
+    public function AuthAdministrator()
     {
-        return $this->belongsTo(User::class, 'deleted_by_id');
+        return Administrator::find(Auth::id());
+    }
+
+    public function AuthModerator()
+    {
+        return Moderator::find(Auth::id());
     }
 }

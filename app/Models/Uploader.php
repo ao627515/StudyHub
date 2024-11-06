@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Resource;
 use App\Models\UserRole;
 use App\Models\University;
 use App\Models\AcademicLevel;
@@ -76,5 +77,10 @@ class Uploader extends User
             foreignKey: 'academic_program_level_id'
 
         );
+    }
+
+    public function resources()
+    {
+        return $this->hasMany(Resource::class, 'created_by_id');
     }
 }
