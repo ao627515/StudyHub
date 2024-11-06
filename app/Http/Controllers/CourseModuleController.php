@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CourseModule;
+use App\Models\AcademicProgramLevel;
+use Illuminate\Support\Facades\Auth;
+use App\Services\CourseModuleService;
 use App\Http\Requests\StoreCourseModuleRequest;
 use App\Http\Requests\UpdateCourseModuleRequest;
-use App\Models\AcademicProgramLevel;
-use App\Services\CourseModuleService;
-use App\Models\CourseModule;
 
 class CourseModuleController extends Controller
 {
@@ -22,8 +23,15 @@ class CourseModuleController extends Controller
      */
     public function index()
     {
-        $modules = $this->courseModuleService->index(relations: ['createdBy', 'academicProgramLevel.academicProgram.university', 'academicProgramLevel.academicLevel']);
-        $academicProgramLevels = AcademicProgramLevel::with(['academicProgram', 'academicLevel'])->latest()->get();
+        $modules = $this->courseModuleService
+            ->index(relations: [
+                'createdBy',
+                'academicProgramLevel.academicProgram.university',
+                'academicProgramLevel.academicLevel'
+            ]);
+        $academicProgramLevels = AcademicProgramLevel::with(['academicProgram', 'academicLevel'])
+            ->where('academic_program_id',  Auth::user()->fetchUploader()->academicProgram->id)
+            ->latest()->get();
         return view('admin.course_modules.index', compact('modules', 'academicProgramLevels'));
     }
 

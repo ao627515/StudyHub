@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\CourseModule;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use InvalidArgumentException;
@@ -24,6 +25,14 @@ class CourseModuleService
 
         if (!empty($relations)) {
             $query->with($relations);
+        }
+
+        /**
+         * @var User $user
+         */
+        $user = Auth::user();
+        if ($user->isUploader()) {
+            $query->where('created_by_id', $user->id);
         }
 
         return $paginate ? $query->paginate($paginate) : $query->latest()->get();

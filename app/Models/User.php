@@ -143,4 +143,19 @@ class User extends Authenticatable
     {
         return Moderator::find(Auth::id());
     }
+
+    public function fetchUploader()
+    {
+        return Uploader::find($this->id);
+    }
+
+    public function fetchAdmin()
+    {
+        return Administrator::find($this->id);
+    }
+
+    public function fetchModerator()
+    {
+        return Moderator::find($this->id);
+    }
 }
