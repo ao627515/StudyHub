@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AcademicProgramLevelService
 {
     /**
-     * Create a new class AcademinProgramLevelService.
+     * Create a new class AcademicProgramLevelService.
      */
     public function __construct()
     {
