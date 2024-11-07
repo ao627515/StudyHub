@@ -122,4 +122,18 @@ class ResourceController extends Controller
         $this->resourceService->destroy($resource);
         return redirect()->route('admin.resources.index')->with('success', 'Resource deleted successfully.');
     }
+
+    public function downloadFile(Resource $resource)
+    {
+        // Chemin du fichier dans le dossier de stockage
+        $filePath = storage_path("app/public/{$resource}");
+
+        // Vérifie si le fichier existe
+        if (!file_exists($filePath)) {
+            abort(404, 'Fichier non trouvé');
+        }
+
+        // Télécharge le fichier
+        return response()->download($filePath);
+    }
 }

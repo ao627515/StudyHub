@@ -127,76 +127,39 @@
             </div>
             <!--/.row -->
             <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
-                <div class="col-md-8 col-lg-6 offset-lg-1 order-lg-2 position-relative">
-                    <div class="shape rounded-circle bg-line primary rellax w-18 h-18" data-rellax-speed="1"
-                        style="top: -2rem; right: -1.9rem;"></div>
-                    <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
-                        style="bottom: -1.8rem; left: -1.5rem; width: 85%; height: 90%; "></div>
-                    <figure class="rounded"><img src="./assets/img/photos/about9.jpg"
-                            srcset="./assets/img/photos/about9@2x.jpg 2x" alt=""></figure>
-                </div>
-                <!--/column -->
-                <div class="col-lg-5">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Why Choose Us?</h2>
+                <div class="col">
+                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Les resource les plus telecharger</h2>
                     <h3 class="display-4 mb-7">A few reasons why our valued customers choose us.</h3>
-                    <div class="accordion accordion-wrapper" id="accordionExample">
-                        <div class="card plain accordion-item">
-                            <div class="card-header" id="headingOne">
-                                <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                    aria-expanded="true" aria-controls="collapseOne"> Professional Design </button>
-                            </div>
-                            <!--/.card-header -->
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                                data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-                                        massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum.
-                                        Praesent commodo cursus magna, vel.</p>
-                                </div>
-                                <!--/.card-body -->
-                            </div>
-                            <!--/.accordion-collapse -->
-                        </div>
-                        <!--/.accordion-item -->
-                        <div class="card plain accordion-item">
-                            <div class="card-header" id="headingTwo">
-                                <button class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                    aria-expanded="false" aria-controls="collapseTwo"> Top-Notch Support </button>
-                            </div>
-                            <!--/.card-header -->
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-                                        massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum.
-                                        Praesent commodo cursus magna, vel.</p>
-                                </div>
-                                <!--/.card-body -->
-                            </div>
-                            <!--/.accordion-collapse -->
-                        </div>
-                        <!--/.accordion-item -->
-                        <div class="card plain accordion-item">
-                            <div class="card-header" id="headingThree">
-                                <button class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                    aria-expanded="false" aria-controls="collapseThree"> Header and Slider Options
-                                </button>
-                            </div>
-                            <!--/.card-header -->
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-                                        massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum.
-                                        Praesent commodo cursus magna, vel.</p>
-                                </div>
-                                <!--/.card-body -->
-                            </div>
-                            <!--/.accordion-collapse -->
-                        </div>
-                        <!--/.accordion-item -->
-                    </div>
-                    <!--/.accordion -->
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Categorie</th>
+                            <th>Nom</th>
+                            <th>Module</th>
+                            <th>Filiere</th>
+                            <th>Universite</th>
+                            <th>Telecharger</th>
+                            <th>Taille</th>
+                            <th>Nombre de telechargement</th>
+                            <th>Uploader le</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($moreResourcesDownload as $resource)
+                                <tr>
+                                    <td>{{ $resource->category->name }}</td>
+                                    <td>{{ $resource->name }}</td>
+                                    <td>{{ $resource->courseModule->name }}</td>
+                                    <td>{{ $resource->academicProgram->name }} ({{ $resource->academicLevel->name }})</td>
+                                    <td>{{ $resource->university->name }}</td>
+                                    <td>
+                                        <a href="{{ $resource->getFileUrl() }}" download>Fichier</a>
+                                    </td>
+                                    <td>{{ $resource->getFileSize(format: true) }}</td>
+                                    <td>{{ $resource->download_count }}</td>
+                                    <td>{{ $resource->created_at->format('d M y') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <!--/column -->
             </div>
