@@ -21,7 +21,7 @@ class University extends Model
 
     public function getLogoUrl()
     {
-        return $this->logo === null ? null : asset('storage/' . $this->logo);
+        return $this->logo === null ? asset('assets/public/img/unisersity_placeholder.png') : asset('storage/' . $this->logo);
     }
 
     public function academicPrograms()
