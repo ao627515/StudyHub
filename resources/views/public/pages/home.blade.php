@@ -130,36 +130,43 @@
                 <div class="col">
                     <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Les resource les plus telecharger</h2>
                     <h3 class="display-4 mb-7">A few reasons why our valued customers choose us.</h3>
-                    <table class="table table-striped">
-                        <thead>
-                            <th>Categorie</th>
-                            <th>Nom</th>
-                            <th>Module</th>
-                            <th>Filiere</th>
-                            <th>Universite</th>
-                            <th>Telecharger</th>
-                            <th>Taille</th>
-                            <th>Nombre de telechargement</th>
-                            <th>Uploader le</th>
-                        </thead>
-                        <tbody>
-                            @foreach ($moreResourcesDownload as $resource)
-                                <tr>
-                                    <td>{{ $resource->category->name }}</td>
-                                    <td>{{ $resource->name }}</td>
-                                    <td>{{ $resource->courseModule->name }}</td>
-                                    <td>{{ $resource->academicProgram->name }} ({{ $resource->academicLevel->name }})</td>
-                                    <td>{{ $resource->university->name }}</td>
-                                    <td>
-                                        <a href="{{ $resource->getFileUrl() }}" download>Fichier</a>
-                                    </td>
-                                    <td>{{ $resource->getFileSize(format: true) }}</td>
-                                    <td>{{ $resource->download_count }}</td>
-                                    <td>{{ $resource->created_at->format('d M y') }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <th>Categorie</th>
+                                <th>Nom</th>
+                                <th>Module</th>
+                                <th>Filiere</th>
+                                <th>Universite</th>
+                                <th>Telecharger</th>
+                                <th>Taille</th>
+                                <th>Nombre de telechargement</th>
+                                <th>Uploader le</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($moreResourcesDownload as $resource)
+                                    <tr>
+                                        <td>
+                                            <span
+                                                class="badge gradient-7 rounded-pill">{{ $resource->category->name }}</span>
+                                        </td>
+                                        <td>{{ $resource->name }}</td>
+                                        <td>{{ $resource->courseModule->name }}</td>
+                                        <td>{{ $resource->academicProgram->name }} ({{ $resource->academicLevel->name }})
+                                        </td>
+                                        <td>{{ $resource->university->name }}</td>
+                                        <td>
+                                            {{-- <a href="{{ $resource->getFileUrl() }}" download>Fichier</a> --}}
+                                            <a href="{{ route('public.resource.download', $resource->id) }}">Fichier 2</a>
+                                        </td>
+                                        <td>{{ $resource->getFileSize(format: true) }}</td>
+                                        <td>{{ $resource->download_count }}</td>
+                                        <td>{{ $resource->created_at->format('d M y') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!--/column -->
             </div>

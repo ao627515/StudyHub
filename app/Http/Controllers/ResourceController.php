@@ -125,13 +125,8 @@ class ResourceController extends Controller
 
     public function downloadFile(Resource $resource)
     {
-        // Chemin du fichier dans le dossier de stockage
-        $filePath = storage_path("app/public/{$resource}");
 
-        // Vérifie si le fichier existe
-        if (!file_exists($filePath)) {
-            abort(404, 'Fichier non trouvé');
-        }
+        $filePath = $this->resourceService->downloadFile($resource);
 
         // Télécharge le fichier
         return response()->download($filePath);

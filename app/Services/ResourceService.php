@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Resource;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -107,6 +109,24 @@ class ResourceService
         $this->update($resource, ['deleted_by_id' => Auth::id()]);
 
         return DB::transaction(fn() => $resource->delete());
+    }
+
+    public function downloadFile(int|Resource $resource)
+    {
+
+        $resource = $this->show($resource);
+
+        // Chemin du fichier dans le dossier de stockage
+        $filePath = storage_path("app/public/{$resource->file_url}");
+
+        // Vérifie si le fichier existe
+        if (!file_exists($filePath)) {
+            throw new Exception("File url not exist");
+        }
+
+        $this->update($resource, ['download_count' => ++$resource->download_count]);
+
+        return $filePath;
     }
 
     private function deleteFiles(array $paths = [])
