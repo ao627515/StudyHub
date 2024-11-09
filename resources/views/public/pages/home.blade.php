@@ -1,5 +1,11 @@
 @extends('public.layouts.app')
 
+@section('styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+@endsection
+
 @section('content')
     <section class="wrapper bg-dark angled lower-start">
         <div class="container pt-7 pt-md-11 pb-8">
@@ -190,46 +196,35 @@
                     @csrf
                     <div class="row g-4">
                         <div class="col-md-6">
-                            <div class="form-floating">
-                                <select class="form-select" id="university" aria-label="Université">
+                            <div class="mb-3">
+                                <label for="university" class="form-label">Université</label>
+                                <select class="form-select" id="university" name="university" aria-label="Université">
                                     <option selected>Choisir l'université</option>
-                                    <option value="1">Université Paris-Saclay</option>
-                                    <option value="2">Sorbonne Université</option>
-                                    <option value="3">Université de Lyon</option>
                                 </select>
-                                <label for="university">Université</label>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-floating">
-                                <select class="form-select" id="field" aria-label="Filière">
+                            <div class="mb-3">
+                                <label for="program" class="form-label">Filière</label>
+                                <select class="form-select" id="program" name="program" aria-label="Filière">
                                     <option selected>Choisir la filière</option>
-                                    <option value="1">Sciences</option>
-                                    <option value="2">Lettres</option>
-                                    <option value="3">Droit</option>
                                 </select>
-                                <label for="field">Filière</label>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-floating">
-                                <select class="form-select" id="field" aria-label="Filière">
+                            <div class="mb-3">
+                                <label for="level" class="form-label">Niveau</label>
+                                <select class="form-select" id="level" aria-label="Niveau academique">
                                     <option selected>Choisir le Niveau</option>
-                                    <option value="1">Licence 1</option>
-                                    <option value="2">Licence 2</option>
-                                    <option value="3">Licence 2</option>
                                 </select>
-                                <label for="field">Niveau</label>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-floating">
-                                <select class="form-select" id="field" aria-label="Filière">
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Categorie</label>
+                                <select class="form-select" id="category" aria-label="Categorie de resource">
                                     <option selected>Choisir la categorie</option>
-                                    <option value="1">Devoir</option>
-                                    <option value="2">TP</option>
                                 </select>
-                                <label for="field">Categorie</label>
                             </div>
                         </div>
                     </div>
@@ -470,4 +465,20 @@
     </section>
 
     <!-- /section -->
+@endsection
+
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('assets/public/js/home.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            home({
+                endpoint: '{{ config('app.url') }}/api/universities',
+                relations: {
+                    relations: 'academicPrograms'
+                }
+            });
+        });
+    </script>,
 @endsection

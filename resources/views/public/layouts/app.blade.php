@@ -9,6 +9,7 @@
     <meta name="keywords"
         content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Sandbox - Modern & Multipurpose Bootstrap 5 Template</title>
     {{-- <link rel="shortcut icon" href="./assets/img/favicon.png"> --}}
     <link rel="stylesheet" href="{{ asset('assets/public/css/plugins.css') }}">

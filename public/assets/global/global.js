@@ -223,7 +223,7 @@ async function fetchUniversity(endpoint, params = {}) {
 
         if (!response.ok) {
 
-            // console.log(await response.json());
+            console.log(await response.json());
 
             throw new Error('Network response was not ok');
         }
