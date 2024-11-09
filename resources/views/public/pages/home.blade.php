@@ -5,14 +5,15 @@
         <div class="container pt-7 pt-md-11 pb-8">
             <div class="row gx-0 gy-10 align-items-center">
                 <div class="col-lg-6" data-cues="slideInDown" data-group="page-title" data-delay="600">
-                    <h1 class="display-1 text-white mb-4">Sandbox focuses on <br /><span
+                    <h1 class="display-1 text-white mb-4">StudyHub centralise les ressources académiques de <br /><span
                             class="typer text-primary text-nowrap" data-delay="100"
-                            data-words="customer satisfaction,business needs,creative ideas"></span><span
-                            class="cursor text-primary" data-owner="typer"></span></h1>
-                    <p class="lead fs-24 lh-sm text-white mb-7 pe-md-18 pe-lg-0 pe-xxl-15">We carefully consider our
-                        solutions to support each and every stage of your growth.</p>
+                            data-words="diverses universités,filères,modules,cours"></span><span class="cursor text-primary"
+                            data-owner="typer"></span></h1>
+                    <p class="lead fs-24 lh-sm text-white mb-7 pe-md-18 pe-lg-0 pe-xxl-15">Une plateforme centralisée pour
+                        faciliter l'accès aux ressources académiques des universités, afin de soutenir l'apprentissage et la
+                        réussite des étudiants.</p>
                     <div>
-                        <a class="btn btn-lg btn-primary rounded">Get Started</a>
+                        <a class="btn btn-lg btn-primary rounded">Commencer</a>
                     </div>
                 </div>
                 <!-- /column -->
@@ -33,13 +34,15 @@
         </div>
         <!-- /.container -->
     </section>
+
     <!-- /section -->
     <section class="wrapper bg-light">
         <div class="container pt-19 pt-md-21 pb-16 pb-md-18">
             <div class="row">
                 <div class="col-lg-8 col-xl-7 col-xxl-6">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">What We Do?</h2>
-                    <h3 class="display-4 mb-9">The service we offer is specifically designed to meet your needs.</h3>
+                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Ce que nous faisons</h2>
+                    <h3 class="display-4 mb-9">Notre application permet de centraliser les ressources académiques pour une
+                        accessibilité facile et rapide.</h3>
                 </div>
                 <!-- /column -->
             </div>
@@ -48,59 +51,60 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="icon btn btn-block btn-lg btn-soft-primary pe-none mb-6"> <i
                             class="uil uil-phone-volume"></i> </div>
-                    <h4>24/7 Support</h4>
-                    <p class="mb-3">Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget
-                        metus. Cras justo.</p>
-                    <a href="#" class="more hover link-primary">Learn More</a>
+                    <h4>Support 24/7</h4>
+                    <p class="mb-3">Notre équipe est disponible à tout moment pour vous assister dans votre navigation et
+                        répondre à vos besoins.</p>
+                    <a href="#" class="more hover link-primary">En savoir plus</a>
                 </div>
                 <!--/column -->
                 <div class="col-md-6 col-lg-3">
                     <div class="icon btn btn-block btn-lg btn-soft-primary pe-none mb-6"> <i
                             class="uil uil-shield-exclamation"></i> </div>
-                    <h4>Secure Payments</h4>
-                    <p class="mb-3">Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget
-                        metus. Cras justo.</p>
-                    <a href="#" class="more hover link-primary">Learn More</a>
+                    <h4>Paiements sécurisés</h4>
+                    <p class="mb-3">Nous garantissons un environnement sécurisé pour vos transactions, avec des paiements
+                        cryptés et protégés.</p>
+                    <a href="#" class="more hover link-primary">En savoir plus</a>
                 </div>
                 <!--/column -->
                 <div class="col-md-6 col-lg-3">
                     <div class="icon btn btn-block btn-lg btn-soft-primary pe-none mb-6"> <i
                             class="uil uil-laptop-cloud"></i> </div>
-                    <h4>Daily Updates</h4>
-                    <p class="mb-3">Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget
-                        metus. Cras justo.</p>
-                    <a href="#" class="more hover link-primary">Learn More</a>
+                    <h4>Mises à jour quotidiennes</h4>
+                    <p class="mb-3">Nous mettons régulièrement à jour les ressources pour vous offrir un accès aux
+                        documents les plus récents.</p>
+                    <a href="#" class="more hover link-primary">En savoir plus</a>
                 </div>
                 <!--/column -->
                 <div class="col-md-6 col-lg-3">
                     <div class="icon btn btn-block btn-lg btn-soft-primary pe-none mb-6"> <i class="uil uil-chart-line"></i>
                     </div>
-                    <h4>Market Research</h4>
-                    <p class="mb-3">Nulla vitae elit libero, a pharetra augue. Donec id elit non mi porta gravida at eget
-                        metus. Cras justo.</p>
-                    <a href="#" class="more hover link-primary">Learn More</a>
+                    <h4>Analyse de marché</h4>
+                    <p class="mb-3">Nous analysons les tendances du marché académique pour vous fournir les ressources les
+                        plus pertinentes et actuelles.</p>
+                    <a href="#" class="more hover link-primary">En savoir plus</a>
                 </div>
                 <!--/column -->
             </div>
             <!--/.row -->
             <div class="row">
-                <div class="offset-lg-6 col-lg-8 col-xl-7 col-xxl-6">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">D'ou vienne nos resource?</h2>
-                    <h3 class="display-4 mb-9">The service we offer is specifically designed to meet your needs.</h3>
+                <div class="offset-lg-8 col-lg-8 col-xl-7 col-xxl-6">
+                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">D'où proviennent nos ressources ?</h2>
+                </div>
+                <div class="col-12">
+                    <h3 class="display-4 mb-9">Les ressources disponibles sur notre plateforme proviennent des meilleures
+                        universités et sont organisées de manière à répondre aux besoins de chaque utilisateur.</h3>
                 </div>
                 <!-- /column -->
             </div>
             <!--/.row -->
             <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
-
                 @foreach ($universities as $university)
                     <div class="col-md-6 col-lg-4">
-
                         <div class="card" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-4 p-5 align-item-center d-flex justify-content-center">
                                     <img src="{{ $university->getLogoUrl() }}" class="img-fluid rounded-start d-block w-100"
-                                        alt="...">
+                                        alt="Logo de l'université">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -108,7 +112,7 @@
                                         <div class="my-2">
                                             <div class="d-flex align-items-center mb-2">
                                                 <i class="uil uil-download-alt"></i>
-                                                <span>12,500 ressources</span>
+                                                <span>{{ $university->resources_count }} ressources disponibles</span>
                                             </div>
                                         </div>
                                         <a href="#" class="btn btn-primary btn-sm">Voir les ressources</a>
@@ -123,24 +127,24 @@
             <!--/.row -->
             <div class="mb-16 mt-8 mb-md-18 d-flex justify-content-center align-items-center">
                 <button class="btn btn-primary">Voir plus</button>
-                <!-- /column -->
             </div>
             <!--/.row -->
-            <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
+            <div class="row gy-10 mb-16 gy-sm-13 gx-lg-3 align-items-center">
                 <div class="col">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Les resource les plus telecharger</h2>
-                    <h3 class="display-4 mb-7">A few reasons why our valued customers choose us.</h3>
+                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Les ressources les plus téléchargées</h2>
+                    <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par nos
+                        utilisateurs.</h3>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
-                                <th>Categorie</th>
+                                <th>Catégorie</th>
                                 <th>Nom</th>
                                 <th>Module</th>
-                                <th>Filiere</th>
-                                <th>Universite</th>
-                                <th>Telecharger</th>
+                                <th>Filière</th>
+                                <th>Université</th>
+                                <th>Télécharger</th>
                                 <th>Taille</th>
-                                <th>Nombre de telechargement</th>
+                                <th>Nombre de téléchargements</th>
                                 <th>Uploader le</th>
                             </thead>
                             <tbody>
@@ -156,8 +160,7 @@
                                         </td>
                                         <td>{{ $resource->university->name }}</td>
                                         <td>
-                                            {{-- <a href="{{ $resource->getFileUrl() }}" download>Fichier</a> --}}
-                                            <a href="{{ route('public.resource.download', $resource->id) }}">Fichier 2</a>
+                                            <a href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
                                         </td>
                                         <td>{{ $resource->getFileSize(format: true) }}</td>
                                         <td>{{ $resource->download_count }}</td>
@@ -171,18 +174,87 @@
                 <!--/column -->
             </div>
             <!--/.row -->
+            <div class="row">
+                <div class="offset-lg-8 col-lg-8 col-xl-7 col-xxl-6">
+                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Trouvez la ressource que vous cherchez</h2>
+                </div>
+                <div class="col-12">
+                    <h3 class="display-4 mb-9">Utilisez notre fonctionnalité de recherche pour filtrer les ressources selon
+                        vos besoins spécifiques.</h3>
+                </div>
+                <!-- /column -->
+            </div>
+            <!--/.row -->
+            <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
+                <form action="" methods="get">
+                    @csrf
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="university" aria-label="Université">
+                                    <option selected>Choisir l'université</option>
+                                    <option value="1">Université Paris-Saclay</option>
+                                    <option value="2">Sorbonne Université</option>
+                                    <option value="3">Université de Lyon</option>
+                                </select>
+                                <label for="university">Université</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="field" aria-label="Filière">
+                                    <option selected>Choisir la filière</option>
+                                    <option value="1">Sciences</option>
+                                    <option value="2">Lettres</option>
+                                    <option value="3">Droit</option>
+                                </select>
+                                <label for="field">Filière</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="field" aria-label="Filière">
+                                    <option selected>Choisir le Niveau</option>
+                                    <option value="1">Licence 1</option>
+                                    <option value="2">Licence 2</option>
+                                    <option value="3">Licence 2</option>
+                                </select>
+                                <label for="field">Niveau</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select class="form-select" id="field" aria-label="Filière">
+                                    <option selected>Choisir la categorie</option>
+                                    <option value="1">Devoir</option>
+                                    <option value="2">TP</option>
+                                </select>
+                                <label for="field">Categorie</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary mt-6" type="submit">Rechercher</button>
+                    </div>
+                </form>
+            </div>
+            <!--/.row -->
         </div>
-        <!-- /.container -->
     </section>
+
     <!-- /section -->
     <section class="wrapper image-wrapper bg-image bg-overlay" data-image-src="./assets/img/photos/bg1.jpg">
         <div class="container py-18">
             <div class="row">
                 <div class="col-lg-8">
-                    <h2 class="fs-16 text-uppercase text-line text-white mb-3">Join Our Community</h2>
-                    <h3 class="display-4 mb-6 text-white pe-xxl-18">We are trusted by over 5000+ clients. Join them by
-                        using our services and grow your business.</h3>
-                    <a href="#" class="btn btn-white rounded mb-0 text-nowrap">Join Us</a>
+                    <h2 class="fs-16 text-uppercase text-line text-white mb-3">Rejoignez StudyHub</h2>
+                    <h3 class="display-4 mb-6 text-white pe-xxl-18">Des milliers d'étudiants et d'enseignants nous font
+                        confiance pour accéder facilement aux ressources académiques essentielles. Rejoignez-les pour
+                        enrichir vos connaissances.</h3>
+                    <a href="https://wa.me/?text=Bonjour!%20Je%20souhaite%20en%20savoir%20plus%20sur%20StudyHub."
+                        target="_blank" class="btn btn-white rounded mb-0 text-nowrap">
+                        Nous Contacter sur WhatsApp
+                    </a>
                 </div>
                 <!-- /column -->
             </div>
@@ -191,7 +263,8 @@
         <!-- /.container -->
     </section>
     <!-- /section -->
-    <section class="wrapper bg-light angled upper-end">
+
+    {{-- <section class="wrapper bg-light angled upper-end">
         <div class="container py-14 py-md-16">
             <div class="row">
                 <div class="col-lg-9 col-xl-8 col-xxl-7">
@@ -321,255 +394,80 @@
             <!-- /.swiper-container -->
         </div>
         <!-- /.container -->
-    </section>
+    </section> --}}
     <!-- /section -->
-    <section class="wrapper bg-soft-primary">
+    <section class="wrapper bg-soft-primary angled upper-end">
         <div class="container py-14 pt-md-17 pb-md-21">
             <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-2 align-items-end">
                 <div class="col-lg-4">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Company Facts</h2>
-                    <h3 class="display-4 mb-0 pe-xxl-15">We are proud of our works</h3>
+                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Prenez Contact</h2>
+                    <h3 class="display-4 mb-0 pe-xxl-15">Nous serions ravis de vous entendre</h3>
+                    <p class="mt-4">Veuillez partager vos pensées, questions ou commentaires avec nous.</p>
                 </div>
-                <!-- /column -->
                 <div class="col-lg-8 mt-lg-2">
-                    <div class="row align-items-center counter-wrapper gy-6 text-center">
-                        <div class="col-md-4">
-                            <h3 class="counter counter-lg">1000+</h3>
-                            <p>Completed Projects</p>
+                    <form action="/submit-feedback" method="POST" class="feedback-form">
+                        <div class="row gx-3 gy-3">
+                            <div class="col-md-6">
+                                <input type="text" name="name" class="form-control" placeholder="Votre Nom"
+                                    required />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" name="email" class="form-control" placeholder="Votre Email"
+                                    required />
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" class="form-control" placeholder="Votre Message" rows="5" required></textarea>
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary rounded">Envoyer le Message</button>
+                            </div>
                         </div>
-                        <!--/column -->
-                        <div class="col-md-4">
-                            <h3 class="counter counter-lg">500+</h3>
-                            <p>Happy Clients</p>
-                        </div>
-                        <!--/column -->
-                        <div class="col-md-4">
-                            <h3 class="counter counter-lg">150+</h3>
-                            <p>Awards Won</p>
-                        </div>
-                        <!--/column -->
-                    </div>
-                    <!--/.row -->
+                    </form>
                 </div>
-                <!-- /column -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container -->
     </section>
-    <!-- /section -->
+
     <section class="wrapper bg-light angled upper-end lower-start">
         <div class="container py-16 py-md-18 position-relative">
-            <div class="position-relative mt-n18 mt-md-n23 mb-16 mb-md-18">
-                <div class="shape rounded-circle bg-line primary rellax w-18 h-18" data-rellax-speed="1"
-                    style="top: -2rem; right: -2.7rem; z-index:0;"></div>
-                <div class="shape rounded-circle bg-soft-primary rellax w-18 h-18" data-rellax-speed="1"
-                    style="bottom: -1rem; left: -3rem; z-index:0;"></div>
+            <div class="position-relative mb-16">
                 <div class="card shadow-lg">
                     <div class="row gx-0">
                         <div class="col-lg-6 image-wrapper bg-image bg-cover rounded-top rounded-lg-start"
-                            data-image-src="./assets/img/photos/tm1.jpg">
+                            style="background-image: url('./assets/img/photos/contact.jpg');">
                         </div>
-                        <!--/column -->
                         <div class="col-lg-6">
                             <div class="p-10 p-md-11 p-lg-13">
-                                <div class="swiper-container dots-closer mb-4" data-margin="30" data-dots="true">
-                                    <div class="swiper">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <blockquote class="icon icon-top fs-lg text-center">
-                                                    <p>“Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-                                                        auctor. Vestibulum ligula porta felis euismod semper. Cras justo
-                                                        odio.”</p>
-                                                    <div class="blockquote-details justify-content-center text-center">
-                                                        <div class="info ps-0">
-                                                            <h5 class="mb-1">Coriss Ambady</h5>
-                                                            <p class="mb-0">Financial Analyst</p>
-                                                        </div>
-                                                    </div>
-                                                </blockquote>
-                                            </div>
-                                            <!--/.swiper-slide -->
-                                            <div class="swiper-slide">
-                                                <blockquote class="icon icon-top fs-lg text-center">
-                                                    <p>“Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-                                                        auctor. Vestibulum ligula porta felis euismod semper. Cras justo
-                                                        odio.”</p>
-                                                    <div class="blockquote-details justify-content-center text-center">
-                                                        <div class="info ps-0">
-                                                            <h5 class="mb-1">Cory Zamora</h5>
-                                                            <p class="mb-0">Marketing Specialist</p>
-                                                        </div>
-                                                    </div>
-                                                </blockquote>
-                                            </div>
-                                            <!--/.swiper-slide -->
-                                            <div class="swiper-slide">
-                                                <blockquote class="icon icon-top fs-lg text-center">
-                                                    <p>“Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-                                                        auctor. Vestibulum ligula porta felis euismod semper. Cras justo
-                                                        odio.”</p>
-                                                    <div class="blockquote-details justify-content-center text-center">
-                                                        <div class="info ps-0">
-                                                            <h5 class="mb-1">Nikolas Brooten</h5>
-                                                            <p class="mb-0">Sales Manager</p>
-                                                        </div>
-                                                    </div>
-                                                </blockquote>
-                                            </div>
-                                            <!--/.swiper-slide -->
-                                        </div>
-                                        <!-- /.swiper-wrapper -->
+                                <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Informations de Contact</h2>
+                                <h3 class="display-4 mb-4">Connectez-vous avec nous</h3>
+                                <p>Nous sommes ici pour vous aider et répondre à toutes vos questions. Nous avons hâte de
+                                    vous entendre !</p>
+                                <div class="d-flex flex-row mt-4">
+                                    <div class="icon text-primary fs-28 me-4"><i class="uil uil-phone-volume"></i></div>
+                                    <div>
+                                        <h5 class="mb-1">Téléphone</h5>
+                                        <p>00 (123) 456 78 90</p>
                                     </div>
-                                    <!-- /.swiper -->
                                 </div>
-                                <!-- /.swiper-container -->
-                            </div>
-                            <!--/div -->
-                        </div>
-                        <!--/column -->
-                    </div>
-                    <!--/.row -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /div -->
-            <div class="row gy-6 mb-16 mb-md-18">
-                <div class="col-lg-4">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mt-lg-18 mb-3">Our Pricing</h2>
-                    <h3 class="display-4 mb-3">We offer great and premium prices.</h3>
-                    <p>Enjoy a <a href="#" class="hover">free 30-day trial</a> and experience the full service. No
-                        credit card required!</p>
-                    <a href="#" class="btn btn-primary rounded mt-2">See All Prices</a>
-                </div>
-                <!--/column -->
-                <div class="col-lg-7 offset-lg-1 pricing-wrapper">
-                    <div class="pricing-switcher-wrapper switcher justify-content-start justify-content-lg-end">
-                        <p class="mb-0 pe-3">Monthly</p>
-                        <div class="pricing-switchers">
-                            <div class="pricing-switcher pricing-switcher-active"></div>
-                            <div class="pricing-switcher"></div>
-                            <div class="switcher-button bg-primary"></div>
-                        </div>
-                        <p class="mb-0 ps-3">Yearly <span class="text-red">(Save 30%)</span></p>
-                    </div>
-                    <div class="row gy-6 position-relative mt-5">
-                        <div class="shape bg-dot primary rellax w-16 h-18" data-rellax-speed="1"
-                            style="bottom: -0.5rem; right: -1.6rem;"></div>
-                        <div class="shape rounded-circle bg-soft-primary rellax w-18 h-18" data-rellax-speed="1"
-                            style="top: -1rem; left: -2rem;"></div>
-                        <div class="col-md-6">
-                            <div class="pricing card shadow-lg">
-                                <div class="card-body pb-12">
-                                    <div class="prices text-dark">
-                                        <div class="price price-show justify-content-start"><span
-                                                class="price-currency">$</span><span class="price-value">19</span> <span
-                                                class="price-duration">mo</span></div>
-                                        <div class="price price-hide price-hidden justify-content-start"><span
-                                                class="price-currency">$</span><span class="price-value">199</span> <span
-                                                class="price-duration">yr</span></div>
+                                <div class="d-flex flex-row mt-4">
+                                    <div class="icon text-primary fs-28 me-4"><i class="uil uil-envelope"></i></div>
+                                    <div>
+                                        <h5 class="mb-1">Email</h5>
+                                        <p>info@company.com</p>
                                     </div>
-                                    <!--/.prices -->
-                                    <h4 class="card-title mt-2">Premium Plan</h4>
-                                    <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8">
-                                        <li><i class="uil uil-check"></i><span><strong>5</strong> Projects </span></li>
-                                        <li><i class="uil uil-check"></i><span><strong>100K</strong> API Access </span>
-                                        </li>
-                                        <li><i class="uil uil-check"></i><span><strong>200MB</strong> Storage </span></li>
-                                        <li><i class="uil uil-check"></i><span> Weekly <strong>Reports</strong></span></li>
-                                        <li><i class="uil uil-times bullet-soft-red"></i><span> 7/24
-                                                <strong>Support</strong></span></li>
-                                    </ul>
-                                    <a href="#" class="btn btn-primary rounded">Choose Plan</a>
                                 </div>
-                                <!--/.card-body -->
-                            </div>
-                            <!--/.pricing -->
-                        </div>
-                        <!--/column -->
-                        <div class="col-md-6 popular">
-                            <div class="pricing card shadow-lg">
-                                <div class="card-body pb-12">
-                                    <div class="prices text-dark">
-                                        <div class="price price-show justify-content-start"><span
-                                                class="price-currency">$</span><span class="price-value">49</span> <span
-                                                class="price-duration">mo</span></div>
-                                        <div class="price price-hide price-hidden justify-content-start"><span
-                                                class="price-currency">$</span><span class="price-value">499</span> <span
-                                                class="price-duration">yr</span></div>
-                                    </div>
-                                    <!--/.prices -->
-                                    <h4 class="card-title mt-2">Corporate Plan</h4>
-                                    <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8">
-                                        <li><i class="uil uil-check"></i><span><strong>20</strong> Projects </span></li>
-                                        <li><i class="uil uil-check"></i><span><strong>300K</strong> API Access </span>
-                                        </li>
-                                        <li><i class="uil uil-check"></i><span><strong>500MB</strong> Storage </span></li>
-                                        <li><i class="uil uil-check"></i><span> Weekly <strong>Reports</strong></span></li>
-                                        <li><i class="uil uil-check"></i><span> 7/24 <strong>Support</strong></span></li>
-                                    </ul>
-                                    <a href="#" class="btn btn-primary rounded">Choose Plan</a>
+                                <div class="text-center mt-4">
+                                    <a href="https://wa.me/your-number" target="_blank" class="btn btn-success rounded">
+                                        Contactez-nous sur WhatsApp
+                                    </a>
                                 </div>
-                                <!--/.card-body -->
-                            </div>
-                            <!--/.pricing -->
-                        </div>
-                        <!--/column -->
-                    </div>
-                    <!--/.row -->
-                </div>
-                <!--/column -->
-            </div>
-            <!--/.row -->
-            <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
-                <div class="col-md-8 col-lg-6 position-relative">
-                    <div class="shape bg-dot primary rellax w-17 h-21" data-rellax-speed="1"
-                        style="top: -2rem; left: -1.9rem;"></div>
-                    <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
-                        style="bottom: -1.8rem; right: -1.5rem; width: 85%; height: 90%; "></div>
-                    <figure class="rounded"><img src="./assets/img/photos/about14.jpg"
-                            srcset="./assets/img/photos/about14@2x.jpg 2x" alt="" /></figure>
-                </div>
-                <!--/column -->
-                <div class="col-lg-5 col-xl-4 offset-lg-1">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Get In Touch</h2>
-                    <h2 class="display-4 mb-8">Convinced yet? Let's make something great together.</h2>
-                    <div class="d-flex flex-row">
-                        <div>
-                            <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-location-pin-alt"></i>
                             </div>
                         </div>
-                        <div>
-                            <h5 class="mb-1">Address</h5>
-                            <address>Moonshine St. 14/05 Light City, <br class="d-none d-md-block" />London, United Kingdom
-                            </address>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-row">
-                        <div>
-                            <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-phone-volume"></i> </div>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">Phone</h5>
-                            <p>00 (123) 456 78 90</p>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-row">
-                        <div>
-                            <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-envelope"></i> </div>
-                        </div>
-                        <div>
-                            <h5 class="mb-1">E-mail</h5>
-                            <p class="mb-0"><a href="mailto:sandbox@email.com" class="link-body">sandbox@email.com</a>
-                            </p>
-                        </div>
                     </div>
                 </div>
-                <!--/column -->
             </div>
-            <!--/.row -->
         </div>
-        <!-- /.container -->
     </section>
+
     <!-- /section -->
 @endsection
