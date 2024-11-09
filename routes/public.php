@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::name('public.')->group(function () {
+Route::name('public.')->group(callback: function () {
     Route::get('home', [PagesController::class, 'home'])->name('pages.home');
     Route::get('resource/{resource}/download', [ResourceController::class, 'downloadFile'])->name('resource.download');
+    Route::get('resource/seach-advance', [PagesController::class, 'seachAdvance'])->name('resources.seachAdvance');
 });

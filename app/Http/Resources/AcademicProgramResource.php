@@ -3,8 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use App\Models\AcademicLevel;
 use App\Http\Resources\UniversityResource;
+use App\Http\Resources\AcademicLevelCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\AcademicProgramLevelCollection;
 
 class AcademicProgramResource extends JsonResource
 {
@@ -26,12 +29,12 @@ class AcademicProgramResource extends JsonResource
             ),
             'academicProgramLevels' => $this->whenLoaded(
                 relationship: 'academicProgramLevels',
-                value: fn() => $this->academicLevels,
+                value: fn(): AcademicProgramLevelCollection => new AcademicProgramLevelCollection(resource: $this->academicProgramLevels),
                 default: []
             ),
             'academicLevels' => $this->whenLoaded(
                 relationship: 'academicLevels',
-                value: fn() => $this->academicLevels,
+                value: fn(): AcademicLevelCollection => new AcademicLevelCollection(resource: $this->academicLevels),
                 default: []
             )
         ];

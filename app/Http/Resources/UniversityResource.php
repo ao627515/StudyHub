@@ -22,11 +22,11 @@ class UniversityResource extends JsonResource
             'logo' => $this->logo,
             'abb' => $this->abb,
             'academicPrograms' => $this->whenLoaded(
-                'academicPrograms',
-                function () {
+                relationship: 'academicPrograms',
+                value: function () {
                     return new AcademicProgramCollection($this->academicPrograms);
                 },
-                []
+                default: []
             ),
             'deleted_at' => $this->deleted_at,
             'created_at' => $this->created_at,

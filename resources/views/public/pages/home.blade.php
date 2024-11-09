@@ -192,7 +192,7 @@
             </div>
             <!--/.row -->
             <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
-                <form action="" methods="get">
+                <form action="{{ route('public.resources.seachAdvance') }}" methods="get">
                     @csrf
                     <div class="row g-4">
                         <div class="col-md-6">
@@ -267,138 +267,6 @@
     </section>
     <!-- /section -->
 
-    {{-- <section class="wrapper bg-light angled upper-end">
-        <div class="container py-14 py-md-16">
-            <div class="row">
-                <div class="col-lg-9 col-xl-8 col-xxl-7">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Case Studies</h2>
-                    <h3 class="display-4 mb-9">Check out some of our awesome projects with creative ideas and great design.
-                    </h3>
-                </div>
-                <!-- /column -->
-            </div>
-            <!-- /.row -->
-            <div class="swiper-container blog grid-view mb-10" data-margin="30" data-dots="true" data-items-xl="3"
-                data-items-md="2" data-items-xs="1">
-                <div class="swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <article>
-                                <figure class="overlay overlay-1 hover-scale rounded mb-6"><a href="#"> <img
-                                            src="./assets/img/photos/b4.jpg" alt="" /></a>
-                                    <figcaption>
-                                        <h5 class="from-top mb-0">Read More</h5>
-                                    </figcaption>
-                                </figure>
-                                <div class="post-header">
-                                    <h2 class="post-title h3 mb-3"><a class="link-dark" href="./blog-post.html">Ligula
-                                            tristique quis risus</a></h2>
-                                </div>
-                                <!-- /.post-header -->
-                                <div class="post-footer">
-                                    <ul class="post-meta">
-                                        <li class="post-date"><i class="uil uil-calendar-alt"></i><span>14 Apr 2022</span>
-                                        </li>
-                                        <li class="post-comments"><a href="#"><i
-                                                    class="uil uil-file-alt fs-15"></i>Coding</a></li>
-                                    </ul>
-                                    <!-- /.post-meta -->
-                                </div>
-                                <!-- /.post-footer -->
-                            </article>
-                            <!-- /article -->
-                        </div>
-                        <!--/.swiper-slide -->
-                        <div class="swiper-slide">
-                            <article>
-                                <figure class="overlay overlay-1 hover-scale rounded mb-6"><a href="#"> <img
-                                            src="./assets/img/photos/b5.jpg" alt="" /></a>
-                                    <figcaption>
-                                        <h5 class="from-top mb-0">Read More</h5>
-                                    </figcaption>
-                                </figure>
-                                <div class="post-header">
-                                    <h2 class="post-title h3 mb-3"><a class="link-dark" href="./blog-post.html">Nullam id
-                                            dolor elit id nibh</a></h2>
-                                </div>
-                                <!-- /.post-header -->
-                                <div class="post-footer">
-                                    <ul class="post-meta">
-                                        <li class="post-date"><i class="uil uil-calendar-alt"></i><span>29 Mar 2022</span>
-                                        </li>
-                                        <li class="post-comments"><a href="#"><i
-                                                    class="uil uil-file-alt fs-15"></i>Workspace</a></li>
-                                    </ul>
-                                    <!-- /.post-meta -->
-                                </div>
-                                <!-- /.post-footer -->
-                            </article>
-                            <!-- /article -->
-                        </div>
-                        <!--/.swiper-slide -->
-                        <div class="swiper-slide">
-                            <article>
-                                <figure class="overlay overlay-1 hover-scale rounded mb-6"><a href="#"> <img
-                                            src="./assets/img/photos/b6.jpg" alt="" /></a>
-                                    <figcaption>
-                                        <h5 class="from-top mb-0">Read More</h5>
-                                    </figcaption>
-                                </figure>
-                                <div class="post-header">
-                                    <h2 class="post-title h3 mb-3"><a class="link-dark" href="./blog-post.html">Ultricies
-                                            fusce porta elit</a></h2>
-                                </div>
-                                <!-- /.post-header -->
-                                <div class="post-footer">
-                                    <ul class="post-meta">
-                                        <li class="post-date"><i class="uil uil-calendar-alt"></i><span>26 Feb 2022</span>
-                                        </li>
-                                        <li class="post-comments"><a href="#"><i
-                                                    class="uil uil-file-alt fs-15"></i>Meeting</a></li>
-                                    </ul>
-                                    <!-- /.post-meta -->
-                                </div>
-                                <!-- /.post-footer -->
-                            </article>
-                            <!-- /article -->
-                        </div>
-                        <!--/.swiper-slide -->
-                        <div class="swiper-slide">
-                            <article>
-                                <figure class="overlay overlay-1 hover-scale rounded mb-6"><a href="#"> <img
-                                            src="./assets/img/photos/b7.jpg" alt="" /></a>
-                                    <figcaption>
-                                        <h5 class="from-top mb-0">Read More</h5>
-                                    </figcaption>
-                                </figure>
-                                <div class="post-header">
-                                    <h2 class="post-title h3 mb-3"><a class="link-dark" href="./blog-post.html">Morbi leo
-                                            risus porta eget</a></h2>
-                                </div>
-                                <div class="post-footer">
-                                    <ul class="post-meta">
-                                        <li class="post-date"><i class="uil uil-calendar-alt"></i><span>7 Jan 2022</span>
-                                        </li>
-                                        <li class="post-comments"><a href="#"><i
-                                                    class="uil uil-file-alt fs-15"></i>Business Tips</a></li>
-                                    </ul>
-                                    <!-- /.post-meta -->
-                                </div>
-                                <!-- /.post-footer -->
-                            </article>
-                            <!-- /article -->
-                        </div>
-                        <!--/.swiper-slide -->
-                    </div>
-                    <!-- /.swiper-wrapper -->
-                </div>
-                <!-- /.swiper -->
-            </div>
-            <!-- /.swiper-container -->
-        </div>
-        <!-- /.container -->
-    </section> --}}
-    <!-- /section -->
     <section class="wrapper bg-soft-primary angled upper-end">
         <div class="container py-14 pt-md-17 pb-md-21">
             <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-2 align-items-end">
@@ -483,10 +351,10 @@
         $(document).ready(function() {
             home({
                 endpoint: '{{ config('app.url') }}/api/universities',
-                relations: {
+                params: {
                     relations: 'academicPrograms'
                 }
             });
         });
-    </script>,
+    </script>
 @endsection

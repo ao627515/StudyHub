@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Resource;
+use App\Models\Uploader;
+use App\Models\University;
 use App\Models\CourseModule;
 use Illuminate\Http\Request;
+use App\Models\AcademicLevel;
+use App\Models\CategoryResource;
 use App\Services\ResourceService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreResourceRequest;
 use App\Http\Requests\UpdateResourceRequest;
-use App\Models\CategoryResource;
-use App\Models\Uploader;
-use App\Models\User;
 
 class ResourceController extends Controller
 {
@@ -30,6 +32,7 @@ class ResourceController extends Controller
         $resources = $this->resourceService->index(10); // Changez 10 si besoin
         return view('admin.resources.index', compact('resources'));
     }
+
 
     /**
      * Show the form for creating a new resource.

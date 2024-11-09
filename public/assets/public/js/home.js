@@ -1,11 +1,11 @@
-async function home({ endpoint, relations }) {
+async function home({ endpoint, params }) {
     // Initialisation des sélecteurs avec un thème commun
     const select2Options = { theme: 'bootstrap-5' };
     const academicProgramsSelect = $('#program').select2(select2Options);
     $('#level, #category, #university').select2(select2Options);
 
     // Récupération des universités
-    const universitiesRaw = await fetchUniversities(endpoint, relations);
+    const universitiesRaw = await fetchUniversities(endpoint, params);
 
     if (!universitiesRaw || universitiesRaw.length === 0) {
         alert('Université non chargée, veuillez recharger la page');

@@ -28,4 +28,21 @@ class PagesController extends Controller
             )
         );
     }
+
+    public function seachAdvance()
+    {
+        $universities = University::latest()->get(['id', 'name']);
+        $levels = AcademicLevel::all(['id', 'name']);
+        $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
+        $resources = Resource::latest()->get();
+        return view(
+            'public.pages.search_advance',
+            compact(
+                'universities',
+                'levels',
+                'resourceCategories',
+                'resources'
+            )
+        );
+    }
 }
