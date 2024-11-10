@@ -7,7 +7,6 @@ use App\Models\Resource;
 use App\Models\Uploader;
 use App\Models\University;
 use App\Models\CourseModule;
-use Illuminate\Http\Request;
 use App\Models\AcademicLevel;
 use App\Models\CategoryResource;
 use App\Services\ResourceService;
@@ -29,7 +28,18 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        $resources = $this->resourceService->index(10); // Changez 10 si besoin
+        $params = [
+            'paginate' => request('paginate', 0),
+            'relations' => request('relations', []),
+            'university' => request('university', 0),
+            'program' => request('program', 0),
+            'level' => request('level', 0),
+            'category' => request('category', 0),
+            'name' => request('name', ''),
+            'module' => request('module', 0),
+            'schoolYear' => request('schoolYear', 0)
+        ];
+        $resources = $this->resourceService->index($params);
         return view('admin.resources.index', compact('resources'));
     }
 

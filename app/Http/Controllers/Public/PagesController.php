@@ -9,10 +9,18 @@ use App\Models\CategoryResource;
 use App\Models\CourseModule;
 use App\Models\Resource;
 use App\Models\University;
+use App\Services\ResourceService;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+
+    private ResourceService $resourceService;
+    public function __construct(ResourceService $resourceService)
+    {
+        $this->resourceService = $resourceService;
+    }
+
     public function home()
     {
         $universities = University::latest()->get(['id', 'name']);
@@ -35,11 +43,12 @@ class PagesController extends Controller
     {
         $universities = University::latest()->get(['id', 'name']);
         $levels = AcademicLevel::all(['id', 'name']);
-        $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
         $schoolYears = Resource::distinct()->pluck('school_year');
         $resources = Resource::latest()->get();
         $programs = AcademicProgram::all(['id', 'name']);
         $modules = CourseModule::all(['id', 'name']);
+        $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
+
 
         return view(
             'public.pages.search_advance',

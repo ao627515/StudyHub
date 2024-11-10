@@ -17,14 +17,33 @@ class ResourceService
     /**
      * Récupère la liste des ressources avec ou sans pagination et avec les relations spécifiées.
      */
-    public function index(int $paginate = 0, array $relations = [])
+    public function index(array $params)
     {
-        $query = Resource::query()->with($relations);
+        $query = Resource::query()->with($params['relations']);
 
-        $query = Auth::user()->isUploader() ? $query->where('created_by_id', Auth::id()) : $query;
+        $filters = [
+            'university' => fn($query, $value) => $query->orWhereHas('courseModule.academicProgramLevel.academicProgram', fn($query) => $query->where('university_id', $value)),
+            'program' => fn($query, $value) => $query->orWhereHas('courseModule.academicProgramLevel', fn($query) => $query->where('academic_program_id', $value)),
+            'level' => fn($query, $value) => $query->orWhereHas('courseModule.academicProgramLevel', fn($query) => $query->where('academic_level_id', $value)),
+            'module' => fn($query, $value) => $query->orWhere('course_module_id', $value),
+            'category' => fn($query, $value) => $query->orWhere('category_id', $value),
+            'name' => fn($query, $value) => $query->orWhere('name', 'LIKE', "%$value%"),
+            'schoolYear' => fn($query, $value) => $query->orWhere('schoolYear', 'LIKE', "%$value%")
+        ];
 
-        return $paginate ? $query->paginate($paginate) : $query->latest()->get();
+        foreach ($filters as $param => $callback) {
+            $query->when($params[$param] ?? null, fn($query) => $callback($query, $params[$param]));
+        }
+
+        if (Auth::user()->isUploader()) {
+            $query->where('created_by_id', Auth::id());
+        }
+
+        return $params['paginate']
+            ? $query->paginate($params['paginate'])
+            : $query->latest()->get();
     }
+
 
     private  function getResourcesByUserAuth(Builder $builder) {}
 
