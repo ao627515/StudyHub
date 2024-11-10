@@ -32,7 +32,9 @@ class StoreResourceRequest extends FormRequest
             'course_module_id' => 'required|exists:course_modules,id',
             'resource_id' => 'nullable|exists:resources,id',
             'category_id' => 'required|exists:category_resources,id',
-            'file' => 'required|file|max:1048576'
+            'file' => 'required|file|max:1048576',
+            'schoolYear' => ['required', 'regex:/^\d{4}-\d{4}$/']
+
         ];
     }
 

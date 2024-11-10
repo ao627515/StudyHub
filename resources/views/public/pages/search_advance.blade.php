@@ -28,7 +28,10 @@
                                 <label for="university" class="form-label">Université</label>
                                 <select class="form-select" id="university" name="university" aria-label="Université"
                                     required>
-                                    <option selected>Choisir l'université</option>
+                                    <option selected value="0">Tout</option>
+                                    @foreach ($universities as $university)
+                                        <option value="{{ $university->id }}">{{ $university->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -37,8 +40,10 @@
                                 <label for="program" class="form-label">Filière (Veuillez choisir une universite en
                                     1er)</label>
                                 <select class="form-select" id="program" name="program" aria-label="Filière">
-                                    <option selected>Choisir la filière</option>
-                                    <option>Veuillez selectionner une universite en 1er</option>
+                                    <option selected value="0">Tout</option>
+                                    @foreach ($programs as $program)
+                                        <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -46,7 +51,7 @@
                             <div class="mb-3">
                                 <label for="level" class="form-label">Niveau</label>
                                 <select class="form-select" id="level" aria-label="Niveau academique">
-                                    <option selected>Choisir le Niveau</option>
+                                    <option selected value="0">Tout</option>
                                     @foreach ($levels as $level)
                                         <option value="{{ $level->id }}">{{ $level->name }}</option>
                                     @endforeach
@@ -57,7 +62,7 @@
                             <div class="mb-3">
                                 <label for="category" class="form-label">Categorie</label>
                                 <select class="form-select" id="category" aria-label="Categorie de resource">
-                                    <option selected>Choisir la categorie</option>
+                                    <option selected value="0">Tout</option>
                                     @foreach ($resourceCategories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -68,6 +73,10 @@
                             <div class="mb-3">
                                 <label for="category" class="form-label">Modules</label>
                                 <select class="form-select" id="module" name="module"required>
+                                    <option selected value="0">Tout</option>
+                                    @foreach ($modules as $module)
+                                        <option value="{{ $module->id }}">{{ $module->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -75,6 +84,10 @@
                             <div class="mb-3">
                                 <label for="category" class="form-label">Annees scholaire</label>
                                 <select class="form-select" id="school_year" name="school_year"required>
+                                    <option selected value="0">Tout</option>
+                                    @foreach ($schoolYears as $schoolYear)
+                                        <option value="{{ $schoolYear }}">{{ $schoolYear }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -151,7 +164,7 @@
     <script src="{{ asset('assets/admin/js/main.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="{{ asset('assets/public/js/search_advance.js') }}"></script>
+    {{-- <script src="{{ asset('assets/public/js/search_advance.js') }}"></script>
     <script>
         $(document).ready(function() {
             searchAdvance({
@@ -161,5 +174,5 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 @endsection

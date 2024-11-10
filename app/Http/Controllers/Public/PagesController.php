@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\AcademicLevel;
+use App\Models\AcademicProgram;
 use App\Models\CategoryResource;
+use App\Models\CourseModule;
 use App\Models\Resource;
 use App\Models\University;
 use Illuminate\Http\Request;
@@ -29,19 +31,27 @@ class PagesController extends Controller
         );
     }
 
-    public function seachAdvance()
+    public function searchAdvance()
     {
         $universities = University::latest()->get(['id', 'name']);
         $levels = AcademicLevel::all(['id', 'name']);
         $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
+        $schoolYears = Resource::distinct()->pluck('school_year');
         $resources = Resource::latest()->get();
+        $programs = AcademicProgram::all(['id', 'name']);
+        $modules = CourseModule::all(['id', 'name']);
+
         return view(
             'public.pages.search_advance',
             compact(
                 'universities',
                 'levels',
                 'resourceCategories',
-                'resources'
+                'resources',
+                'schoolYears',
+                'programs',
+                'modules'
+
             )
         );
     }

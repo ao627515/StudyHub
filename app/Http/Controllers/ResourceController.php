@@ -44,9 +44,17 @@ class ResourceController extends Controller
         $authUserAcademicProgramId  = $authUploader->academicProgramLevel->academicProgram->id;
         $authUserUniversityId = $authUploader->university->id;
         $authUserAcademicLevelId = $authUploader->academicLevel->id;
-        // dump('authUserAcademicProgramId = ', $authUserAcademicProgramId);
-        // dump('authUserUniversityId = ', $authUserUniversityId);
-        // dump('authUserAcademicLevelId = ', $authUserAcademicLevelId);
+
+
+        $schoolYears = [];
+        $currentYear = date('Y');
+        for ($i = 0; $i < 10; $i++) {
+            $previousYear = $currentYear - 1;
+            $schoolYears[] = "$previousYear-$currentYear";
+            $currentYear--;
+        }
+
+
 
         $courseModules = CourseModule::latest()->whereHas('academicProgramLevel', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId, $authUserAcademicLevelId) {
             $query->whereHas('academicProgram', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId) {
@@ -62,7 +70,7 @@ class ResourceController extends Controller
 
         $categories = CategoryResource::latest()->get();
 
-        return view('admin.resources.create', compact("courseModules", "categories"));
+        return view('admin.resources.create', compact("courseModules", "categories", "schoolYears"));
     }
 
     /**

@@ -7,6 +7,8 @@ async function searchAdvance({ apiUrl, params }) {
 
     // Chargement des universités
     const universitiesRaw = await fetchUniversities(`${apiUrl}/api/universities`, params);
+    // console.log(universitiesRaw);
+
     if (!universitiesRaw || universitiesRaw.length === 0) {
         alert('Université non chargée, veuillez recharger la page');
         return;

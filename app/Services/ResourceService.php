@@ -36,6 +36,8 @@ class ResourceService
         // Ajout de l'ID de l'utilisateur connecté
         $attributes['created_by_id'] = Auth::id();
 
+        $attributes['school_year'] = $attributes['schoolYear'];
+
         // Gestion du fichier image
         if (isset($attributes['image'])) {
             $attributes['image_url'] = $attributes['image']->store('resources/images', 'public');

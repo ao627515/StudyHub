@@ -11,20 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('academic_program_levels', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('academic_level_id')
+        Schema::table('academic_program_levels', function (Blueprint $table) {
+            $table->foreignId('created_by_id')
                 ->nullable()
-                ->constrained('academic_levels')
+                ->constrained('users')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('academic_program_id')
+            $table->foreignId('deleted_by_id')
                 ->nullable()
-                ->constrained('academic_programs')
+                ->constrained('users')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
-
-            $table->timestamps();
         });
     }
 
@@ -33,6 +30,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('academic_program_levels');
+        Schema::table('user_roles', function (Blueprint $table) {
+            $table->dropForeign('created_by_id');
+            $table->dropForeign('deleted_by_id');
+        });
     }
 };

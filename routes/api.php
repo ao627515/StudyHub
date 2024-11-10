@@ -13,11 +13,16 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::resource("universities", UniversityController::class)->except(['create', 'edit']);
-    Route::resource("academic_programs", AcademicProgramController::class)->except(['create', 'show', 'edit']);
-    Route::resource("academic_levels", AcademicLevelController::class)->except(['create', 'edit']);
-    Route::resource("academic_program_levels", CategoryResourceController::class)->except(['create', 'edit']);
+    Route::resource("universities", UniversityController::class)->only(['store', 'update', 'destroy']);
+    Route::resource("academic_programs", AcademicProgramController::class)->only(['store', 'update', 'destroy']);
+    Route::resource("academic_levels", AcademicLevelController::class)->only(['store', 'update', 'destroy']);
+    Route::resource("academic_program_levels", CategoryResourceController::class)->only(['store', 'update', 'destroy']);
 });
+
+Route::resource('universities', UniversityController::class)->only(['index', 'show']);
+Route::resource("academic_programs", AcademicProgramController::class)->only(['index', 'show']);
+Route::resource("academic_levels", AcademicLevelController::class)->only(['index', 'show']);
+Route::resource("academic_program_levels", CategoryResourceController::class)->only(['index', 'show']);
 
 
 Route::middleware('guest')->group(function () {

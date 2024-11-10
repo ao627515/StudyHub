@@ -29,7 +29,7 @@ class AcademicProgramLevelController extends Controller
     public function index(): View
     {
         $programLevels = $this->academicProgramLevel->index();
-        $programs = Auth::user()->isAdmin() ? AcademicLevel::latest()->get() : AcademicProgram::where('university_id', Uploader::find(Auth::id())->university->id)->get();
+        $programs = Auth::user()->isAdmin() ? AcademicProgram::latest()->get() : AcademicProgram::where('university_id', Uploader::find(Auth::id())->university->id)->get();
         $levels = AcademicLevel::latest()->get();
 
         return view(

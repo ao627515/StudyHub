@@ -93,6 +93,22 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-3">
+                                <label for="category_id" class="form-label">Anne Scholaire</label>
+                                <select name="schoolYear" class="form-select @error('schoolYear') is-invalid @enderror"
+                                    id="category_id" required>
+                                    <option value="">Sélectionner une catégorie</option>
+                                    <!-- Ajoutez ici les options de catégorie de ressource dynamiquement -->
+                                    @foreach ($schoolYears as $schoolYear)
+                                        <option value="{{ $schoolYear }}" @selected(old('schoolYear') === $schoolYear)>
+                                            {{ $schoolYear }}</option>
+                                    @endforeach
+                                </select>
+                                @error('schoolYear')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Créer</button>
                         </form>
                         <!-- Fin du formulaire -->
