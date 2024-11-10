@@ -331,12 +331,7 @@
     <script src="{{ asset('assets/public/js/home.js') }}"></script>
     <script>
         $(document).ready(function() {
-            home({
-                endpoint: '{{ config('app.url') }}/api/universities',
-                params: {
-                    relations: 'academicPrograms'
-                }
-            });
+            home();
         });
     </script>
 @endsection
