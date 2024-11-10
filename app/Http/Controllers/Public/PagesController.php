@@ -27,6 +27,8 @@ class PagesController extends Controller
         $moreResourcesDownload = Resource::latest()->limit(10)->get();
         $levels = AcademicLevel::all(['id', 'name']);
         $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
+        $programs = AcademicProgram::all(['id', 'name']);
+
 
         return view(
             'public.pages.home',
@@ -34,7 +36,8 @@ class PagesController extends Controller
                 'universities',
                 'moreResourcesDownload',
                 'levels',
-                'resourceCategories'
+                'resourceCategories',
+                'programs'
             )
         );
     }

@@ -10,36 +10,107 @@
     <section class="wrapper bg-dark angled lower-start">
         <div class="container pt-7 pt-md-11 pb-8">
             <div class="row gx-0 gy-10 align-items-center">
+                <!-- Texte principal avec animation et typographie améliorée -->
                 <div class="col-lg-6" data-cues="slideInDown" data-group="page-title" data-delay="600">
-                    <h1 class="display-1 text-white mb-4">StudyHub centralise les ressources académiques de <br /><span
-                            class="typer text-primary text-nowrap" data-delay="100"
-                            data-words="diverses universités,filères,modules,cours"></span><span class="cursor text-primary"
-                            data-owner="typer"></span></h1>
-                    <p class="lead fs-24 lh-sm text-white mb-7 pe-md-18 pe-lg-0 pe-xxl-15">Une plateforme centralisée pour
-                        faciliter l'accès aux ressources académiques des universités, afin de soutenir l'apprentissage et la
-                        réussite des étudiants.</p>
+                    <h1 class="display-1 text-white mb-4">
+                        StudyHub centralise les ressources académiques de <br />
+                        <span class="typer text-primary text-nowrap" data-delay="100"
+                            data-words="diverses universités, filières, modules, cours"></span>
+                        <span class="cursor text-primary" data-owner="typer"></span>
+                    </h1>
+                    <p class="lead fs-24 lh-sm text-white mb-7 pe-md-18 pe-lg-0 pe-xxl-15">
+                        Une plateforme centralisée pour faciliter l'accès aux ressources académiques, afin de soutenir
+                        l'apprentissage et la réussite des étudiants.
+                    </p>
                     <div>
                         <a class="btn btn-lg btn-primary rounded">Commencer</a>
                     </div>
                 </div>
-                <!-- /column -->
+                <!-- Formulaire de recherche -->
                 <div class="col-lg-5 offset-lg-1 mb-n18" data-cues="slideInDown">
-                    <div class="position-relative">
-                        <a href="./assets/media/movie.mp4"
-                            class="btn btn-circle btn-primary btn-play ripple mx-auto mb-6 position-absolute"
-                            style="top:50%; left: 50%; transform: translate(-50%,-50%); z-index:3;" data-glightbox><i
-                                class="icn-caret-right"></i></a>
-                        <figure class="rounded shadow-lg"><img src="./assets/img/photos/about13.jpg"
-                                srcset="./assets/img/photos/about13@2x.jpg 2x" alt=""></figure>
+                    <div class="position-relative bg-light p-4 rounded shadow">
+                        <form action="{{ route('public.resources.seachAdvance') }}" method="get">
+                            @csrf
+                            <div class="row g-3">
+                                <!-- Université -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="university" class="form-label text-dark">Université</label>
+                                        <select class="form-select" id="university" name="university"
+                                            aria-label="Université">
+                                            <option value="0" {{ request('university') == 0 ? 'selected' : '' }}>
+                                                Choisir l'université</option>
+                                            @foreach ($universities as $university)
+                                                <option value="{{ $university->id }}"
+                                                    {{ request('university') == $university->id ? 'selected' : '' }}>
+                                                    {{ $university->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Filière -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="program" class="form-label text-dark">Filière</label>
+                                        <select class="form-select" id="program" name="program" aria-label="Filière">
+                                            <option value="0" {{ request('program') == 0 ? 'selected' : '' }}>Choisir
+                                                la filière</option>
+                                            @foreach ($programs as $program)
+                                                <option value="{{ $program->id }}"
+                                                    {{ request('program') == $program->id ? 'selected' : '' }}>
+                                                    {{ $program->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Niveau -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="level" class="form-label text-dark">Niveau</label>
+                                        <select class="form-select" id="level" name="level"
+                                            aria-label="Niveau académique">
+                                            <option value="0" {{ request('level') == 0 ? 'selected' : '' }}>Choisir le
+                                                niveau</option>
+                                            @foreach ($levels as $level)
+                                                <option value="{{ $level->id }}"
+                                                    {{ request('level') == $level->id ? 'selected' : '' }}>
+                                                    {{ $level->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Catégorie -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="category" class="form-label text-dark">Catégorie</label>
+                                        <select class="form-select" id="category" name="category"
+                                            aria-label="Catégorie de ressource">
+                                            <option value="0" {{ request('category') == 0 ? 'selected' : '' }}>Choisir
+                                                la catégorie</option>
+                                            @foreach ($resourceCategories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    {{ request('category') == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Boutons d'action centrés -->
+                            <div class="d-flex justify-content-center mt-4">
+                                <button class="btn btn-primary me-2" type="submit">Rechercher</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- /div -->
                 </div>
-                <!-- /column -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container -->
     </section>
+
 
     <!-- /section -->
     <section class="wrapper bg-light">
@@ -109,8 +180,8 @@
                         <div class="card" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-4 p-5 align-item-center d-flex justify-content-center">
-                                    <img src="{{ $university->getLogoUrl() }}" class="img-fluid rounded-start d-block w-100"
-                                        alt="Logo de l'université">
+                                    <img src="{{ $university->getLogoUrl() }}"
+                                        class="img-fluid rounded-start d-block w-100" alt="Logo de l'université">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -138,7 +209,8 @@
             <div class="row gy-10 mb-16 gy-sm-13 gx-lg-3 align-items-center">
                 <div class="col">
                     <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Les ressources les plus téléchargées</h2>
-                    <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par nos
+                    <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par
+                        nos
                         utilisateurs.</h3>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -166,7 +238,8 @@
                                         </td>
                                         <td>{{ $resource->university->name }}</td>
                                         <td>
-                                            <a href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
+                                            <a
+                                                href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
                                         </td>
                                         <td>{{ $resource->getFileSize(format: true) }}</td>
                                         <td>{{ $resource->download_count }}</td>
@@ -178,70 +251,6 @@
                     </div>
                 </div>
                 <!--/column -->
-            </div>
-            <!--/.row -->
-            <div class="row">
-                <div class="offset-lg-8 col-lg-8 col-xl-7 col-xxl-6">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Trouvez la ressource que vous cherchez</h2>
-                </div>
-                <div class="col-12">
-                    <h3 class="display-4 mb-9">Utilisez notre fonctionnalité de recherche pour filtrer les ressources selon
-                        vos besoins spécifiques.</h3>
-                </div>
-                <!-- /column -->
-            </div>
-            <!--/.row -->
-            <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
-                <form action="{{ route('public.resources.seachAdvance') }}" methods="get">
-                    @csrf
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="university" class="form-label">Université</label>
-                                <select class="form-select" id="university" name="university" aria-label="Université">
-                                    <option selected value="0">Choisir l'université</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="program" class="form-label">Filière (Veuillez choisir une universite en
-                                    1er)</label>
-                                <select class="form-select" id="program" name="program" aria-label="Filière">
-                                    <option selected value="0">Choisir la filière</option>
-                                    <option>Veuillez selectionner une universite en 1er</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="level" class="form-label">Niveau</label>
-                                <select class="form-select" id="level" name="level"
-                                    aria-label="Niveau academique">
-                                    <option selected value="0">Choisir le Niveau</option>
-                                    @foreach ($levels as $level)
-                                        <option value="{{ $level->id }}">{{ $level->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="category" class="form-label">Categorie</label>
-                                <select class="form-select" name="category" id="category"
-                                    aria-label="Categorie de resource">
-                                    <option selected value="0">Choisir la categorie</option>
-                                    @foreach ($resourceCategories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-primary mt-6" type="submit">Rechercher</button>
-                    </div>
-                </form>
             </div>
             <!--/.row -->
         </div>
@@ -351,12 +360,7 @@
     <script src="{{ asset('assets/public/js/home.js') }}"></script>
     <script>
         $(document).ready(function() {
-            home({
-                endpoint: '{{ config('app.url') }}/api/universities',
-                params: {
-                    relations: 'academicPrograms'
-                }
-            });
+            home();
         });
     </script>
 @endsection

@@ -41,8 +41,7 @@
 
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="program" class="form-label">Filière (Veuillez choisir une université en
-                                    1er)</label>
+                                <label for="program" class="form-label">Filière</label>
                                 <select class="form-select" id="program" name="program" aria-label="Filière">
                                     <option value="0"
                                         {{ old('program', request('program')) == '0' ? 'selected' : '' }}>Tout</option>
@@ -201,15 +200,10 @@
     <script src="{{ asset('assets/admin/js/main.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    {{-- <script src="{{ asset('assets/public/js/search_advance.js') }}"></script>
+    <script src="{{ asset('assets/public/js/search_advance.js') }}"></script>
     <script>
         $(document).ready(function() {
-            searchAdvance({
-                apiUrl: '{{ config('app.url') }}',
-                params: {
-                    relations: "academicPrograms.academicLevels"
-                }
-            });
+            searchAdvance();
         });
-    </script> --}}
+    </script>
 @endsection
