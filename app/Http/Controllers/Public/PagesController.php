@@ -44,11 +44,23 @@ class PagesController extends Controller
         $universities = University::latest()->get(['id', 'name']);
         $levels = AcademicLevel::all(['id', 'name']);
         $schoolYears = Resource::distinct()->pluck('school_year');
-        $resources = Resource::latest()->get();
+        // $resources = Resource::latest()->get();
         $programs = AcademicProgram::all(['id', 'name']);
         $modules = CourseModule::all(['id', 'name']);
         $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
 
+        $params = [
+            'paginate' => request('paginate', 0),
+            'relations' => request('relations', []),
+            'university' => request('university', 0),
+            'program' => request('program', 0),
+            'level' => request('level', 0),
+            'category' => request('category', 0),
+            'name' => request('name', ''),
+            'module' => request('module', 0),
+            'schoolYear' => request('schoolYear', 0)
+        ];
+        $resources = $this->resourceService->index($params);
 
         return view(
             'public.pages.search_advance',

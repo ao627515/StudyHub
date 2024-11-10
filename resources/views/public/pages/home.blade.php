@@ -199,7 +199,7 @@
                             <div class="mb-3">
                                 <label for="university" class="form-label">Université</label>
                                 <select class="form-select" id="university" name="university" aria-label="Université">
-                                    <option selected>Choisir l'université</option>
+                                    <option selected value="0">Choisir l'université</option>
                                 </select>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                                 <label for="program" class="form-label">Filière (Veuillez choisir une universite en
                                     1er)</label>
                                 <select class="form-select" id="program" name="program" aria-label="Filière">
-                                    <option selected>Choisir la filière</option>
+                                    <option selected value="0">Choisir la filière</option>
                                     <option>Veuillez selectionner une universite en 1er</option>
                                 </select>
                             </div>
@@ -216,8 +216,9 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="level" class="form-label">Niveau</label>
-                                <select class="form-select" id="level" aria-label="Niveau academique">
-                                    <option selected>Choisir le Niveau</option>
+                                <select class="form-select" id="level" name="level"
+                                    aria-label="Niveau academique">
+                                    <option selected value="0">Choisir le Niveau</option>
                                     @foreach ($levels as $level)
                                         <option value="{{ $level->id }}">{{ $level->name }}</option>
                                     @endforeach
@@ -227,8 +228,9 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="category" class="form-label">Categorie</label>
-                                <select class="form-select" id="category" aria-label="Categorie de resource">
-                                    <option selected>Choisir la categorie</option>
+                                <select class="form-select" name="category" id="category"
+                                    aria-label="Categorie de resource">
+                                    <option selected value="0">Choisir la categorie</option>
                                     @foreach ($resourceCategories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach

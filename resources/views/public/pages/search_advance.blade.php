@@ -20,7 +20,7 @@
             </div>
             <!--/.row -->
             <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
-                <form action="{{ route('public.resources.seachAdvance') }}" methods="get">
+                <form action="{{ route('public.resources.seachAdvance') }}" method="get">
                     @csrf
                     <div class="row g-4">
                         <div class="col-md-6">
@@ -28,80 +28,117 @@
                                 <label for="university" class="form-label">Université</label>
                                 <select class="form-select" id="university" name="university" aria-label="Université"
                                     required>
-                                    <option selected value="0">Tout</option>
+                                    <option value="0" {{ old('university') == '0' ? 'selected' : '' }}>Tout</option>
                                     @foreach ($universities as $university)
-                                        <option value="{{ $university->id }}">{{ $university->name }}</option>
+                                        <option value="{{ $university->id }}"
+                                            {{ old('university', request('university')) == $university->id ? 'selected' : '' }}>
+                                            {{ $university->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="program" class="form-label">Filière (Veuillez choisir une universite en
+                                <label for="program" class="form-label">Filière (Veuillez choisir une université en
                                     1er)</label>
                                 <select class="form-select" id="program" name="program" aria-label="Filière">
-                                    <option selected value="0">Tout</option>
+                                    <option value="0"
+                                        {{ old('program', request('program')) == '0' ? 'selected' : '' }}>Tout</option>
                                     @foreach ($programs as $program)
-                                        <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                        <option value="{{ $program->id }}"
+                                            {{ old('program', request('program')) == $program->id ? 'selected' : '' }}>
+                                            {{ $program->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="level" class="form-label">Niveau</label>
-                                <select class="form-select" id="level" aria-label="Niveau academique">
-                                    <option selected value="0">Tout</option>
+                                <select class="form-select" id="level" name="level" aria-label="Niveau académique">
+                                    <option value="0" {{ old('level', request('level')) == '0' ? 'selected' : '' }}>
+                                        Tout</option>
                                     @foreach ($levels as $level)
-                                        <option value="{{ $level->id }}">{{ $level->name }}</option>
+                                        <option value="{{ $level->id }}"
+                                            {{ old('level', request('level')) == $level->id ? 'selected' : '' }}>
+                                            {{ $level->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="category" class="form-label">Categorie</label>
-                                <select class="form-select" id="category" aria-label="Categorie de resource">
-                                    <option selected value="0">Tout</option>
+                                <label for="category" class="form-label">Catégorie</label>
+                                <select class="form-select" id="category" name="category"
+                                    aria-label="Catégorie de ressource">
+                                    <option value="0"
+                                        {{ old('category', request('category')) == '0' ? 'selected' : '' }}>Tout</option>
                                     @foreach ($resourceCategories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}"
+                                            {{ old('category', request('category')) == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="category" class="form-label">Modules</label>
-                                <select class="form-select" id="module" name="module"required>
-                                    <option selected value="0">Tout</option>
+                                <label for="module" class="form-label">Module</label>
+                                <select class="form-select" id="module" name="module" required>
+                                    <option value="0" {{ old('module', request('module')) == '0' ? 'selected' : '' }}>
+                                        Tout</option>
                                     @foreach ($modules as $module)
-                                        <option value="{{ $module->id }}">{{ $module->name }}</option>
+                                        <option value="{{ $module->id }}"
+                                            {{ old('module', request('module')) == $module->id ? 'selected' : '' }}>
+                                            {{ $module->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="category" class="form-label">Annees scholaire</label>
-                                <select class="form-select" id="school_year" name="school_year"required>
-                                    <option selected value="0">Tout</option>
+                                <label for="school_year" class="form-label">Année scolaire</label>
+                                <select class="form-select" id="school_year" name="school_year" required>
+                                    <option value="0"
+                                        {{ old('school_year', request('school_year')) == '0' ? 'selected' : '' }}>Tout
+                                    </option>
                                     @foreach ($schoolYears as $schoolYear)
-                                        <option value="{{ $schoolYear }}">{{ $schoolYear }}</option>
+                                        <option value="{{ $schoolYear }}"
+                                            {{ old('school_year', request('school_year')) == $schoolYear ? 'selected' : '' }}>
+                                            {{ $schoolYear }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="category" class="form-label">Nom de la resource</label>
-                                <input type="text" id="name" name="name" class="form-control">
+                                <label for="name" class="form-label">Nom de la ressource</label>
+                                <input type="text" id="name" name="name" class="form-control"
+                                    value="{{ old('name', request('name')) }}">
                             </div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-primary mt-6" type="submit">Rechercher</button>
+                        <button class="btn btn-primary mt-6 me-2" type="submit">Rechercher</button>
+                        <a href="{{ route('public.resources.seachAdvance') }}" class="btn btn-info mt-6">
+                            Réinitialiser
+                        </a>
+                        {{-- <button class="btn btn-info mt-6" type="reset">Réinitialiser</button> --}}
                     </div>
                 </form>
+                >
             </div>
             <!--/.row -->
 
