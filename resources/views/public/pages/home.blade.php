@@ -252,7 +252,7 @@
             <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-2 align-items-end">
                 <div class="col-lg-4">
                     <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Prenez Contact</h2>
-                    <h3 class="display-4 mb-0 pe-xxl-15">Nous serions ravis de vous entendre</h3>
+                    <h3 class="display-6 mb-0 pe-xxl-15">Nous serions ravis de vous entendre</h3>
                     <p class="mt-4">Veuillez partager vos pensées, questions ou commentaires avec nous.</p>
                 </div>
                 <div class="col-lg-8 mt-lg-2">
