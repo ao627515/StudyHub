@@ -45,10 +45,9 @@
                <!-- /.navbar-collapse -->
                <div class="navbar-other w-100 d-flex ms-auto">
                    <ul class="navbar-nav flex-row align-items-center ms-auto">
-                       <li class="nav-item"><a class="nav-link" data-bs-toggle="offcanvas"
-                               data-bs-target="#offcanvas-search"><i class="uil uil-search"></i></a></li>
                        <li class="nav-item d-none d-md-block">
-                           <a href="./contact.html" class="btn btn-sm btn-primary rounded">Contact</a>
+                           <a href="{{ route('public.pages.home') }}#contact"
+                               class="btn btn-sm btn-primary rounded">Contact</a>
                        </li>
                        <li class="nav-item d-lg-none">
                            <button class="hamburger offcanvas-nav-btn"><span></span></button>
@@ -60,16 +59,5 @@
            </div>
            <!-- /.container -->
        </nav>
-       <!-- /.navbar -->
-       <div class="offcanvas offcanvas-top bg-light" id="offcanvas-search" data-bs-scroll="true">
-           <div class="container d-flex flex-row py-6">
-               <form class="search-form w-100">
-                   <input id="search-form" type="text" class="form-control" placeholder="Type keyword and hit enter">
-               </form>
-               <!-- /.search-form -->
-               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-           </div>
-           <!-- /.container -->
-       </div>
        <!-- /.offcanvas -->
    </header>

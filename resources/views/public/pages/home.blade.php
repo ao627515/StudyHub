@@ -226,25 +226,25 @@
     </section>
 
     <!-- /section -->
-    <section class="wrapper image-wrapper bg-image bg-overlay" data-image-src="./assets/img/photos/bg1.jpg">
+    <section id="contact" class="wrapper image-wrapper bg-image bg-overlay"
+        data-image-src="{{ asset('assets/public/img/bg3.jpg') }}">
+        {{-- <img class="img-fluid" src="./assets/img/illustrations/ni2.png" alt="" /> --}}
         <div class="container py-18">
             <div class="row">
                 <div class="col-lg-8">
                     <h2 class="fs-16 text-uppercase text-line text-white mb-3">Rejoignez StudyHub</h2>
-                    <h3 class="display-4 mb-6 text-white pe-xxl-18">Des milliers d'étudiants et d'enseignants nous font
-                        confiance pour accéder facilement aux ressources académiques essentielles. Rejoignez-les pour
-                        enrichir vos connaissances.</h3>
-                    <a href="https://wa.me/?text=Bonjour!%20Je%20souhaite%20en%20savoir%20plus%20sur%20StudyHub."
-                        target="_blank" class="btn btn-white rounded mb-0 text-nowrap">
-                        Nous Contacter sur WhatsApp
+                    <h3 class="display-4 mb-6 text-white pe-xxl-18">Étudiants et enseignants nous font confiance pour des
+                        ressources académiques essentielles. Rejoignez-les!</h3>
+                    <a href="https://wa.me/22673471085?text=Bonjour!%20Je%20souhaite%20en%20savoir%20plus%20sur%20StudyHub."
+                        target="_blank" class="btn btn-success rounded mb-0 text-nowrap"
+                        style="background-color: #25D366; color: white; border-color: #25D366;">
+                        <i class="uil uil-whatsapp me-2 fs-30"></i> Nous Contacter
                     </a>
                 </div>
-                <!-- /column -->
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container -->
     </section>
+
     <!-- /section -->
 
     <section class="wrapper bg-soft-primary angled upper-end">
