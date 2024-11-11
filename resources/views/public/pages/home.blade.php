@@ -11,26 +11,22 @@
         <div class="container pt-7 pt-md-11 pb-8">
             <div class="row gx-0 gy-10 align-items-center">
                 <div class="col-lg-6" data-cues="slideInDown" data-group="page-title" data-delay="600">
-                    <h1 class="display-1 text-white mb-4">StudyHub centralise les ressources académiques de <br /><span
-                            class="typer text-primary text-nowrap" data-delay="100"
-                            data-words="diverses universités,filères,modules,cours"></span><span class="cursor text-primary"
+                    <h1 class="display-1 text-white mb-4">StudyHub centralise les ressources académiques de diverses
+                        universités par<br /><span class="typer text-primary text-nowrap" data-delay="100"
+                            data-words="filères,modules,annee scholaire"></span><span class="cursor text-primary"
                             data-owner="typer"></span></h1>
                     <p class="lead fs-24 lh-sm text-white mb-7 pe-md-18 pe-lg-0 pe-xxl-15">Une plateforme centralisée pour
                         faciliter l'accès aux ressources académiques des universités, afin de soutenir l'apprentissage et la
                         réussite des étudiants.</p>
                     <div>
-                        <a class="btn btn-lg btn-primary rounded">Commencer</a>
+                        <a href="#standardSearch" class="btn btn-lg btn-primary rounded">Commencer</a>
                     </div>
                 </div>
                 <!-- /column -->
                 <div class="col-lg-5 offset-lg-1 mb-n18" data-cues="slideInDown">
                     <div class="position-relative">
-                        <a href="./assets/media/movie.mp4"
-                            class="btn btn-circle btn-primary btn-play ripple mx-auto mb-6 position-absolute"
-                            style="top:50%; left: 50%; transform: translate(-50%,-50%); z-index:3;" data-glightbox><i
-                                class="icn-caret-right"></i></a>
-                        <figure class="rounded shadow-lg"><img src="./assets/img/photos/about13.jpg"
-                                srcset="./assets/img/photos/about13@2x.jpg 2x" alt=""></figure>
+                        <figure class="rounded shadow-lg"><img src="{{ asset('assets/public/img/hero.jpg') }}"
+                                srcset="{{ asset('assets/public/img/hero.jpg') }}@2x.jpg 2x" alt=""></figure>
                     </div>
                     <!-- /div -->
                 </div>
@@ -47,7 +43,8 @@
 
             <div class="row">
                 <div class="offset-lg-8 col-lg-8 col-xl-7 col-xxl-6">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Trouvez la ressource que vous cherchez
+                    <h2 id="standardSearch" class="fs-16 text-uppercase text-line text-primary mb-3">Trouvez la ressource
+                        que vous cherchez
                     </h2>
                 </div>
                 <div class="col-12">
