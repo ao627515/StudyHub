@@ -30,8 +30,12 @@ class CourseModuleController extends Controller
                 'academicProgramLevel.academicLevel'
             ]);
         $academicProgramLevels = AcademicProgramLevel::with(['academicProgram', 'academicLevel'])
-            ->where('academic_program_id',  Auth::user()->fetchUploader()->academicProgram->id)
+            ->when(Auth::user()->isUploader(), function ($query) {
+                return $query->where('academic_program_id',  Auth::user()->fetchUploader()->academicProgram->id);
+            })
             ->latest()->get();
+
+
         return view('admin.course_modules.index', compact('modules', 'academicProgramLevels'));
     }
 
