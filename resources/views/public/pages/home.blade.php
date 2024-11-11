@@ -284,8 +284,16 @@
             <div class="position-relative mb-16">
                 <div class="card shadow-lg">
                     <div class="row gx-0">
-                        <div class="col-lg-6 image-wrapper bg-image bg-cover rounded-top rounded-lg-start"
-                            style="background-image: url('./assets/img/photos/contact.jpg');">
+                        {{-- <div class="col-lg-6 image-wrapper bg-image bg-cover rounded-top rounded-lg-start"
+                            style="background-image: url('{{ asset('assets/public/img/b6.jpg') }}');">
+                        </div> --}}
+                        <div class="col-lg-6 image-wrapper bg-image bg-cover rounded-top rounded-lg-start">
+                            <div class="shape bg-dot primary rellax w-17 h-21" data-rellax-speed="1"
+                                style="top: -2rem; left: -1.9rem;"></div>
+                            <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
+                                style="bottom: -1.8rem; right: -1.5rem; width: 85%; height: 90%; "></div>
+                            <figure class="rounded"><img src="{{ asset('assets/public/img/b6.jpg') }}"
+                                    srcset="{{ asset('assets/public/img/b6.jpg') }} 2x" alt="" /></figure>
                         </div>
                         <div class="col-lg-6">
                             <div class="p-10 p-md-11 p-lg-13">
@@ -297,21 +305,21 @@
                                     <div class="icon text-primary fs-28 me-4"><i class="uil uil-phone-volume"></i></div>
                                     <div>
                                         <h5 class="mb-1">Téléphone</h5>
-                                        <p>00 (123) 456 78 90</p>
+                                        <p>226 73471085</p>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-row mt-4">
                                     <div class="icon text-primary fs-28 me-4"><i class="uil uil-envelope"></i></div>
                                     <div>
                                         <h5 class="mb-1">Email</h5>
-                                        <p>info@company.com</p>
+                                        <p>ao627515@gmail.com</p>
                                     </div>
                                 </div>
-                                <div class="text-center mt-4">
-                                    <a href="https://wa.me/your-number" target="_blank" class="btn btn-success rounded">
-                                        Contactez-nous sur WhatsApp
-                                    </a>
-                                </div>
+                                <a href="https://wa.me/22673471085?text=Bonjour!%20Je%20souhaite%20en%20savoir%20plus%20sur%20StudyHub."
+                                    target="_blank" class="btn btn-success rounded mb-0 text-nowrap"
+                                    style="background-color: #25D366; color: white; border-color: #25D366;">
+                                    <i class="uil uil-whatsapp me-2 fs-30"></i> Nous Contacter
+                                </a>
                             </div>
                         </div>
                     </div>
