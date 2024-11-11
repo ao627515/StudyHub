@@ -48,7 +48,7 @@
                     </h2>
                 </div>
                 <div class="col-12">
-                    <h3 class="display-4 mb-9">Utilisez notre fonctionnalité de recherche pour filtrer les ressources selon
+                    <h3 class="display-6 mb-9">Utilisez notre fonctionnalité de recherche pour filtrer les ressources selon
                         vos besoins spécifiques.</h3>
                 </div>
                 <!-- /column -->
@@ -136,8 +136,8 @@
                     <h2 class="fs-16 text-uppercase text-line text-primary mb-3">D'où proviennent nos ressources ?</h2>
                 </div>
                 <div class="col-12">
-                    <h3 class="display-4 mb-9">Les ressources disponibles sur notre plateforme proviennent des meilleures
-                        universités et sont organisées de manière à répondre aux besoins de chaque utilisateur.</h3>
+                    <h3 class="display-6 mb-9">Les ressources de notre plateforme proviennent des meilleures universités
+                    </h3>
                 </div>
                 <!-- /column -->
             </div>
@@ -160,7 +160,8 @@
                                                 <span>{{ $university->resources_count }} ressources disponibles</span>
                                             </div>
                                         </div>
-                                        <a href="#" class="btn btn-primary btn-sm">Voir les ressources</a>
+                                        <a href="{{ route('public.resources.seachAdvance', ['university' => $university->id]) }}"
+                                            class="btn btn-primary btn-sm">Voir les ressources</a>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +172,7 @@
             </div>
             <!--/.row -->
             <div class="mb-16 mt-8 mb-md-18 d-flex justify-content-center align-items-center">
-                <button class="btn btn-primary">Voir plus</button>
+                <a href="{{ route('public.resources.seachAdvance') }}" class="btn btn-primary">Voir plus</a>
             </div>
             <!--/.row -->
             <div class="row gy-10 mb-16 gy-sm-13 gx-lg-3 align-items-center">
@@ -190,7 +191,7 @@
                                 <th>Université</th>
                                 <th>Télécharger</th>
                                 <th>Taille</th>
-                                <th>Nombre de téléchargements</th>
+                                <th>Téléchargements</th>
                                 <th>Uploader le</th>
                             </thead>
                             <tbody>

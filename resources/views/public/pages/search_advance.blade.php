@@ -156,9 +156,9 @@
                                         <th>Module</th>
                                         <th>Filière</th>
                                         <th>Université</th>
-                                        <th>Télécharger</th>
+                                        <th>Fichier</th>
                                         <th>Taille</th>
-                                        <th>Nombre de téléchargements</th>
+                                        <th>Téléchargements</th>
                                         <th>Uploader le</th>
                                     </thead>
                                     <tbody>
