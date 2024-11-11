@@ -29,7 +29,7 @@ class ResourceController extends Controller
     public function index()
     {
         $params = [
-            'paginate' => request('paginate', 0),
+            'paginate' => request('paginate', 10),
             'relations' => request('relations', []),
             'university' => request('university', 0),
             'program' => request('program', 0),
