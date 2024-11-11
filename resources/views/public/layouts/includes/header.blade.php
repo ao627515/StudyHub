@@ -26,15 +26,15 @@
                        <!-- /.navbar-nav -->
                        <div class="offcanvas-footer d-lg-none">
                            <div>
-                               <a href="mailto:first.last@email.com" class="link-inverse">info@email.com</a>
-                               <br /> 00 (123) 456 78 90 <br />
-                               <nav class="nav social social-white mt-4">
+                               <a href="mailto:ao627515@gmail.com" class="link-inverse">ao627515@gmail.com</a>
+                               <br />+226 73471085 <br />
+                               {{-- <nav class="nav social social-white mt-4">
                                    <a href="#"><i class="uil uil-twitter"></i></a>
                                    <a href="#"><i class="uil uil-facebook-f"></i></a>
                                    <a href="#"><i class="uil uil-dribbble"></i></a>
                                    <a href="#"><i class="uil uil-instagram"></i></a>
                                    <a href="#"><i class="uil uil-youtube"></i></a>
-                               </nav>
+                               </nav> --}}
                                <!-- /.social -->
                            </div>
                        </div>
