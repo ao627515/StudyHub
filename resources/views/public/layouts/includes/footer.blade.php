@@ -1,6 +1,6 @@
     <footer class="bg-dark text-inverse">
         <div class="container pt-17 pt-md-19 pb-13 pb-md-15">
-            <div class="row gy-6 gy-lg-0">
+            {{-- <div class="row gy-6 gy-lg-0">
                 <div class="col-md-4 col-lg-3">
                     <div class="widget">
                         <img class="mb-4" src="./assets/img/logo-light.png" srcset="./assets/img/logo-light@2x.png 2x"
@@ -87,8 +87,13 @@
                     <!-- /.widget -->
                 </div>
                 <!-- /column -->
-            </div>
+            </div> --}}
+
+            <p class="text-center text-muted">
+                &copy; {{ date('Y') }} Tous droits réservés, ODG Développement
+            </p>
             <!--/.row -->
         </div>
+
         <!-- /.container -->
     </footer>
