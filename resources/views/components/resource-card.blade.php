@@ -24,7 +24,7 @@
             <!-- Boutons d'actions -->
             <button class="btn btn-sm btn-soft-blue" data-bs-toggle="modal"
                 data-bs-target="#resourceModal{{ $resource->id }}">
-                <i class="uil uil-info-circle me-2"></i>
+                <i class="uil uil-info-circle"></i>
                 {{-- Infos --}}
                 {{-- <i class="uil uil-eye"></i> --}}
             </button>
