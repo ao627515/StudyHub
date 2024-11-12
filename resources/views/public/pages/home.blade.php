@@ -181,7 +181,7 @@
                     <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par
                         nos
                         utilisateurs.</h3>
-                    <div class="table-responsive">
+                    {{-- <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <th>Catégorie</th>
@@ -217,6 +217,89 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div> --}}
+
+                    <div class="row">
+                        @foreach ($moreResourcesDownload as $resource)
+                            <div class="col-md-4 mb-4">
+                                <div class="card h-100">
+                                    <!-- Image de la ressource -->
+                                    <img src="{{ $resource->getImageUrl() }}" class="card-img-top"
+                                        alt="Image de {{ $resource->name }}" style="height: 200px; object-fit: cover;">
+
+                                    <div class="card-body">
+                                        <!-- Nom et Catégorie -->
+                                        <h5 class="card-title">{{ $resource->name }}</h5>
+                                        <span class="badge gradient-7 rounded-pill">{{ $resource->category->name }}</span>
+
+
+                                        <!-- Informations essentielles -->
+                                        <p class="card-text">
+                                            <strong>Module :</strong> {{ $resource->courseModule->name }} <br>
+                                            <strong>Filière :</strong> {{ $resource->academicProgram->name }}
+                                            ({{ $resource->academicLevel->name }})
+                                            <br>
+                                            <strong>Université :</strong> {{ $resource->university->name }}
+                                            <br>
+                                            <strong>Téléchargements :</strong> {{ $resource->download_count }}
+                                        </p>
+
+                                        <!-- Boutons d'actions -->
+                                        <button class="btn btn-soft-blue" data-bs-toggle="modal"
+                                            data-bs-target="#resourceModal{{ $resource->id }}">
+                                            Voir plus
+                                        </button>
+                                        <a href="{{ route('public.resource.download', $resource->id) }}"
+                                            class="btn btn-primary">
+                                            Télécharger
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal pour afficher les détails de la ressource -->
+                            <div class="modal fade" id="resourceModal{{ $resource->id }}" tabindex="-1"
+                                aria-labelledby="resourceModalLabel{{ $resource->id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="resourceModalLabel{{ $resource->id }}">
+                                                {{ $resource->name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><strong>Catégorie :</strong> <span
+                                                    class="badge gradient-7 rounded-pill">{{ $resource->category->name }}</span>
+                                            </p>
+                                            <p><strong>Module :</strong> {{ $resource->courseModule->name }}
+                                            </p>
+                                            <p><strong>Filière :</strong>
+                                                {{ $resource->academicProgram->name }}
+                                                ({{ $resource->academicLevel->name }})</p>
+                                            <p><strong>Université :</strong> {{ $resource->university->name }}
+                                            </p>
+                                            <p><strong>Taille :</strong>
+                                                {{ $resource->getFileSize(format: true) }}
+                                            </p>
+                                            <p><strong>Téléchargements :</strong>
+                                                {{ $resource->download_count }}
+                                            </p>
+                                            <p><strong>Date d'upload :</strong>
+                                                {{ $resource->created_at->format('d M y') }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="{{ route('public.resource.download', $resource->id) }}"
+                                                class="btn btn-primary">
+                                                Télécharger
+                                            </a>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <!--/column -->

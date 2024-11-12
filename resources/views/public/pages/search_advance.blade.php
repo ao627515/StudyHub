@@ -141,53 +141,164 @@
             </div>
             <!--/.row -->
 
-            <div class="row gy-10 mb-16 gy-sm-13 gx-lg-3 align-items-center ">
-                <div class="col">
-                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Les ressources les plus téléchargées</h2>
-                    <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par nos
-                        utilisateurs.</h3>
+            <div class="row gy-10 mb-16 gy-sm-13 gx-lg-3 align-items-center" id="ressources">
+                <div class="col-12">
+                    <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Nos resources</h2>
+                    {{-- <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par nos
+                        utilisateurs.</h3> --}}
+
+
                     <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <span class="me-2">Disposition :</span>
+                            <a href="{{ route('public.resources.seachAdvance', ['layout' => 'list']) }}"
+                                class="btn btn-sm {{ request('layout') === 'list' || !request()->has('layout') ? 'btn-primary' : 'btn-outline-primary' }}"
+                                title="Vue liste">
+                                <i class="uil uil-list-ul"></i>
+                            </a>
+
+                            <a href="{{ route('public.resources.seachAdvance', ['layout' => 'grid']) }}"
+                                class="btn btn-sm ms-2 {{ request('layout') === 'grid' ? 'btn-primary' : 'btn-outline-primary' }}"
+                                title="Vue en grille">
+                                <i class="uil uil-apps"></i>
+                            </a>
+                        </div>
+
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped datatable">
-                                    <thead>
-                                        <th>Catégorie</th>
-                                        <th>Nom</th>
-                                        <th>Module</th>
-                                        <th>Filière</th>
-                                        <th>Université</th>
-                                        <th>Fichier</th>
-                                        <th>Taille</th>
-                                        <th>Téléchargements</th>
-                                        <th>Uploader le</th>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($resources as $resource)
-                                            <tr>
-                                                <td>
+
+
+                            @if (request('layout') == 'grid')
+                                <div class="row">
+                                    @foreach ($resources as $resource)
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card h-100">
+                                                <!-- Image de la ressource -->
+                                                <img src="{{ $resource->getImageUrl() }}" class="card-img-top"
+                                                    alt="Image de {{ $resource->name }}"
+                                                    style="height: 200px; object-fit: cover;">
+
+                                                <div class="card-body">
+                                                    <!-- Nom et Catégorie -->
+                                                    <h5 class="card-title">{{ $resource->name }}</h5>
                                                     <span
                                                         class="badge gradient-7 rounded-pill">{{ $resource->category->name }}</span>
-                                                </td>
-                                                <td>{{ $resource->name }}</td>
-                                                <td>{{ $resource->courseModule->name }}</td>
-                                                <td>{{ $resource->academicProgram->name }}
-                                                    ({{ $resource->academicLevel->name }})
-                                                </td>
-                                                <td>{{ $resource->university->name }}</td>
-                                                <td>
-                                                    <a
-                                                        href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
-                                                </td>
-                                                <td>{{ $resource->getFileSize(format: true) }}</td>
-                                                <td>{{ $resource->download_count }}</td>
-                                                <td>{{ $resource->created_at->format('d M y') }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+
+
+                                                    <!-- Informations essentielles -->
+                                                    <p class="card-text">
+                                                        <strong>Module :</strong> {{ $resource->courseModule->name }} <br>
+                                                        <strong>Filière :</strong> {{ $resource->academicProgram->name }}
+                                                        ({{ $resource->academicLevel->name }})
+                                                        <br>
+                                                        <strong>Université :</strong> {{ $resource->university->name }}
+                                                        <br>
+                                                        <strong>Téléchargements :</strong> {{ $resource->download_count }}
+                                                    </p>
+
+                                                    <!-- Boutons d'actions -->
+                                                    <button class="btn btn-soft-blue" data-bs-toggle="modal"
+                                                        data-bs-target="#resourceModal{{ $resource->id }}">
+                                                        Voir plus
+                                                    </button>
+                                                    <a href="{{ route('public.resource.download', $resource->id) }}"
+                                                        class="btn btn-primary">
+                                                        Télécharger
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal pour afficher les détails de la ressource -->
+                                        <div class="modal fade" id="resourceModal{{ $resource->id }}" tabindex="-1"
+                                            aria-labelledby="resourceModalLabel{{ $resource->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="resourceModalLabel{{ $resource->id }}">
+                                                            {{ $resource->name }}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p><strong>Catégorie :</strong> <span
+                                                                class="badge gradient-7 rounded-pill">{{ $resource->category->name }}</span>
+                                                        </p>
+                                                        <p><strong>Module :</strong> {{ $resource->courseModule->name }}
+                                                        </p>
+                                                        <p><strong>Filière :</strong>
+                                                            {{ $resource->academicProgram->name }}
+                                                            ({{ $resource->academicLevel->name }})</p>
+                                                        <p><strong>Université :</strong> {{ $resource->university->name }}
+                                                        </p>
+                                                        <p><strong>Taille :</strong>
+                                                            {{ $resource->getFileSize(format: true) }}
+                                                        </p>
+                                                        <p><strong>Téléchargements :</strong>
+                                                            {{ $resource->download_count }}
+                                                        </p>
+                                                        <p><strong>Date d'upload :</strong>
+                                                            {{ $resource->created_at->format('d M y') }}</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="{{ route('public.resource.download', $resource->id) }}"
+                                                            class="btn btn-primary">
+                                                            Télécharger
+                                                        </a>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Fermer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="table-responsive">
+                                    <table class="table table-striped datatable">
+                                        <thead>
+                                            <th>Catégorie</th>
+                                            <th>Nom</th>
+                                            <th>Module</th>
+                                            <th>Filière</th>
+                                            <th>Université</th>
+                                            <th>Fichier</th>
+                                            <th>Taille</th>
+                                            <th>Téléchargements</th>
+                                            <th>Uploader le</th>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($resources as $resource)
+                                                <tr>
+                                                    <td>
+                                                        <span
+                                                            class="badge gradient-7 rounded-pill">{{ $resource->category->name }}</span>
+                                                    </td>
+                                                    <td>{{ $resource->name }}</td>
+                                                    <td>{{ $resource->courseModule->name }}</td>
+                                                    <td>{{ $resource->academicProgram->name }}
+                                                        ({{ $resource->academicLevel->name }})
+                                                    </td>
+                                                    <td>{{ $resource->university->name }}</td>
+                                                    <td>
+                                                        <a
+                                                            href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
+                                                    </td>
+                                                    <td>{{ $resource->getFileSize(format: true) }}</td>
+                                                    <td>{{ $resource->download_count }}</td>
+                                                    <td>{{ $resource->created_at->format('d M y') }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
                         </div>
                     </div>
+                </div>
+                <div class="col-12">
+
+
                 </div>
                 <!--/column -->
             </div>

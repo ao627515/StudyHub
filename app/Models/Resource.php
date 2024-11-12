@@ -111,6 +111,11 @@ class Resource extends Model
         return asset('storage/' . $this->file_url);
     }
 
+    public function getImageUrl()
+    {
+        return $this->image_url ? asset('storage/' . $this->image_url) :  asset('assets/public/img/book.png');
+    }
+
     public function formatFileSize()
     {
         return $this->getFileSize(unit: null, format: true);
