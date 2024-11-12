@@ -202,7 +202,7 @@
                                                         <i class="uil uil-eye"></i>
                                                     </button>
                                                     <a href="{{ route('public.resource.download', $resource->id) }}"
-                                                        class="btn btn-primary">
+                                                        class="btn btn-sm btn-primary">
                                                         {{-- Télécharger --}}
                                                         <i class="uil uil-download-alt"></i>
                                                     </a>
