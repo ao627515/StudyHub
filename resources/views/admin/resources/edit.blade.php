@@ -86,7 +86,9 @@
                                     <option value="">Sélectionner un module</option>
                                     @foreach ($courseModules as $courseModule)
                                         <option value="{{ $courseModule->id }}" @selected(old('course_module_id', $resource->course_module_id) === $courseModule->id)>
-                                            {{ $courseModule->name }}</option>
+                                            {{ $courseModule->name }}
+                                            {{ !Auth::user()->isUploader() ? "({$courseModule->university->name})" : '' }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('course_module_id')

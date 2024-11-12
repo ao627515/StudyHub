@@ -127,23 +127,41 @@ class ResourceController extends Controller
      */
     public function edit(Resource $resource)
     {
-        $authUploader = Uploader::find(Auth::id());
-        $authUserAcademicProgramId  = $authUploader->academicProgramLevel->academicProgram->id;
-        $authUserUniversityId = $authUploader->university->id;
-        $authUserAcademicLevelId = $authUploader->academicLevel->id;
+        /**
+         * @var Administrator|Moderator|Uploader|User $authUser
+         */
+        $authUser = Auth::user()->authUserSpecialisation();
 
-        $courseModules = CourseModule::latest()->whereHas('academicProgramLevel', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId, $authUserAcademicLevelId) {
-            $query->whereHas('academicProgram', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId) {
-                $query->where('id', $authUserAcademicProgramId)
-                    ->where('university_id', $authUserUniversityId);
-            })
-                ->whereHas('academicLevel', function ($query) use ($authUserAcademicLevelId) {
+        // Extraction des IDs nécessaires en une seule ligne
+        if ($authUser->isUploader()) {
+            $authUserAcademicProgramId = $authUser->academicProgramLevel->academicProgram->id ?? null;
+            $authUserUniversityId = $authUser->university->id ?? null;
+            $authUserAcademicLevelId = $authUser->academicLevel->id ?? null;
+        }
+
+        $schoolYears = $this->generateSchoolYears();
+
+        $courseModulesQuery = CourseModule::latest();
+
+        // Filtrage des modules de cours si l'utilisateur est un uploader
+        if ($authUser->isUploader()) {
+            $courseModulesQuery->whereHas('academicProgramLevel', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId, $authUserAcademicLevelId) {
+                $query->whereHas('academicProgram', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId) {
+                    $query->where('id', $authUserAcademicProgramId)
+                        ->where('university_id', $authUserUniversityId);
+                })->whereHas('academicLevel', function ($query) use ($authUserAcademicLevelId) {
                     $query->where('id', $authUserAcademicLevelId);
                 });
-        })->get();
+            });
+        }
+
+
+
+        $courseModules = $courseModulesQuery->get();
+        if (!$authUser->isUploader())
+            $courseModules->load('academicProgramLevel.academicProgram.university');
 
         $categories = CategoryResource::latest()->get();
-
 
         return view('admin.resources.edit', compact('resource', "courseModules", "categories"));
     }
