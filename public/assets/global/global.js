@@ -100,12 +100,7 @@ function initializeSelect2WithCreate({
         data: data,
         language: {
             noResults: function () {
-                return `
-                        <div>
-                            <p>${noResultsMessage}</p>
-                            <button id="create-btn-${selectId.replace('#', '')}" class="btn btn-primary mt-2">Create new ${resource}</button>
-                        </div>
-                    `;
+                return `<p>${noResultsMessage}</p>`;
             }
         },
         escapeMarkup: function (markup) {
@@ -113,14 +108,38 @@ function initializeSelect2WithCreate({
         }
     });
 
+    // Ajout du bouton "Créer" lors de l'ouverture de la liste
+    $(selectId).on('select2:open', function () {
+        const createButtonId = `create-btn-${selectId.replace('#', '')}`;
+
+        // Écouter les changements dans le champ de recherche pour afficher/masquer le bouton
+        $('.select2-search__field').on('input', function () {
+            const searchValue = $(this).val().trim();
+
+            // Supprime le bouton si la valeur est vide
+            $(`#${createButtonId}`).remove();
+
+            // Ajoute le bouton uniquement s'il y a au moins un caractère dans le terme de recherche
+            if (searchValue.length > 0) {
+                const createButton = $(`
+                    <button id="${createButtonId}" class="btn btn-primary mt-2" style="width: 100%;">
+                        Create new "${searchValue}"
+                    </button>
+                `);
+
+                // Ajoute le bouton à la liste des résultats
+                $('.select2-results').append(createButton);
+            }
+        });
+    });
+
     // Création d'une nouvelle option lorsque le bouton "Create new" est cliqué
     $(document).on('click', `#create-btn-${selectId.replace('#', '')}`, function () {
-        const searchValue = $('.select2-search__field').val();
+        const searchValue = $('.select2-search__field').val().trim();
         if (searchValue) {
-            // console.log(newResourceData);
+            const resourceData = { ...newResourceData, name: searchValue };
 
-            createNewResource(apiUrl, newResourceData)
-
+            createNewResource(apiUrl, resourceData)
                 .then(data => addOptionToSelect(selectId, data, resource, afterSelectCallback))
                 .catch(error => handleError(error, resource));
         }
@@ -134,10 +153,9 @@ function createNewResource(apiUrl, data) {
     console.log(data);
 
     const keys = Object.keys(data);
-
     keys.forEach(key => {
         if (typeof data[key] == 'function') {
-            data[key] = data[key]()
+            data[key] = data[key]();
         }
     });
 
@@ -153,8 +171,8 @@ function createNewResource(apiUrl, data) {
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok')
-            };
+                throw new Error('Network response was not ok');
+            }
             return response.json();
         });
 }
@@ -177,6 +195,10 @@ function handleError(error, resource) {
     console.error('Error:', error);
     alert(`Failed to create the ${resource}.`);
 }
+
+
+
+
 
 function buildUrlWithParams(endpoint, params) {
     const url = new URL(endpoint);

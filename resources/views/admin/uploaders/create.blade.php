@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    @dump($errors->all())
+    {{-- @dump($errors->all()) --}}
     <div class="pagetitle">
         <h1>Ajouter un Uploader</h1>
         <nav>
