@@ -175,7 +175,7 @@
                 <a href="{{ route('public.resources.seachAdvance') }}" class="btn btn-primary">Voir plus</a>
             </div>
             <!--/.row -->
-            <div class="row gy-10 mb-16 gy-sm-13 gx-lg-3 align-items-center">
+            <div class="row gy-10 mb-4 gy-sm-13 gx-lg-3 align-items-center">
                 <div class="col">
                     <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Les ressources les plus téléchargées</h2>
                     <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par
@@ -220,6 +220,9 @@
                     </div>
                 </div>
                 <!--/column -->
+            </div>
+            <div class="mb-4 mt-4 mb-md-5 d-flex justify-content-center align-items-center">
+                <a href="{{ route('public.resources.seachAdvance') }}" class="btn btn-primary">Voir plus</a>
             </div>
             <!--/.row -->
         </div>
