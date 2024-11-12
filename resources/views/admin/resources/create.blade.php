@@ -69,8 +69,11 @@
                                     <!-- Ajoutez ici les options de module de cours dynamiquement -->
                                     @foreach ($courseModules as $courseModule)
                                         <option value="{{ $courseModule->id }}" @selected(old('course_module_id') === $courseModule->id)>
-                                            {{ $courseModule->name }}</option>
+                                            {{ $courseModule->name }}
+                                            {{ !Auth::user()->isUploader() ? "({$courseModule->university->name})" : '' }}
+                                        </option>
                                     @endforeach
+
                                 </select>
                                 @error('course_module_id')
                                     <div class="invalid-feedback">{{ $message }}</div>

@@ -17,16 +17,17 @@ class Administrator extends User
     {
         parent::booted();
 
-        $role = UserRole::where('name', 'administrator')->first();
+        $roles = UserRole::whereIn('name', ['administrator', 'super-administrator'])->pluck('id');
 
-        if ($role) {
-            static::addGlobalScope('role', function (Builder $builder) use ($role) {
-                $builder->where('role_id', $role->id);
+        if ($roles->isNotEmpty()) {
+            static::addGlobalScope('role', function (Builder $builder) use ($roles) {
+                $builder->whereIn('role_id', $roles);
             });
         } else {
-            throw new InvalidArgumentException(Administrator::class . ' is missing role');
+            throw new InvalidArgumentException(static::class . ' is missing role');
         }
     }
+
 
     protected static function boot(): void
     {

@@ -129,33 +129,33 @@ class User extends Authenticatable
         return $this->role->abb == 'mod';
     }
 
-    public function AuthUploader()
+    public function fetchAuthUserByRole($role = null)
     {
-        return Uploader::find(Auth::id());
+        $role = $role ?? $this->role->abb;
+
+
+        switch ($role) {
+            case 'mood':
+                return Moderator::find($this->id ?? Auth::id());
+            case 'admin':
+            case 'superadmin':
+                return Administrator::find($this->id ?? Auth::id());
+            case 'upldr':
+                return Uploader::find($this->id ?? Auth::id());
+            default:
+                return $this;
+        }
     }
 
-    public function AuthAdministrator()
+    // Appel pour l'utilisateur authentifié
+    public function authUserSpecialisation()
     {
-        return Administrator::find(Auth::id());
+        return $this->fetchAuthUserByRole(Auth::user()->role->abb);
     }
 
-    public function AuthModerator()
+    // Appel pour un utilisateur spécifique
+    public function fetchUserSpecialisation()
     {
-        return Moderator::find(Auth::id());
-    }
-
-    public function fetchUploader()
-    {
-        return Uploader::find($this->id);
-    }
-
-    public function fetchAdmin()
-    {
-        return Administrator::find($this->id);
-    }
-
-    public function fetchModerator()
-    {
-        return Moderator::find($this->id);
+        return $this->fetchAuthUserByRole();
     }
 }

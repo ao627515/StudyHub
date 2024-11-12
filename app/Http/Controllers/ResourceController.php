@@ -13,6 +13,8 @@ use App\Services\ResourceService;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreResourceRequest;
 use App\Http\Requests\UpdateResourceRequest;
+use App\Models\Administrator;
+use App\Models\Moderator;
 
 class ResourceController extends Controller
 {
@@ -49,39 +51,59 @@ class ResourceController extends Controller
      */
     public function create()
     {
+        /**
+         * @var Administrator|Moderator|Uploader|User $authUser
+         */
+        $authUser = Auth::user()->authUserSpecialisation();
 
-        $authUploader = Uploader::find(Auth::id());
-        $authUserAcademicProgramId  = $authUploader->academicProgramLevel->academicProgram->id;
-        $authUserUniversityId = $authUploader->university->id;
-        $authUserAcademicLevelId = $authUploader->academicLevel->id;
+        // Extraction des IDs nécessaires en une seule ligne
+        if ($authUser->isUploader()) {
+            $authUserAcademicProgramId = $authUser->academicProgramLevel->academicProgram->id ?? null;
+            $authUserUniversityId = $authUser->university->id ?? null;
+            $authUserAcademicLevelId = $authUser->academicLevel->id ?? null;
+        }
 
+        $schoolYears = $this->generateSchoolYears();
 
-        $schoolYears = [];
-        $currentYear = date('Y');
-        for ($i = 0; $i < 10; $i++) {
-            $previousYear = $currentYear - 1;
-            $schoolYears[] = "$previousYear-$currentYear";
-            $currentYear--;
+        $courseModulesQuery = CourseModule::latest();
+
+        // Filtrage des modules de cours si l'utilisateur est un uploader
+        if ($authUser->isUploader()) {
+            $courseModulesQuery->whereHas('academicProgramLevel', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId, $authUserAcademicLevelId) {
+                $query->whereHas('academicProgram', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId) {
+                    $query->where('id', $authUserAcademicProgramId)
+                        ->where('university_id', $authUserUniversityId);
+                })->whereHas('academicLevel', function ($query) use ($authUserAcademicLevelId) {
+                    $query->where('id', $authUserAcademicLevelId);
+                });
+            });
         }
 
 
 
-        $courseModules = CourseModule::latest()->whereHas('academicProgramLevel', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId, $authUserAcademicLevelId) {
-            $query->whereHas('academicProgram', function ($query) use ($authUserAcademicProgramId, $authUserUniversityId) {
-                $query->where('id', $authUserAcademicProgramId)
-                    ->where('university_id', $authUserUniversityId);
-            })
-                ->whereHas('academicLevel', function ($query) use ($authUserAcademicLevelId) {
-                    $query->where('id', $authUserAcademicLevelId);
-                });
-        })->get();
-
-        // dd($courseModules);
+        $courseModules = $courseModulesQuery->get();
+        if (!$authUser->isUploader())
+            $courseModules->load('academicProgramLevel.academicProgram.university');
 
         $categories = CategoryResource::latest()->get();
 
         return view('admin.resources.create', compact("courseModules", "categories", "schoolYears"));
     }
+
+    /**
+     * Génère les années scolaires sous forme de chaînes "YYYY-YYYY" pour les 10 dernières années.
+     */
+    private function generateSchoolYears($years = 10)
+    {
+        $schoolYears = [];
+        $currentYear = date('Y');
+        for ($i = 0; $i < $years; $i++) {
+            $schoolYears[] = ($currentYear - 1) . "-$currentYear";
+            $currentYear--;
+        }
+        return $schoolYears;
+    }
+
 
     /**
      * Store a newly created resource in storage.
