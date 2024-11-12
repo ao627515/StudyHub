@@ -196,14 +196,16 @@
                                                     </p>
 
                                                     <!-- Boutons d'actions -->
-                                                    <button class="btn btn-soft-blue" data-bs-toggle="modal"
+                                                    <button class="btn btn-sm btn-soft-blue" data-bs-toggle="modal"
                                                         data-bs-target="#resourceModal{{ $resource->id }}">
-                                                        Voir plus
+                                                        {{-- Voir plus --}}
+                                                        <i class="uil uil-eye"></i>
                                                     </button>
-                                                    {{-- <a href="{{ route('public.resource.download', $resource->id) }}"
+                                                    <a href="{{ route('public.resource.download', $resource->id) }}"
                                                         class="btn btn-primary">
-                                                        Télécharger
-                                                    </a> --}}
+                                                        {{-- Télécharger --}}
+                                                        <i class="uil uil-download-alt"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
