@@ -200,10 +200,10 @@
                                                         data-bs-target="#resourceModal{{ $resource->id }}">
                                                         Voir plus
                                                     </button>
-                                                    <a href="{{ route('public.resource.download', $resource->id) }}"
+                                                    {{-- <a href="{{ route('public.resource.download', $resource->id) }}"
                                                         class="btn btn-primary">
                                                         Télécharger
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </div>
