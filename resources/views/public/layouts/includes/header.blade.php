@@ -3,11 +3,11 @@
            <div class="container flex-lg-row flex-nowrap align-items-center">
                <div class="navbar-brand w-100">
                    <a href="{{ route('public.pages.home') }}">
-                       <img class="logo-dark" src="./assets/img/logo-dark.png" srcset="./assets/img/logo-dark@2x.png 2x"
-                           alt="" />
+                       {{-- <img class="logo-dark" src="./assets/img/logo-dark.png" srcset="./assets/img/logo-dark@2x.png 2x"
+                           alt="" /> --}}
                        <h3 class="text-white fs-30 mb-0">Study Hub</h3>
-                       <img class="logo-light" src="./assets/img/logo-light.png"
-                           srcset="./assets/img/logo-light@2x.png 2x" alt="" />
+                       {{-- <img class="logo-light" src="./assets/img/logo-light.png"
+                           srcset="./assets/img/logo-light@2x.png 2x" alt="" /> --}}
                    </a>
                </div>
                <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
