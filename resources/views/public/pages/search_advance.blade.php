@@ -199,7 +199,8 @@
                                                     <button class="btn btn-sm btn-soft-blue" data-bs-toggle="modal"
                                                         data-bs-target="#resourceModal{{ $resource->id }}">
                                                         {{-- Voir plus --}}
-                                                        <i class="uil uil-eye"></i>
+                                                        <i class="uil uil-info-circle"></i>
+                                                        {{-- <i class="uil uil-eye"></i> --}}
                                                     </button>
                                                     <a href="{{ route('public.resource.download', $resource->id) }}"
                                                         class="btn btn-sm btn-primary">
