@@ -2,16 +2,17 @@
        <nav class="navbar navbar-expand-lg center-nav transparent navbar-dark">
            <div class="container flex-lg-row flex-nowrap align-items-center">
                <div class="navbar-brand w-100">
-                   <a href="./index.html">
+                   <a href="{{ route('public.pages.home') }}">
                        <img class="logo-dark" src="./assets/img/logo-dark.png" srcset="./assets/img/logo-dark@2x.png 2x"
                            alt="" />
+                       <h3 class="text-white fs-30 mb-0">Study Hub</h3>
                        <img class="logo-light" src="./assets/img/logo-light.png"
                            srcset="./assets/img/logo-light@2x.png 2x" alt="" />
                    </a>
                </div>
                <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                    <div class="offcanvas-header d-lg-none">
-                       <h3 class="text-white fs-30 mb-0">ElectHub</h3>
+                       <h3 class="text-white fs-30 mb-0">Study Hub</h3>
                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                            aria-label="Close"></button>
                    </div>
