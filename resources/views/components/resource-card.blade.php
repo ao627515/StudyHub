@@ -17,18 +17,19 @@
                 ({{ $resource->academicLevel->name }})
                 <br>
                 <strong>Université :</strong> {{ $resource->university->name }}
-                <br>
-                <strong>Téléchargements :</strong> {{ $resource->download_count }}
+                {{-- <br>
+                <strong>Téléchargements :</strong> {{ $resource->download_count }} --}}
             </p>
 
             <!-- Boutons d'actions -->
-            <button class="btn btn-soft-blue" data-bs-toggle="modal" data-bs-target="#resourceModal{{ $resource->id }}">
-                <i class="uil uil-info-circle"></i>
+            <button class="btn btn-sm btn-soft-blue" data-bs-toggle="modal"
+                data-bs-target="#resourceModal{{ $resource->id }}">
+                <i class="uil uil-info-circle me-2"></i>
                 Infos
                 {{-- <i class="uil uil-eye"></i> --}}
             </button>
-            <a href="{{ route('public.resource.download', $resource->id) }}" class="btn  btn-primary">
-                <i class="uil uil-download-alt"></i>
+            <a href="{{ route('public.resource.download', $resource->id) }}" class="btn btn-sm btn-primary">
+                <i class="uil uil-download-alt me-2"></i>
                 <span>Télécharger</span>
             </a>
         </div>
@@ -36,7 +37,7 @@
 
     <div class="modal fade" id="resourceModal{{ $resource->id }}" tabindex="-1"
         aria-labelledby="resourceModalLabel{{ $resource->id }}" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="resourceModalLabel{{ $resource->id }}">
