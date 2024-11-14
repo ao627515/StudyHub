@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\Request;
 use App\Models\Administrator;
 use App\Services\AdministratorService;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Services\PasswordResetLinkService;
 
 class AdministratorController extends Controller
 {
 
     private AdministratorService $adminService;
+    private PasswordResetLinkService $passwordResetLinkService;
 
-    public function __construct(AdministratorService $adminService)
-    {
+    public function __construct(
+        AdministratorService $adminService,
+        PasswordResetLinkService $passwordResetLinkService
+    ) {
         $this->adminService = $adminService;
+        $this->passwordResetLinkService = $passwordResetLinkService;
     }
 
     /**
@@ -44,6 +49,8 @@ class AdministratorController extends Controller
         $attributes = $request->validated();
 
         $this->adminService->store($attributes);
+
+        $this->passwordResetLinkService->store(['email' => $attributes['email']]);
 
         return to_route("admin.administrators.index")->with("success", "Administrateur creer !!");
     }
