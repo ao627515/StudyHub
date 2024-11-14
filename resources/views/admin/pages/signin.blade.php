@@ -65,11 +65,11 @@
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100" type="submit">Connexion</button>
                                     </div>
-
+                                    {{-- 
                                     <div class="col-12">
                                         <p class="small mb-0"><a href="">Mot de passe oublier ?</a>
                                         </p>
-                                    </div>
+                                    </div> --}}
 
                                 </form>
 

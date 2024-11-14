@@ -300,7 +300,7 @@
 
           <li class="nav-item">
               <a class="nav-link collapsed" href="{{ route('public.pages.home') }}">
-                  <i class="bi bi-home"></i>
+                  <i class="bi bi-house"></i>
                   <span>Acceuil</span>
               </a>
           </li>
