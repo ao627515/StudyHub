@@ -23,11 +23,15 @@
 
             <!-- Boutons d'actions -->
             <button class="btn btn-sm btn-soft-blue" data-bs-toggle="modal"
-                data-bs-target="#resourceModal{{ $resource->id }}">
+                data-bs-target="#resourceModal{{ $resource->id }}" title="Voir plus d'information">
                 <i class="uil uil-info-circle"></i>
                 {{-- Infos --}}
                 {{-- <i class="uil uil-eye"></i> --}}
             </button>
+            <a href="{{ asset('storage/' . $resource->file_url) }}" class="btn btn-sm btn-soft-blue"
+                title="visualise la resource">
+                <i class="uil uil-eye"></i>
+            </a>
             <a href="{{ route('public.resource.download', $resource->id) }}" class="btn btn-sm btn-primary">
                 <i class="uil uil-download-alt me-2"></i>
                 <span>Télécharger</span>
@@ -66,7 +70,13 @@
                 </div>
                 <div class="modal-footer">
                     <a href="{{ route('public.resource.download', $resource->id) }}" class="btn btn-primary">
+                        <i class="uil uil-download-alt me-2"></i>
                         Télécharger
+                    </a>
+                    <a href="{{ asset('storage/' . $resource->file_url) }}" class="btn btn-soft-blue"
+                        title="visualise la resource ">
+                        <i class="uil uil-eye me-2"></i>
+                        Lire
                     </a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                 </div>
