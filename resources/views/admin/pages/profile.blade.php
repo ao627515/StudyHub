@@ -12,6 +12,27 @@
         </nav>
     </div><!-- End Page Title -->
 
+    {{-- @dump($errors) --}}
+
+    @if ($errors->updatePassword->any())
+        <div class="alert alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <ul>
+                @foreach ($errors->updatePassword->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @session('status')
+        <div class="alert alert-info" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {{ $value }}
+        </div>
+    @endsession
+
+
     <section class="section profile">
         <div class="row">
             <div class="col-xl-4">
@@ -147,47 +168,50 @@
 
                             <div class="tab-pane fade pt-3" id="profile-change-password">
                                 <!-- Formulaire de changement de mot de passe -->
-                                <form action="{{ '' }}" method="POST">
+                                <form action="{{ route('admin.password.update') }}" method="POST">
                                     @csrf
-
+                                    @method('Put')
+                                    <!-- Current Password -->
                                     <div class="row mb-3">
-                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mot de Passe
-                                            Actuel</label>
+                                        <label for="current_password" class="col-md-4 col-lg-3 col-form-label">Current
+                                            Password</label>
                                         <div class="col-md-8 col-lg-9">
                                             <input name="current_password" type="password" class="form-control"
-                                                id="currentPassword">
-                                            @error('current_password')
+                                                id="current_password">
+                                            @error('current_password', 'updatePassword')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
+                                    <!-- New Password -->
                                     <div class="row mb-3">
-                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nouveau Mot de
-                                            Passe</label>
+                                        <label for="password" class="col-md-4 col-lg-3 col-form-label">New
+                                            Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="new_password" type="password" class="form-control"
-                                                id="newPassword">
-                                            @error('new_password')
+                                            <input name="password" type="password" class="form-control" id="password">
+                                            @error('password', 'updatePassword')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
+                                    <!-- Confirm New Password -->
                                     <div class="row mb-3">
-                                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Confirmer le
-                                            Nouveau Mot de Passe</label>
+                                        <label for="password_confirmation"
+                                            class="col-md-4 col-lg-3 col-form-label">Confirm New Password</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="renew_password" type="password" class="form-control"
-                                                id="renewPassword">
-                                            @error('renew_password')
+                                            <input name="password_confirmation" type="password" class="form-control"
+                                                id="password_confirmation">
+                                            @error('password_confirmation', 'updatePassword')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Changer le Mot de Passe</button>
+                                        <br>
+                                        <a href="">Mot de passe oublié ?</a>
                                     </div>
                                 </form><!-- End Change Password Form -->
 
