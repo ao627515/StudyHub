@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             return request()->is('*api*') ? route('api.auth.fail') : route('admin.login');
         });
         $middleware->statefulApi();
+        $middleware->trustHosts(at: fn() => config('app.trusted_hosts'), subdomains: false);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
