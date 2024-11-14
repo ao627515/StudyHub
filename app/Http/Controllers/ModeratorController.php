@@ -23,7 +23,7 @@ class ModeratorController extends Controller
      */
     public function index()
     {
-        $moderators = $this->moderatorService->getAllModerators();
+        $moderators = $this->moderatorService->index();
 
         return view("admin.moderators.index", compact("moderators"));
     }
@@ -43,7 +43,7 @@ class ModeratorController extends Controller
     {
         $attributes = $request->validated();
 
-        $this->moderatorService->createModerator($attributes);
+        $this->moderatorService->store($attributes);
 
         return to_route("admin.moderators.index")->with("success", "Moderateur creer !!");
     }
@@ -71,7 +71,7 @@ class ModeratorController extends Controller
     {
         $attributes = $request->validated();
 
-        $this->moderatorService->updateModerator($moderator, $attributes);
+        $this->moderatorService->update($moderator, $attributes);
 
         return to_route("admin.moderators.index")->with("success", "Moderateur modifier !!");
     }
@@ -81,7 +81,7 @@ class ModeratorController extends Controller
      */
     public function destroy(Moderator $moderator)
     {
-        $this->moderatorService->deleteModerator($moderator);
+        $this->moderatorService->destroy($moderator);
 
         return to_route("admin.moderators.index")->with("success", "Moderateur supprimer !!");
     }

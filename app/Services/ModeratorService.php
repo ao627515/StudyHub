@@ -15,7 +15,7 @@ class ModeratorService
         //
     }
 
-    public function getAllModerators()
+    public function index()
     {
         return Moderator::all();
     }
@@ -23,7 +23,7 @@ class ModeratorService
     /**
      * Crée un nouvel moderateur.
      */
-    public function createModerator(array $attributes)
+    public function store(array $attributes)
     {
         $attibutes['created_by_id'] = Auth::id();
         return Moderator::create($attributes);
@@ -32,7 +32,7 @@ class ModeratorService
     /**
      * Met à jour un moderateur existant.
      */
-    public function updateModerator(Moderator $moderator, array $attributes, array $options = [])
+    public function update(Moderator $moderator, array $attributes, array $options = [])
     {
         return $moderator->update($attributes, $options);
     }
@@ -40,9 +40,9 @@ class ModeratorService
     /**
      * Supprime un moderateur.
      */
-    public function deleteModerator(Moderator $moderator)
+    public function destroy(Moderator $moderator)
     {
-        $this->updateModerator($moderator, ['deleted_by_id' => Auth::id()]);
+        $this->update($moderator, ['deleted_by_id' => Auth::id()]);
 
         return $moderator->delete();
     }

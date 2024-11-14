@@ -23,7 +23,7 @@ class AdministratorController extends Controller
      */
     public function index()
     {
-        $administrators = $this->adminService->getAllAdministrators();
+        $administrators = $this->adminService->index();
 
         return view("admin.administrators.index", compact("administrators"));
     }
@@ -43,7 +43,7 @@ class AdministratorController extends Controller
     {
         $attributes = $request->validated();
 
-        $this->adminService->createAdministrator($attributes);
+        $this->adminService->store($attributes);
 
         return to_route("admin.administrators.index")->with("success", "Administrateur creer !!");
     }
@@ -71,7 +71,7 @@ class AdministratorController extends Controller
     {
         $attributes = $request->validated();
 
-        $this->adminService->updateAdministrator($administrator, $attributes);
+        $this->adminService->update($administrator, $attributes);
 
         return to_route("admin.administrators.index")->with("success", "Administrateur modifier !!");
     }
@@ -81,7 +81,7 @@ class AdministratorController extends Controller
      */
     public function destroy(Administrator $administrator)
     {
-        $this->adminService->deleteAdministrator($administrator);
+        $this->adminService->destroy($administrator);
 
         return to_route("admin.administrators.index")->with("success", "Administrateur supprimer !!");
     }

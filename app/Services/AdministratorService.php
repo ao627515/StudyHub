@@ -10,7 +10,7 @@ class AdministratorService
     /**
      * Récupère tous les administrateurs.
      */
-    public function getAllAdministrators()
+    public function index()
     {
         return Administrator::all();
     }
@@ -18,7 +18,7 @@ class AdministratorService
     /**
      * Crée un nouvel administrateur.
      */
-    public function createAdministrator(array $attributes)
+    public function store(array $attributes)
     {
         $attibutes['created_by_id'] = Auth::id();
         return Administrator::create($attributes);
@@ -27,7 +27,7 @@ class AdministratorService
     /**
      * Met à jour un administrateur existant.
      */
-    public function updateAdministrator(Administrator $administrator, array $attributes, array $options = [])
+    public function update(Administrator $administrator, array $attributes, array $options = [])
     {
         return $administrator->update($attributes);
     }
@@ -35,9 +35,9 @@ class AdministratorService
     /**
      * Supprime un administrateur.
      */
-    public function deleteAdministrator(Administrator $administrator)
+    public function destroy(Administrator $administrator)
     {
-        $this->updateAdministrator($administrator, ['deleted_by_id' => Auth::id()]);
+        $this->update($administrator, ['deleted_by_id' => Auth::id()]);
 
         $administrator->delete();
     }
