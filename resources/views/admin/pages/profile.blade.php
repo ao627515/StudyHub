@@ -209,11 +209,21 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Changer le Mot de Passe</button>
+                                        <button type="submit" class="btn btn-primary mb-3">Changer le Mot de
+                                            Passe</button>
                                         <br>
-                                        <a href="">Mot de passe oublié ?</a>
                                     </div>
                                 </form><!-- End Change Password Form -->
+                                <div class="text-center">
+
+                                    <form action="{{ route('admin.password.email') }}" method="post"
+                                        id="passwordForgot">
+                                        @csrf
+                                        <button type="submit" class="btn btn-info btn-sm" form="passwordForgot">Mot
+                                            de passe oublié
+                                            ?</button>
+                                    </form>
+                                </div>
 
                             </div>
 
