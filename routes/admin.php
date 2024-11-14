@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminPagesController;
 use App\Http\Controllers\CategoryResourceController;
 use App\Http\Controllers\CourseModuleController;
 use App\Http\Controllers\ModeratorController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UniversityController;
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware("auth")->group(function () {
     Route::prefix("admin")->name("admin.")->controller(AdminPagesController::class)->group(function () {
         Route::get("dashboard", "dashboard")->name("dashboard");
+        // Route::get("profile", "profile")->name("profile");
+        Route::get("users/profile", [ProfileController::class, 'show'])->name('profile.show');
+        Route::put("users/profile", [ProfileController::class, 'update'])->name('profile.update');
 
         Route::resource('administrators', AdministratorController::class);
         Route::resource('moderators', ModeratorController::class);
