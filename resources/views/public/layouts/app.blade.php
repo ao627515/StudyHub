@@ -10,8 +10,8 @@
         content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Sandbox - Modern & Multipurpose Bootstrap 5 Template</title>
-    {{-- <link rel="shortcut icon" href="./assets/img/favicon.png"> --}}
+    <title>Study Hub</title>
+    <link rel="shortcut icon" href="{{ asset('assets/global/svg/logo.svg') }}">
     <link rel="stylesheet" href="{{ asset('assets/public/css/plugins.css') }}">
     <link rel="stylesheet" href=" {{ asset('assets/public/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/public/css/colors/aqua.css') }}">
