@@ -42,13 +42,15 @@ class ResourceService
             $query->where('created_by_id', Auth::id());
         }
 
+        if ($params['paginate']) {
+            return $query->paginate($params['paginate']);
+        }
+
         if ($params['limit']) {
             $query->limit($params['limit']);
         }
 
-        return $params['paginate']
-            ? $query->paginate($params['paginate'])
-            : $query->latest()->get();
+        return $query->latest()->get();
     }
 
 
