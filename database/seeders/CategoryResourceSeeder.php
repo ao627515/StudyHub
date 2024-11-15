@@ -27,12 +27,16 @@ class CategoryResourceSeeder extends Seeder
             //     'description' => 'Cours théoriques couvrant les notions fondamentales et avancées d’un sujet donné.'
             // ],
             [
-                'name' => 'Recueil De Devoir',
+                'name' => 'Recueil De Devoirs',
                 'description' => 'Collection de devoirs précédents, utilisés pour la révision et la préparation des examens.'
             ],
             [
                 'name' => 'Livre',
                 'description' => 'Livres académiques et manuels de référence pour approfondir la compréhension des matières.'
+            ],
+            [
+                'name' => 'Exercice',
+                'description' => 'Exercice'
             ]
         ]);
     }
