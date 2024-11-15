@@ -199,8 +199,15 @@ class ResourceController extends Controller
 
         $path = $this->resourceService->view($resource);
 
-        return response()->file($path, [
-            'Content-Disposition' => 'inline',
+        // return response()->file($path, [
+        //     'Content-Disposition' => 'inline',
+        // ]);
+
+        return response()->stream(function () use ($path) {
+            readfile($path);
+        }, 200, [
+            'Content-Type' => mime_content_type($path),
+            'Content-Disposition' => 'inline; filename="' . basename($path) . '"',
         ]);
     }
 }
