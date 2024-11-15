@@ -10,25 +10,35 @@ use App\Models\CourseModule;
 use App\Models\Resource;
 use App\Models\University;
 use App\Services\ResourceService;
-use Illuminate\Http\Request;
+use App\Services\SeoService;
 
 class PagesController extends Controller
 {
-
     private ResourceService $resourceService;
-    public function __construct(ResourceService $resourceService)
+    private SeoService $seoService;
+
+    public function __construct(ResourceService $resourceService, SeoService $seoService)
     {
         $this->resourceService = $resourceService;
+        $this->seoService = $seoService;
     }
 
     public function home()
     {
+        // SEO configuration for the home page
+        $this->seoService->setPageSeo(
+            title: 'StudyHub - Partage de Ressources Académiques',
+            description: 'Découvrez StudyHub, la plateforme qui centralise les ressources académiques de diverses institutions. Recherchez, partagez et accédez aux ressources éducatives dont vous avez besoin pour vos études.',
+            canonical: route('public.pages.home'),
+            keywords: ['ressources académiques', 'partage de cours', 'StudyHub', 'étudiants', 'universités'],
+            image: asset('assets/global/svg/logo.svg') // Assurez-vous d'avoir une image pour la page d'accueil
+        );
+
         $universities = University::latest()->get(['id', 'name']);
         $moreResourcesDownload = Resource::latest()->limit(10)->get();
         $levels = AcademicLevel::all(['id', 'name']);
         $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
         $programs = AcademicProgram::all(['id', 'name']);
-
 
         return view(
             'public.pages.home',
@@ -44,10 +54,18 @@ class PagesController extends Controller
 
     public function searchAdvance()
     {
+        // SEO configuration for the searchAdvance page
+        $this->seoService->setPageSeo(
+            title: 'Recherche Avancée - Trouvez des Ressources Académiques sur StudyHub',
+            description: 'Utilisez notre fonctionnalité de recherche avancée pour filtrer et trouver les ressources académiques parfaites. Affinez votre recherche par université, programme, niveau académique et année scolaire.',
+            canonical: route('public.resources.seachAdvance'),
+            keywords: ['recherche avancée', 'ressources académiques', 'StudyHub', 'filtres de recherche', 'cours et documents'],
+            image: asset('assets/global/svg/logo.svg') // Image pour la page de recherche avancée
+        );
+
         $universities = University::latest()->get(['id', 'name']);
         $levels = AcademicLevel::all(['id', 'name']);
         $schoolYears = Resource::distinct()->pluck('school_year');
-        // $resources = Resource::latest()->get();
         $programs = AcademicProgram::all(['id', 'name']);
         $modules = CourseModule::all(['id', 'name']);
         $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
@@ -75,7 +93,6 @@ class PagesController extends Controller
                 'schoolYears',
                 'programs',
                 'modules'
-
             )
         );
     }

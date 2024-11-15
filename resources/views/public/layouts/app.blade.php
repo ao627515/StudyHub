@@ -4,13 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="An impressive and flawless site template that includes various UI elements and countless features, attractive ready-made blocks and rich pages, basically everything you need to create a unique and professional website.">
-    <meta name="keywords"
-        content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
-    <meta name="author" content="elemis">
+    <meta name="msvalidate.01" content="5FF8D283B9C90AD029C6B24A1F2A4CD1" />
+    {!! SEO::generate() !!}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Study Hub</title>
     <link rel="shortcut icon" href="{{ asset('assets/global/svg/logo.svg') }}">
     <link rel="stylesheet" href="{{ asset('assets/public/css/plugins.css') }}">
     <link rel="stylesheet" href=" {{ asset('assets/public/css/style.css') }}">

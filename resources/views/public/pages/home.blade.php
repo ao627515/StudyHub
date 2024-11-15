@@ -25,8 +25,8 @@
                 <!-- /column -->
                 <div class="col-lg-5 offset-lg-1 mb-n18" data-cues="slideInDown">
                     <div class="position-relative">
-                        <figure class="rounded shadow-lg"><img src="{{ asset('assets/public/img/hero.jpg') }}"
-                                srcset="{{ asset('assets/public/img/hero.jpg') }}@2x.jpg 2x" alt=""></figure>
+                        <figure class="rounded shadow-lg"><img src="{{ asset('assets/global/img/banner.png') }}"
+                                srcset="{{ asset('assets/global/img/banner.png') }} 2x" alt=""></figure>
                     </div>
                     <!-- /div -->
                 </div>
