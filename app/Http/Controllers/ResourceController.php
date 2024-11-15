@@ -39,7 +39,8 @@ class ResourceController extends Controller
             'category' => request('category', 0),
             'name' => request('name', ''),
             'module' => request('module', 0),
-            'schoolYear' => request('schoolYear', 0)
+            'schoolYear' => request('schoolYear', 0),
+            'limit' => 0
         ];
         $resources = $this->resourceService->index($params);
         return view('admin.resources.index', compact('resources'));
@@ -96,7 +97,7 @@ class ResourceController extends Controller
     private function generateSchoolYears($years = 10)
     {
         $schoolYears = [];
-        $currentYear = date('Y');
+        $currentYear = date('Y') + 1;
         for ($i = 0; $i < $years; $i++) {
             $schoolYears[] = ($currentYear - 1) . "-$currentYear";
             $currentYear--;
