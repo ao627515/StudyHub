@@ -193,4 +193,14 @@ class ResourceController extends Controller
         // Télécharge le fichier
         return response()->download($filePath);
     }
+
+    public function view(Resource $resource)
+    {
+
+        $path = $this->resourceService->view($resource);
+
+        return response()->file($path, [
+            'Content-Disposition' => 'inline',
+        ]);
+    }
 }

@@ -169,6 +169,21 @@ class ResourceService
         return $filePath;
     }
 
+    public function view(int|Resource $resource)
+    {
+        $resource = $this->show($resource);
+
+        // Chemin du fichier dans le dossier de stockage
+        $filePath = storage_path("app/public/{$resource->file_url}");
+
+        // Vérifie si le fichier existe
+        if (!file_exists($filePath)) {
+            throw new Exception("File url not exist");
+        }
+
+        return $filePath;
+    }
+
     private function deleteFiles(array $paths = [])
     {
 

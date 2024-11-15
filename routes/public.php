@@ -15,6 +15,7 @@ use App\Http\Controllers\Public\PagesController;
 Route::name('public.')->group(callback: function () {
     Route::get('home', [PagesController::class, 'home'])->name('pages.home');
     Route::get('resource/{resource}/download', [ResourceController::class, 'downloadFile'])->name('resource.download');
+    Route::get('resource/{resource}/view', [ResourceController::class, 'view'])->name('resource.view');
     Route::get('resource/seach-advance', [PagesController::class, 'searchAdvance'])->name('resources.seachAdvance');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 });
