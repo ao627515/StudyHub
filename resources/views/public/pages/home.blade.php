@@ -267,18 +267,31 @@
                     <p class="mt-4">Veuillez partager vos pensées, questions ou commentaires avec nous.</p>
                 </div>
                 <div class="col-lg-8 mt-lg-2">
-                    <form action="/submit-feedback" method="POST" class="feedback-form">
+                    <form action="{{ route('public.contact.store') }}" method="POST">
+                        @csrf
                         <div class="row gx-3 gy-3">
                             <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Votre Nom"
-                                    required />
+                                <input type="text" name="name"
+                                    class="form-control @error('name') is-invalid @enderror" placeholder="Votre Nom"
+                                    value="{{ old('name') }}" required />
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-md-6">
-                                <input type="email" name="email" class="form-control" placeholder="Votre Email"
-                                    required />
+                                <input type="email" name="email"
+                                    class="form-control @error('email') is-invalid @enderror" placeholder="Votre Email"
+                                    value="{{ old('email') }}" required />
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-12">
-                                <textarea name="message" class="form-control" placeholder="Votre Message" rows="5" required></textarea>
+                                <textarea name="message" class="form-control @error('message') is-invalid @enderror" placeholder="Votre Message"
+                                    rows="5" required>{{ old('message') }}</textarea>
+                                @error('message')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-12 text-center mt-4">
                                 <button type="submit" class="btn btn-primary rounded">Envoyer le Message</button>
@@ -289,6 +302,7 @@
             </div>
         </div>
     </section>
+
 
     <section class="wrapper bg-light angled upper-end lower-start">
         <div class="container py-16 py-md-18 position-relative">
