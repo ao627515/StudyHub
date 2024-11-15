@@ -63,7 +63,7 @@
                         </table>
 
                         <!-- Pagination links (if applicable) -->
-                        {{ $resources->links() }}
+                        {{-- {{ $resources->links() }} --}}
                     </div>
                 </div>
             </div>
