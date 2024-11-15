@@ -185,9 +185,6 @@
                     <div class="row">
                         @foreach ($moreResourcesDownload as $resource)
                             <div class="col-12">
-                                <a href="{{ asset('storage/' . $resource->file_url) }}" class="btn btn-sm btn-soft-blue">
-                                    ici</a>
-
                                 <div class="col-md-4 mb-4">
                                     < <x:resource-card :resource="$resource" />
                                 </div>
