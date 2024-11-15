@@ -14,21 +14,25 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+
             $table->foreignId('university_id')
                 ->nullable()
                 ->constrained('universities')
-                ->nullOnDelete()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+
             $table->foreignId('created_by_id')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
+
             $table->foreignId('deleted_by_id')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
+
             $table->softDeletes();
             $table->timestamps();
         });

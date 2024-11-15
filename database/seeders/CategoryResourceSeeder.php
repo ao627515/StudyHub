@@ -22,10 +22,10 @@ class CategoryResourceSeeder extends Seeder
                 'name' => 'TP',
                 'description' => 'Travaux pratiques permettant aux étudiants de manipuler et d’appliquer les concepts techniques dans un environnement contrôlé.'
             ],
-            [
-                'name' => 'Cours',
-                'description' => 'Cours théoriques couvrant les notions fondamentales et avancées d’un sujet donné.'
-            ],
+            // [
+            //     'name' => 'Cours',
+            //     'description' => 'Cours théoriques couvrant les notions fondamentales et avancées d’un sujet donné.'
+            // ],
             [
                 'name' => 'Recueil De Devoir',
                 'description' => 'Collection de devoirs précédents, utilisés pour la révision et la préparation des examens.'

@@ -16,14 +16,14 @@ return new class extends Migration
             $table->foreignId('academic_level_id')
                 ->nullable()
                 ->constrained('academic_levels')
-                ->nullOnDelete()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('academic_program_id')
                 ->nullable()
                 ->constrained('academic_programs')
-                ->nullOnDelete()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

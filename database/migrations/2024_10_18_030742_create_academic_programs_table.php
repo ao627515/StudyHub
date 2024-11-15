@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('university_id')
                 ->nullable()
                 ->constrained('universities')
-                ->nullOnDelete()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->softDeletes();
             $table->timestamps();

@@ -33,13 +33,13 @@ return new class extends Migration
 
             $table->foreignId('category_id')
                 ->constrained('category_resources')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->foreignId('course_module_id')
                 ->constrained('course_modules')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->foreignId('teacher_id')
                 ->nullable()
@@ -59,6 +59,7 @@ return new class extends Migration
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

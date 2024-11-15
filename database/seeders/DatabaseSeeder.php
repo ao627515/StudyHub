@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
-            UniversitySeeder::class,
+            // UniversitySeeder::class,
             AcademicLevelSeeder::class,
-            AcademicProgramSeeder::class,
-            UserRoleSeeder::class
+            // AcademicProgramSeeder::class,
+            UserRoleSeeder::class,
+            CategoryResourceSeeder::class
         ]);
 
         User::factory()->create([
