@@ -29,7 +29,7 @@
                 {{-- <i class="uil uil-eye"></i> --}}
             </button>
             <a href="{{ asset('storage/' . $resource->file_url) }}" class="btn btn-sm btn-soft-blue"
-                title="visualise la resource">
+                title="visualise la resource" target="_blank">
                 <i class="uil uil-eye"></i>
             </a>
             <a href="{{ route('public.resource.download', $resource->id) }}" class="btn btn-sm btn-primary">
