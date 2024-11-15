@@ -16,7 +16,7 @@ return [
             'description'  => 'Découvrez StudyHub, la plateforme collaborative pour accéder aux ressources académiques de divers établissements scolaires. Accédez facilement à des cours, exercices, devoirs passés, et plus encore.',
             'separator'    => ' - ',
             'keywords'     => ['resources académiques', 'plateforme éducative', 'éducation', 'partage de ressources', 'StudyHub', 'cours', 'devoirs', 'exercices'],
-            'canonical'    => config('app.url'), // Utilise Url::full() pour définir l'URL canonique complète
+            'canonical'    => env('APP_URL'), // Utilise Url::full() pour définir l'URL canonique complète
             'robots'       => 'index, follow', // Indexable et suivable par les moteurs de recherche
         ],
         /*

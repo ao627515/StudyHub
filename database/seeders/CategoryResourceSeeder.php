@@ -36,7 +36,7 @@ class CategoryResourceSeeder extends Seeder
             ],
             [
                 'name' => 'Exercice',
-                'description' => 'Exercice'
+                'description' => 'Exercices pratiques pour renforcer la compréhension des concepts étudiés, avec des exemples, des problèmes à résoudre, et des solutions détaillées.'
             ]
         ]);
     }
