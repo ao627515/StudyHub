@@ -184,10 +184,9 @@
                         utilisateurs.</h3>
                     <div class="row">
                         @foreach ($moreResourcesDownload as $resource)
-                            <div class="col-12">
-                                <div class="col-md-4 mb-4">
-                                    < <x:resource-card :resource="$resource" />
-                                </div>
+                            <div class="col-md-4 mb-4">
+                                < <x:resource-card :resource="$resource" />
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -334,26 +333,22 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets/public/js/home.js') }}"></script>
     <script>
-        < script src = "{{ asset('assets/public/js/home.js') }}" >
-            <
-            /> <
-        script >
-            $(document).ready(function() {
-                function isViewable(url) {
-                    const viewableExtensions = ['pdf', 'jpg', 'jpeg', 'png', 'mp4'];
-                    const extension = url.split('.').pop().toLowerCase();
-                    return viewableExtensions.includes(extension);
-                }
+        $(document).ready(function() {
+            function isViewable(url) {
+                const viewableExtensions = ['pdf', 'jpg', 'jpeg', 'png', 'mp4'];
+                const extension = url.split('.').pop().toLowerCase();
+                return viewableExtensions.includes(extension);
+            }
 
-                function openResource(url) {
-                    const win = window.open('', '_blank');
-                    if (!win) {
-                        alert(
-                            'Impossible d’ouvrir la ressource. Veuillez vérifier les paramètres de votre navigateur.'
+            function openResource(url) {
+                const win = window.open('', '_blank');
+                if (!win) {
+                    alert(
+                        'Impossible d’ouvrir la ressource. Veuillez vérifier les paramètres de votre navigateur.'
                         );
-                        return;
-                    }
-                    win.document.write(`
+                    return;
+                }
+                win.document.write(`
                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -371,22 +366,20 @@
                 </body>
                 </html>
             `);
+            }
+
+            home(); // Appel à ta fonction "home"
+
+            $('.view-resource').on('click', function(event) {
+                event.preventDefault(); // Empêche la navigation par défaut
+                const url = this.href;
+
+                if (isViewable(url)) {
+                    openResource(url);
+                } else {
+                    alert('Ce fichier ne peut pas être affiché dans le navigateur.');
                 }
-
-                home(); // Appel à ta fonction "home"
-
-                $('.view-resource').on('click', function(event) {
-                    event.preventDefault(); // Empêche la navigation par défaut
-                    const url = this.href;
-
-                    if (isViewable(url)) {
-                        openResource(url);
-                    } else {
-                        alert('Ce fichier ne peut pas être affiché dans le navigateur.');
-                    }
-                });
             });
+        });
     </script>
-
-    <script></script>
 @endsection
