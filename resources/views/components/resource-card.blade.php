@@ -28,7 +28,7 @@
                 {{-- Infos --}}
                 {{-- <i class="uil uil-eye"></i> --}}
             </button>
-            <a href="{{ route('public.resource.view', $resource) }}" class="btn btn-sm btn-soft-blue view-resource"
+            <a href="{{ route('public.resource.view', $resource) }}" class="btn btn-sm btn-soft-blue "
                 title="visualise la resource" target="_blank">
                 <i class="uil uil-eye"></i>
             </a>
