@@ -79,7 +79,8 @@ class PagesController extends Controller
             'category' => request('category', 0),
             'name' => request('name', ''),
             'module' => request('module', 0),
-            'schoolYear' => request('schoolYear', 0)
+            'schoolYear' => request('schoolYear', 0),
+            'limit' => 0
         ];
         $resources = $this->resourceService->index($params);
 
