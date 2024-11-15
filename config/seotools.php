@@ -63,9 +63,9 @@ return [
         'defaults' => [
             'title'       => 'StudyHub - Centralisation des Ressources Académiques',
             'description' => 'La plateforme collaborative de ressources académiques de divers établissements scolaires. Accédez aux cours, devoirs passés, exercices et bien plus.',
-            'url'         => 'full', // Utilise Url::full() pour définir l'URL complète actuelle
+            'url'         => env('APP_URL'), // Utilise Url::full() pour définir l'URL complète actuelle
             'type'        => 'WebSite', // Type pour le schéma JSON-LD
-            'images'      => ['assets/global/svg/logo.svg'], // Image pour JSON-LD
+            'images'      => ['/assets/global/svg/logo.svg'], // Image pour JSON-LD
         ],
     ],
 ];
