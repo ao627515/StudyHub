@@ -22,39 +22,49 @@ class ResourceService
     {
         $query = Resource::query()->with($params['relations']);
 
-        // dd($params);
-
         $filters = [
-            'university' => fn($query, $value) => $query->whereHas('courseModule.academicProgramLevel.academicProgram', fn($query) => $query->where('university_id', $value)),
-            'program' => fn($query, $value) => $query->whereHas('courseModule.academicProgramLevel', fn($query) => $query->where('academic_program_id', $value)),
-            'level' => fn($query, $value) => $query->whereHas('courseModule.academicProgramLevel', fn($query) => $query->where('academic_level_id', $value)),
+            'university' => fn($query, $value) => $query->whereHas(
+                'courseModule.academicProgramLevel.academicProgram',
+                fn($query) => $query->where('university_id', $value)
+            ),
+            'program' => fn($query, $value) => $query->whereHas(
+                'courseModule.academicProgramLevel',
+                fn($query) => $query->where('academic_program_id', $value)
+            ),
+            'level' => fn($query, $value) => $query->whereHas(
+                'courseModule.academicProgramLevel',
+                fn($query) => $query->where('academic_level_id', $value)
+            ),
             'module' => fn($query, $value) => $query->where('course_module_id', $value),
             'category' => fn($query, $value) => $query->where('category_id', $value),
             'name' => fn($query, $value) => $query->where('name', 'LIKE', "%$value%"),
-            'schoolYear' => fn($query, $value) => $query->where('schoolYear', 'LIKE', "%$value%")
+            'schoolYear' => fn($query, $value) => $query->where('schoolYear', 'LIKE', "%$value%"),
         ];
 
         foreach ($filters as $param => $callback) {
             $query->when($params[$param] ?? null, fn($query) => $callback($query, $params[$param]));
         }
 
-        if (Auth::user()?->isUploader() ?? false && Route::is('*admin*')) {
+        if (Auth::user()?->isUploader() && Route::is('*admin*')) {
             $query->where('created_by_id', Auth::id());
         }
 
-        if ($params['paginate']) {
+        if ($this->validateParam($params, 'paginate', fn($value) => is_numeric($value) && $value > 0)) {
             return $query->paginate($params['paginate']);
         }
 
-        if ($params['limit']) {
+        if ($this->validateParam($params, 'limit', fn($value) => is_numeric($value) && $value > 0)) {
             $query->limit($params['limit']);
         }
 
         return $query->latest()->get();
     }
 
+    private function validateParam(array $params, string $key, callable $condition): bool
+    {
+        return isset($params[$key]) && $condition($params[$key]);
+    }
 
-    private  function getResourcesByUserAuth(Builder $builder) {}
 
     /**
      * Crée une nouvelle ressource avec les attributs spécifiés.
