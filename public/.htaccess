@@ -18,9 +18,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    <FilesMatch "\.(pdf|jpg|png|mp4)$">
-    Header set Content-Disposition inline
-    </FilesMatch>
-
 </IfModule>
