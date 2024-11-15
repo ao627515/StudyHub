@@ -43,7 +43,7 @@ return [
             'url'         => null, // Utilise Url::current() pour définir l'URL actuelle
             'type'        => 'website', // Type d'opengraph - site web
             'site_name'   => 'StudyHub',
-            'images'      => [asset('assets/global/svg/logo.svg'), asset('assets/global/img/banner.png')], // Image par défaut pour les partages sociaux
+            'images'      => ['/assets/global/svg/logo.svg', '/assets/global/img/banner.png'], // Image par défaut pour les partages sociaux
         ],
     ],
     'twitter' => [
@@ -65,7 +65,7 @@ return [
             'description' => 'La plateforme collaborative de ressources académiques de divers établissements scolaires. Accédez aux cours, devoirs passés, exercices et bien plus.',
             'url'         => 'full', // Utilise Url::full() pour définir l'URL complète actuelle
             'type'        => 'WebSite', // Type pour le schéma JSON-LD
-            'images'      => [asset('assets/global/svg/logo.svg')], // Image pour JSON-LD
+            'images'      => ['assets/global/svg/logo.svg'], // Image pour JSON-LD
         ],
     ],
 ];
