@@ -23,6 +23,10 @@
                            {{-- <li class="nav-item"><a class="nav-link" href="{{ route('un') }}">Universite</a></li> --}}
                            <li class="nav-item"><a class="nav-link"
                                    href="{{ route('public.resources.seachAdvance') }}">Recherche avancée</a></li>
+                           @auth
+                               <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Page
+                                       D'administration</a></li>
+                           @endauth
                        </ul>
                        <!-- /.navbar-nav -->
                        <div class="offcanvas-footer d-lg-none">

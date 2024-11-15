@@ -14,34 +14,37 @@
           <!-- End Dashboard Nav -->
 
           @if (Auth::user()->isAdmin())
-              <li class="nav-item">
-                  <a @class(['nav-link', 'collapsed' => !Route::is('*administrators*')]) data-bs-target="#administrators-nav" data-bs-toggle="collapse"
-                      href="#">
-                      <i class="bi bi-person-lock"></i><span>Administrateurs</span><i
-                          class="bi bi-chevron-down ms-auto"></i>
-                  </a>
-                  <ul id="administrators-nav" @class([
-                      'nav-content',
-                      'collapse',
-                      'show' => Route::is('*administrators*'),
-                  ]) data-bs-parent="#sidebar-nav">
-                      <li>
-                          <a href="{{ route('admin.administrators.create') }}" @class([
-                              'active' => Route::currentRouteNamed('*administrators.create'),
-                          ])>
-                              <i class="bi bi-person-plus"></i><span>Ajouter</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="{{ route('admin.administrators.index') }}" @class([
-                              'active' => Route::currentRouteNamed('*administrators.index'),
-                          ])>
-                              <i class="bi bi-person-lines-fill"></i><span>Liste</span>
-                          </a>
-                      </li>
-                  </ul>
-              </li>
-              <!-- End administrators Nav -->
+
+              @if (Auth::user()->isSuperAdmin())
+                  <li class="nav-item">
+                      <a @class(['nav-link', 'collapsed' => !Route::is('*administrators*')]) data-bs-target="#administrators-nav" data-bs-toggle="collapse"
+                          href="#">
+                          <i class="bi bi-person-lock"></i><span>Administrateurs</span><i
+                              class="bi bi-chevron-down ms-auto"></i>
+                      </a>
+                      <ul id="administrators-nav" @class([
+                          'nav-content',
+                          'collapse',
+                          'show' => Route::is('*administrators*'),
+                      ]) data-bs-parent="#sidebar-nav">
+                          <li>
+                              <a href="{{ route('admin.administrators.create') }}" @class([
+                                  'active' => Route::currentRouteNamed('*administrators.create'),
+                              ])>
+                                  <i class="bi bi-person-plus"></i><span>Ajouter</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="{{ route('admin.administrators.index') }}" @class([
+                                  'active' => Route::currentRouteNamed('*administrators.index'),
+                              ])>
+                                  <i class="bi bi-person-lines-fill"></i><span>Liste</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <!-- End administrators Nav -->
+              @endif
 
               <li class="nav-item">
                   <a @class(['nav-link', 'collapsed' => !Route::is('*moderators*')]) data-bs-target="#moderators-nav" data-bs-toggle="collapse"
