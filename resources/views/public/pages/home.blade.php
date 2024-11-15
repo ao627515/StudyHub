@@ -184,6 +184,9 @@
                         utilisateurs.</h3>
                     <div class="row">
                         @foreach ($moreResourcesDownload as $resource)
+                            <div class="col-12">
+                                <a href="{{ $resourse->getFileUrl() }}">ici</a>
+                            </div>
                             <div class="col-md-4 mb-4">
                                 < <x:resource-card :resource="$resource" />
                             </div>
@@ -336,7 +339,7 @@
         < script src = "{{ asset('assets/public/js/home.js') }}" >
             <
             /> <
-            script >
+        script >
             $(document).ready(function() {
                 function isViewable(url) {
                     const viewableExtensions = ['pdf', 'jpg', 'jpeg', 'png', 'mp4'];
@@ -349,7 +352,7 @@
                     if (!win) {
                         alert(
                             'Impossible d’ouvrir la ressource. Veuillez vérifier les paramètres de votre navigateur.'
-                            );
+                        );
                         return;
                     }
                     win.document.write(`
