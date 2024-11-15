@@ -337,4 +337,12 @@
             home();
         });
     </script>
+    <script>
+        function openResource(url) {
+            const win = window.open('', '_blank');
+            win.document.write(`
+            <iframe src="${url}" width="100%" height="100%" style="border: none;"></iframe>
+        `);
+        }
+    </script>
 @endsection
