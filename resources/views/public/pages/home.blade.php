@@ -333,16 +333,59 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets/public/js/home.js') }}"></script>
     <script>
-        $(document).ready(function() {
-            home();
-        });
+        < script src = "{{ asset('assets/public/js/home.js') }}" >
+            <
+            /> <
+            script >
+            $(document).ready(function() {
+                function isViewable(url) {
+                    const viewableExtensions = ['pdf', 'jpg', 'jpeg', 'png', 'mp4'];
+                    const extension = url.split('.').pop().toLowerCase();
+                    return viewableExtensions.includes(extension);
+                }
+
+                function openResource(url) {
+                    const win = window.open('', '_blank');
+                    if (!win) {
+                        alert(
+                            'Impossible d’ouvrir la ressource. Veuillez vérifier les paramètres de votre navigateur.'
+                            );
+                        return;
+                    }
+                    win.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <title>Prévisualisation</title>
+                    <style>
+                        body {
+                            margin: 0;
+                            padding: 0;
+                            overflow: hidden;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <iframe src="${url}" width="100%" height="100%" style="border: none;"></iframe>
+                </body>
+                </html>
+            `);
+                }
+
+                home(); // Appel à ta fonction "home"
+
+                $('.view-resource').on('click', function(event) {
+                    event.preventDefault(); // Empêche la navigation par défaut
+                    const url = this.href;
+
+                    if (isViewable(url)) {
+                        openResource(url);
+                    } else {
+                        alert('Ce fichier ne peut pas être affiché dans le navigateur.');
+                    }
+                });
+            });
     </script>
-    <script>
-        function openResource(url) {
-            const win = window.open('', '_blank');
-            win.document.write(`
-            <iframe src="${url}" width="100%" height="100%" style="border: none;"></iframe>
-        `);
-        }
-    </script>
+
+    <script></script>
 @endsection

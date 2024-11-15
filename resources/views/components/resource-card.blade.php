@@ -28,7 +28,7 @@
                 {{-- Infos --}}
                 {{-- <i class="uil uil-eye"></i> --}}
             </button>
-            <a href="{{ asset('storage/' . $resource->file_url) }}" class="btn btn-sm btn-soft-blue"
+            <a href="{{ asset('storage/' . $resource->file_url) }}" class="btn btn-sm btn-soft-blue view-resource"
                 title="visualise la resource" target="_blank">
                 <i class="uil uil-eye"></i>
             </a>
