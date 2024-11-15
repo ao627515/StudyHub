@@ -1,2 +1,17 @@
+# Bloquer toutes les routes qui commencent par /admin (pour éviter l'indexation de l'administration)
 User-agent: *
-Disallow:
+Disallow: /admin
+
+# Bloquer l'accès aux dossiers sensibles de Laravel
+Disallow: /vendor
+Disallow: /storage
+Disallow: /node_modules
+Disallow: /config
+Disallow: /resources
+Disallow: /bootstrap
+
+# Autoriser l'accès à certaines ressources importantes pour le SEO
+Allow: /sitemap.xml
+
+# Spécifier l'emplacement du fichier sitemap
+Sitemap: https://example.com/sitemap.xml
