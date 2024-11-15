@@ -35,7 +35,7 @@ class PagesController extends Controller
         );
 
         $universities = University::latest()->get(['id', 'name', 'logo']);
-        $moreResourcesDownload = Resource::latest()->limit(10)->get();
+        $moreResourcesDownload = Resource::latest()->limit(6)->get();
         $levels = AcademicLevel::all(['id', 'name']);
         $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
         $programs = AcademicProgram::all(['id', 'name']);
@@ -79,8 +79,7 @@ class PagesController extends Controller
             'category' => request('category', 0),
             'name' => request('name', ''),
             'module' => request('module', 0),
-            'schoolYear' => request('schoolYear', 0),
-            'limit' => 4
+            'schoolYear' => request('schoolYear', 0)
         ];
         $resources = $this->resourceService->index($params);
 
