@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Notifications\ContactNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -25,10 +27,21 @@ class ContactController extends Controller
             'message' => $validated['message'],
         ]);
 
+        $status = 'Votre message a été envoyé avec succès!';
+        try {
+            // Envoi de la notification par mail
+            $recipientEmail = env('MAIL_ADMIN_ADDRESS'); // Tu peux paramétrer une adresse spécifique ici
+            Notification::route('mail', $recipientEmail)->notify(new ContactNotification($contact));
+        } catch (Exception $ex) {
+            // En cas d'erreur d'envoi
+            $status = 'Une erreur est survenue lors de l\'envoi du mail. Veuillez réessayer plus tard.';
+            // Optionnel : Log de l'exception
+            Log::error('Erreur d\'envoi de notification de contact: ' . $ex->getMessage());
+        }
+
         // Envoi de la notification par mail
-        Notification::route('mail', env('MAIL_FROM_ADDRESS'))->notify(new ContactNotification($contact));
 
         // Retour avec un message de succès
-        return back()->with('success', 'Votre message a été envoyé avec succès!');
+        return back()->with('conatactMailStatus', $status);
     }
 }

@@ -260,6 +260,12 @@
 
     <section class="wrapper bg-soft-primary angled upper-end">
         <div class="container py-14 pt-md-17 pb-md-21">
+            @session('conatactMailStatus')
+                <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                    {{ $value }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endsession
             <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-2 align-items-end">
                 <div class="col-lg-4">
                     <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Prenez Contact</h2>
@@ -308,10 +314,14 @@
         <div class="container py-16 py-md-18 position-relative">
             <div class="position-relative mb-16">
                 <div class="card shadow-lg">
+
                     <div class="row gx-0">
                         {{-- <div class="col-lg-6 image-wrapper bg-image bg-cover rounded-top rounded-lg-start"
                             style="background-image: url('{{ asset('assets/public/img/b6.jpg') }}');">
                         </div> --}}
+
+
+
                         <div class="col-lg-6 image-wrapper bg-image bg-cover rounded-top rounded-lg-start">
                             <div class="shape bg-dot primary rellax w-17 h-21" data-rellax-speed="1"
                                 style="top: -2rem; left: -1.9rem;"></div>
@@ -352,7 +362,6 @@
             </div>
         </div>
     </section>
-
     <!-- /section -->
 @endsection
 
