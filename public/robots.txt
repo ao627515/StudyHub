@@ -14,4 +14,4 @@ Disallow: /bootstrap
 Allow: /sitemap.xml
 
 # Spécifier l'emplacement du fichier sitemap
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://studyhub.eliteero.com/sitemap.xml
