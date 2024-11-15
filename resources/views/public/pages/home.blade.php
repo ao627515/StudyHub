@@ -59,10 +59,10 @@
                     @csrf
                     <div class="row g-3">
                         <!-- Université -->
-                        <div class="col-md-6">
+                        <div class="col-12 col-lg-6">
                             <div class="mb-3">
                                 <label for="university" class="form-label text-dark">Université</label>
-                                <select class="form-select" id="university" name="university" aria-label="Université">
+                                <select class="form-select w-100" id="university" name="university" aria-label="Université">
                                     <option value="0" {{ request('university') == 0 ? 'selected' : '' }}>
                                         Choisir l'université</option>
                                     @foreach ($universities as $university)
@@ -75,10 +75,10 @@
                             </div>
                         </div>
                         <!-- Filière -->
-                        <div class="col-md-6">
+                        <div class="col-12 col-lg-6">
                             <div class="mb-3">
                                 <label for="program" class="form-label text-dark">Filière</label>
-                                <select class="form-select" id="program" name="program" aria-label="Filière">
+                                <select class="form-select w-100" id="program" name="program" aria-label="Filière">
                                     <option value="0" {{ request('program') == 0 ? 'selected' : '' }}>Choisir
                                         la filière</option>
                                     @foreach ($programs as $program)
@@ -91,10 +91,11 @@
                             </div>
                         </div>
                         <!-- Niveau -->
-                        <div class="col-md-6">
+                        <div class="col-12 col-lg-6">
                             <div class="mb-3">
                                 <label for="level" class="form-label text-dark">Niveau</label>
-                                <select class="form-select" id="level" name="level" aria-label="Niveau académique">
+                                <select class="form-select w-100" id="level" name="level"
+                                    aria-label="Niveau académique">
                                     <option value="0" {{ request('level') == 0 ? 'selected' : '' }}>Choisir le
                                         niveau</option>
                                     @foreach ($levels as $level)
@@ -107,10 +108,10 @@
                             </div>
                         </div>
                         <!-- Catégorie -->
-                        <div class="col-md-6">
+                        <div class="col-12 col-lg-6">
                             <div class="mb-3">
                                 <label for="category" class="form-label text-dark">Catégorie</label>
-                                <select class="form-select" id="category" name="category"
+                                <select class="form-select w-100" id="category" name="category"
                                     aria-label="Catégorie de ressource">
                                     <option value="0" {{ request('category') == 0 ? 'selected' : '' }}>Choisir
                                         la catégorie</option>
@@ -149,7 +150,7 @@
                             <div class="row g-0">
                                 <div class="col-md-4 p-5 align-item-center d-flex justify-content-center">
                                     <img src="{{ $university->getLogoUrl() }}"
-                                        class="img-fluid rounded-start d-block w-100" alt="Logo de l'université">
+                                        class="img-fluid rounded-start d-block w-100" alt="Logo {{ $university->name }}">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -181,44 +182,6 @@
                     <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par
                         nos
                         utilisateurs.</h3>
-                    {{-- <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <th>Catégorie</th>
-                                <th>Nom</th>
-                                <th>Module</th>
-                                <th>Filière</th>
-                                <th>Université</th>
-                                <th>Télécharger</th>
-                                <th>Taille</th>
-                                <th>Téléchargements</th>
-                                <th>Uploader le</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($moreResourcesDownload as $resource)
-                                    <tr>
-                                        <td>
-                                            <span
-                                                class="badge gradient-7 rounded-pill">{{ $resource->category->name }}</span>
-                                        </td>
-                                        <td>{{ $resource->name }}</td>
-                                        <td>{{ $resource->courseModule->name }}</td>
-                                        <td>{{ $resource->academicProgram->name }} ({{ $resource->academicLevel->name }})
-                                        </td>
-                                        <td>{{ $resource->university->name }}</td>
-                                        <td>
-                                            <a
-                                                href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
-                                        </td>
-                                        <td>{{ $resource->getFileSize(format: true) }}</td>
-                                        <td>{{ $resource->download_count }}</td>
-                                        <td>{{ $resource->created_at->format('d M y') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div> --}}
-
                     <div class="row">
                         @foreach ($moreResourcesDownload as $resource)
                             <div class="col-md-4 mb-4">

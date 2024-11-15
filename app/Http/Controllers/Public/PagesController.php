@@ -34,7 +34,7 @@ class PagesController extends Controller
             image: asset('assets/global/svg/logo.svg') // Assurez-vous d'avoir une image pour la page d'accueil
         );
 
-        $universities = University::latest()->get(['id', 'name']);
+        $universities = University::latest()->get(['id', 'name', 'logo']);
         $moreResourcesDownload = Resource::latest()->limit(10)->get();
         $levels = AcademicLevel::all(['id', 'name']);
         $resourceCategories = CategoryResource::latest()->get(['id', 'name']);
