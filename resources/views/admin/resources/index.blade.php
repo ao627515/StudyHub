@@ -24,43 +24,46 @@
                         <a href="{{ route('admin.resources.create') }}" class="btn btn-success mb-3">
                             Add New Resource
                         </a>
-
-                        <table class="table table-bordered datatable">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>File URL</th>
-                                    <th>Version</th>
-                                    <th>Download count</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($resources as $resource)
-                                    <tr>
-                                        <td>{{ $resource->name }}</td>
-                                        <td>{{ $resource->description ?? 'N/A' }}</td>
-                                        <td><a href="{{ $resource->getFileUrl() }}" target="_blank">View File</a></td>
-                                        <td>{{ $resource->version }}</td>
-                                        <td>{{ $resource->download_count }}</td>
-                                        <td>
-                                            <!-- Link to edit the resource -->
-                                            <a href="{{ route('admin.resources.edit', $resource) }}"
-                                                class="btn btn-primary btn-sm">Edit</a>
-
-                                            <form action="{{ route('admin.resources.destroy', $resource) }}" method="POST"
-                                                style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Are you sure?')">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-striped datatable ">
+                                <thead>
+                                    <th>Catégorie</th>
+                                    <th>Nom</th>
+                                    <th>Module</th>
+                                    <th>Filière</th>
+                                    <th>Université</th>
+                                    <th>Fichier</th>
+                                    <th>Taille</th>
+                                    <th>Téléchargements</th>
+                                    <th>Uploader le</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($resources as $resource)
+                                        <tr>
+                                            <td>
+                                                <span
+                                                    class="badge text-bg-primary rounded-pill">{{ $resource->category->name }}</span>
+                                            </td>
+                                            <td>{{ $resource->name }}</td>
+                                            <td>{{ $resource->courseModule->name }}</td>
+                                            <td>{{ $resource->academicProgram->name }}
+                                                ({{ $resource->academicLevel->name }})
+                                            </td>
+                                            <td>{{ $resource->university->name }}</td>
+                                            <td>
+                                                <a
+                                                    href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
+                                                <br>
+                                                <a href="{{ $resource->getFileUrl() }}">Voir</a>
+                                            </td>
+                                            <td>{{ $resource->getFileSize(format: true) }}</td>
+                                            <td>{{ $resource->download_count }}</td>
+                                            <td>{{ $resource->created_at->format('d M y') }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
 
                         <!-- Pagination links (if applicable) -->
                         {{-- {{ $resources->links() }} --}}

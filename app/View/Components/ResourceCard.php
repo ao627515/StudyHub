@@ -10,6 +10,7 @@ use Illuminate\View\Component;
 class ResourceCard extends Component
 {
     public Resource $resource;
+
     /**
      * Create a new component instance.
      */

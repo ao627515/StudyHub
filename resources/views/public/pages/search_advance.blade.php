@@ -10,6 +10,7 @@
 
 
 @section('content')
+    {{-- @dd($resources) --}}
     <section class="wrapper bg-light">
         <div class="container pt-9 pt-md-10 pb-6 pb-md-8">
             <div class="row">
@@ -147,82 +148,7 @@
                     {{-- <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par nos
                         utilisateurs.</h3> --}}
 
-
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <span class="me-2">Disposition :</span>
-                            <a href="{{ route('public.resources.seachAdvance', ['layout' => 'list']) }}"
-                                class="btn btn-sm {{ request('layout') === 'list' || !request()->has('layout') ? 'btn-primary' : 'btn-outline-primary' }}"
-                                title="Vue liste">
-                                <i class="uil uil-list-ul"></i>
-                            </a>
-
-                            <a href="{{ route('public.resources.seachAdvance', ['layout' => 'grid']) }}"
-                                class="btn btn-sm ms-2 {{ request('layout') === 'grid' ? 'btn-primary' : 'btn-outline-primary' }}"
-                                title="Vue en grille">
-                                <i class="uil uil-apps"></i>
-                            </a>
-                        </div>
-
-                        <div class="card-body">
-
-
-                            @if (request('layout') == 'grid')
-                                <div class="row">
-                                    @foreach ($resources as $resource)
-                                        <div class="col-md-4 mb-4">
-                                            <x:resource-card :resource="$resource" />
-                                        </div>
-                                    @endforeach
-                                </div>
-                            @else
-                                <div class="table-responsive">
-                                    <table class="table table-striped datatable">
-                                        <thead>
-                                            <th>Catégorie</th>
-                                            <th>Nom</th>
-                                            <th>Module</th>
-                                            <th>Filière</th>
-                                            <th>Université</th>
-                                            <th>Fichier</th>
-                                            <th>Taille</th>
-                                            <th>Téléchargements</th>
-                                            <th>Uploader le</th>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($resources as $resource)
-                                                <tr>
-                                                    <td>
-                                                        <span
-                                                            class="badge gradient-7 rounded-pill">{{ $resource->category->name }}</span>
-                                                    </td>
-                                                    <td>{{ $resource->name }}</td>
-                                                    <td>{{ $resource->courseModule->name }}</td>
-                                                    <td>{{ $resource->academicProgram->name }}
-                                                        ({{ $resource->academicLevel->name }})
-                                                    </td>
-                                                    <td>{{ $resource->university->name }}</td>
-                                                    <td>
-                                                        <a
-                                                            href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
-                                                        <br>
-                                                        <a href="{{ $resource->getFileUrl() }}">Voir</a>
-                                                    </td>
-                                                    <td>{{ $resource->getFileSize(format: true) }}</td>
-                                                    <td>{{ $resource->download_count }}</td>
-                                                    <td>{{ $resource->created_at->format('d M y') }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-
-
+                    <x:resources-layout :resources="$resources" :datatable="'simple_datable'" />
                 </div>
                 <!--/column -->
             </div>
