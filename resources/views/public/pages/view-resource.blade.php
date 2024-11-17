@@ -73,18 +73,24 @@
     <div class="container-fluid pdf-container">
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">{{ $resource->name }}</h5>
-                    <div class="zoom-controls d-flex gap-2">
-                        <button id="zoom-in" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
-                            <i class="uil uil-search-plus"></i>
-                        </button>
-                        <button id="zoom-out" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
-                            <i class="uil uil-search-minus"></i>
-                        </button>
-                        <button id="zoom-reset" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
-                            <i class="uil uil-sync"></i>
-                        </button>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <h5 class="card-title mb-0">{{ $resource->name }}</h5>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="zoom-controls d-flex gap-2 justify-content-center justify-content-sm-end">
+                                <button id="zoom-in" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
+                                    <i class="uil uil-search-plus"></i>
+                                </button>
+                                <button id="zoom-out" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
+                                    <i class="uil uil-search-minus"></i>
+                                </button>
+                                <button id="zoom-reset" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
+                                    <i class="uil uil-sync"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
