@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Resource;
 use App\Models\Uploader;
+use App\Models\Moderator;
 use App\Models\University;
 use App\Models\CourseModule;
 use App\Models\AcademicLevel;
+use App\Models\Administrator;
 use App\Models\CategoryResource;
 use App\Services\ResourceService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Requests\StoreResourceRequest;
 use App\Http\Requests\UpdateResourceRequest;
-use App\Models\Administrator;
-use App\Models\Moderator;
 
 class ResourceController extends Controller
 {
@@ -199,7 +200,8 @@ class ResourceController extends Controller
 
         $resource = $this->resourceService->view($resource);
         $resource->only('name');
+        $layout = Route::is('*admin*') ? 'admin.layouts.app' : 'public.layouts.app';
 
-        return view('public.pages.view-resource', compact('resource'));
+        return view('public.pages.view-resource', compact('resource', 'layout'));
     }
 }
