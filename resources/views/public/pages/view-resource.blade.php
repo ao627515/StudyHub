@@ -126,13 +126,13 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('assets/global/lib/pdfjs-modern/build/pdf.mjs') }}" type="module"></script>
+    <script src="{{ asset('assets/global/lib/pdfjs-legacy/build/pdf.mjs') }}" type="module"></script>
     <script type="module">
         var url = @json($resource->getFileUrl());
         var {
             pdfjsLib
         } = globalThis;
-        pdfjsLib.GlobalWorkerOptions.workerSrc = @json(asset('assets/global/lib/pdfjs-modern/build/pdf.worker.mjs'));
+        pdfjsLib.GlobalWorkerOptions.workerSrc = @json(asset('assets/global/lib/pdfjs-legacy/build/pdf.worker.mjs'));
 
         var pdfDoc = null,
             pageNum = 1,
