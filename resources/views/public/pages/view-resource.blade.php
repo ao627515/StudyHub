@@ -4,13 +4,13 @@
     <style>
         /* Reset des marges et paddings par défaut */
         /* body,
-                html {
-                    margin: 0;
-                    padding: 0;
-                    height: 100%;
-                    width: 100%;
-                    overflow: hidden;
-                } */
+                    html {
+                        margin: 0;
+                        padding: 0;
+                        height: 100%;
+                        width: 100%;
+                        overflow: hidden;
+                    } */
 
         .pdf-container {
             width: 100%;
@@ -22,25 +22,25 @@
         }
 
         /* .card {
-                    height: 100%;
-                    border: none;
-                    border-radius: 0;
-                    display: flex;
-                    flex-direction: column;
-                }
+                        height: 100%;
+                        border: none;
+                        border-radius: 0;
+                        display: flex;
+                        flex-direction: column;
+                    }
 
-                .card-header {
-                    padding: 0.5rem;
-                    flex-shrink: 0;
-                }
+                    .card-header {
+                        padding: 0.5rem;
+                        flex-shrink: 0;
+                    }
 
-                .card-body {
-                    flex: 1;
-                    padding: 0;
-                    display: flex;
-                    flex-direction: column;
-                    overflow: hidden;
-                } */
+                    .card-body {
+                        flex: 1;
+                        padding: 0;
+                        display: flex;
+                        flex-direction: column;
+                        overflow: hidden;
+                    } */
 
         .pdf-controls {
             padding: 0.5rem;
@@ -134,7 +134,7 @@
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">{{ $resource->name }}</h5>
+                    {{-- <h5 class="card-title">{{ $resource->name }}</h5> --}}
                     <div class="zoom-controls d-flex gap-1">
                         <button id="zoom-in" class="btn btn-sm btn-primary rounded-circle">
                             <i class="uil uil-search-plus"></i>
@@ -151,11 +151,11 @@
             <div class="card-body">
                 <div class="pdf-controls d-flex justify-content-between align-items-center">
                     <div class="btn-group" role="group">
-                        <button id="prev" class="btn btn-sm btn-outline-primary p-0">
+                        <button id="prev" class="btn btn-sm btn-primary p-0">
                             <i class="uil uil-angle-left"></i>
                             <span class="d-none d-sm-inline">Previous</span>
                         </button>
-                        <button id="next" class="btn btn-sm btn-outline-primary p-0">
+                        <button id="next" class="btn btn-sm btn-primary p-0">
                             <i class="uil uil-angle-right"></i>
                             <span class="d-none d-sm-inline">Next</span>
                         </button>
