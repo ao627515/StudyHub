@@ -2,123 +2,175 @@
 
 @section('styles')
     <style>
+        /* Reset des marges et paddings par défaut */
+        /* body,
+                html {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                    width: 100%;
+                    overflow: hidden;
+                } */
+
         .pdf-container {
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 15px;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* .card {
+                    height: 100%;
+                    border: none;
+                    border-radius: 0;
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .card-header {
+                    padding: 0.5rem;
+                    flex-shrink: 0;
+                }
+
+                .card-body {
+                    flex: 1;
+                    padding: 0;
+                    display: flex;
+                    flex-direction: column;
+                    overflow: hidden;
+                } */
+
         .pdf-controls {
-            margin-bottom: 20px;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .zoom-container {
+            flex: 1;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            background: #f5f5f5;
         }
 
         #the-canvas {
+            display: block;
+            margin: 0 auto;
             max-width: 100%;
             height: auto !important;
-            /* Force le respect de la hauteur proportionnelle */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Styles responsifs pour différentes tailles d'écran */
-        @media (max-width: 768px) {
+        .progress {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 0;
+        }
+
+        /* Style des boutons pour mobile */
+
+        /* Optimisations pour petits écrans */
+        @media (max-width: 576px) {
+            .card-header {
+                padding: 0.25rem;
+            }
+
+            .card-title {
+                font-size: 1rem;
+                margin: 0;
+            }
+
             .pdf-controls {
-                flex-direction: column;
-                gap: 1rem;
+                padding: 0.25rem;
             }
 
             .btn-group {
                 width: 100%;
-                display: flex;
                 justify-content: space-between;
             }
 
+            .zoom-controls {
+                position: fixed;
+                bottom: 1rem;
+                right: 1rem;
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 2rem;
+                padding: 0.5rem;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+
             .page-info {
-                width: 100%;
-                text-align: center;
-            }
-
-            .pdf-container {
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .card-header h5 {
-                font-size: 1rem;
-            }
-
-            .btn {
-                padding: 0.375rem 0.5rem;
-                font-size: 0.875rem;
+                position: fixed;
+                bottom: 1rem;
+                left: 1rem;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 0.25rem 0.5rem;
+                border-radius: 1rem;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             }
         }
 
-        /* Optimisation pour les grands écrans */
-        @media (min-width: 1200px) {
-            .pdf-container {
-                max-width: 1140px;
+        /* Optimisation pour mode paysage */
+        @media (orientation: landscape) and (max-width: 896px) {
+            .card-header {
+                position: sticky;
+                top: 0;
+                z-index: 11;
             }
-        }
-
-        /* Classe pour le mode zoom */
-        .zoom-container {
-            position: relative;
-            overflow: auto;
-            max-height: 80vh;
         }
     </style>
 @endsection
 
 @section('content')
-    <div class="container-fluid pdf-container">
+    <div class="pdf-container">
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <h5 class="card-title mb-0">{{ $resource->name }}</h5>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="zoom-controls d-flex gap-2 justify-content-center justify-content-sm-end">
-                                <button id="zoom-in" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
-                                    <i class="uil uil-search-plus"></i>
-                                </button>
-                                <button id="zoom-out" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
-                                    <i class="uil uil-search-minus"></i>
-                                </button>
-                                <button id="zoom-reset" class="btn btn-sm btn-outline-gradient gradient-7 rounded-pill">
-                                    <i class="uil uil-sync"></i>
-                                </button>
-                            </div>
-                        </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">{{ $resource->name }}</h5>
+                    <div class="zoom-controls d-flex gap-1">
+                        <button id="zoom-in" class="btn btn-sm btn-primary rounded-circle">
+                            <i class="uil uil-search-plus"></i>
+                        </button>
+                        <button id="zoom-out" class="btn btn-sm btn-primary rounded-circle">
+                            <i class="uil uil-search-minus"></i>
+                        </button>
+                        <button id="zoom-reset" class="btn btn-sm btn-primary rounded-circle">
+                            <i class="uil uil-sync"></i>
+                        </button>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="pdf-controls d-flex justify-content-between align-items-center mb-3">
-                    <div class="btn-group" role="group" aria-label="PDF Navigation">
-                        <button id="prev" class="btn btn-outline-primary">
-                            <i class="fas fa-chevron-left d-none d-sm-inline"></i>
-                            <span>Previous</span>
+                <div class="pdf-controls d-flex justify-content-between align-items-center">
+                    <div class="btn-group" role="group">
+                        <button id="prev" class="btn btn-sm btn-outline-primary p-0">
+                            <i class="uil uil-angle-left"></i>
+                            <span class="d-none d-sm-inline">Previous</span>
                         </button>
-                        <button id="next" class="btn btn-outline-primary">
-                            <span>Next</span>
-                            <i class="fas fa-chevron-right d-none d-sm-inline"></i>
+                        <button id="next" class="btn btn-sm btn-outline-primary p-0">
+                            <i class="uil uil-angle-right"></i>
+                            <span class="d-none d-sm-inline">Next</span>
                         </button>
                     </div>
                     <div class="page-info">
                         <span class="badge bg-secondary">
-                            Page: <span id="page_num" class="fw-bold"></span> / <span id="page_count"></span>
+                            Page: <span id="page_num"></span> / <span id="page_count"></span>
                         </span>
                     </div>
                 </div>
-                <div class="zoom-container text-center">
-                    <canvas id="the-canvas" class="img-fluid rounded"></canvas>
+                <div class="zoom-container">
+                    <canvas id="the-canvas"></canvas>
                 </div>
-                <div class="mt-3">
-                    <div class="progress">
-                        <div id="pdf-progress" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                    </div>
+                <div class="progress">
+                    <div id="pdf-progress" class="progress-bar" role="progressbar" style="width: 0%"></div>
                 </div>
             </div>
         </div>
