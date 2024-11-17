@@ -4,13 +4,13 @@
     <style>
         /* Reset des marges et paddings par défaut */
         /* body,
-                    html {
-                        margin: 0;
-                        padding: 0;
-                        height: 100%;
-                        width: 100%;
-                        overflow: hidden;
-                    } */
+                            html {
+                                margin: 0;
+                                padding: 0;
+                                height: 100%;
+                                width: 100%;
+                                overflow: hidden;
+                            } */
 
         .pdf-container {
             width: 100%;
@@ -22,25 +22,25 @@
         }
 
         /* .card {
-                        height: 100%;
-                        border: none;
-                        border-radius: 0;
-                        display: flex;
-                        flex-direction: column;
-                    }
+                                height: 100%;
+                                border: none;
+                                border-radius: 0;
+                                display: flex;
+                                flex-direction: column;
+                            }
 
-                    .card-header {
-                        padding: 0.5rem;
-                        flex-shrink: 0;
-                    }
+                            .card-header {
+                                padding: 0.5rem;
+                                flex-shrink: 0;
+                            }
 
-                    .card-body {
-                        flex: 1;
-                        padding: 0;
-                        display: flex;
-                        flex-direction: column;
-                        overflow: hidden;
-                    } */
+                            .card-body {
+                                flex: 1;
+                                padding: 0;
+                                display: flex;
+                                flex-direction: column;
+                                overflow: hidden;
+                            } */
 
         .pdf-controls {
             padding: 0.5rem;
@@ -148,7 +148,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body p-1">
                 <div class="pdf-controls d-flex justify-content-between align-items-center">
                     <div class="btn-group" role="group">
                         <button id="prev" class="btn btn-sm btn-primary p-0">
