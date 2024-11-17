@@ -54,7 +54,7 @@
                                                 <a
                                                     href="{{ route('public.resource.download', $resource->id) }}">Télécharger</a>
                                                 <br>
-                                                <a href="{{ $resource->getFileUrl() }}">Voir</a>
+                                                <a href="{{ route('public.resource.view', $resource) }}">Voir</a>
                                             </td>
                                             <td>{{ $resource->getFileSize(format: true) }}</td>
                                             <td>{{ $resource->download_count }}</td>
