@@ -181,7 +181,7 @@ class ResourceService
             throw new Exception("File url not exist");
         }
 
-        return $filePath;
+        return $resource;
     }
 
     private function deleteFiles(array $paths = [])

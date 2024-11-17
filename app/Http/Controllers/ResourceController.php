@@ -197,17 +197,9 @@ class ResourceController extends Controller
     public function view(Resource $resource)
     {
 
-        $path = $this->resourceService->view($resource);
+        $resource = $this->resourceService->view($resource);
+        $resource->only('name');
 
-        // return response()->file($path, [
-        //     'Content-Disposition' => 'inline',
-        // ]);
-
-        return response()->stream(function () use ($path) {
-            readfile($path);
-        }, 200, [
-            'Content-Type' => mime_content_type($path),
-            'Content-Disposition' => 'inline; filename="' . basename($path) . '"',
-        ]);
+        return view('public.pages.view-resource', compact('resource'));
     }
 }
