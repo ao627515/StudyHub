@@ -40,7 +40,7 @@ class Resource extends Model
         'updated_at'
     ];
 
-    public function created_by()
+    public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by_id');
     }

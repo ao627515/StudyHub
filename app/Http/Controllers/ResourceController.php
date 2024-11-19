@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\StoreResourceRequest;
 use App\Http\Requests\UpdateResourceRequest;
+use App\Jobs\UploadResources;
 
 class ResourceController extends Controller
 {
@@ -112,7 +113,8 @@ class ResourceController extends Controller
      */
     public function store(StoreResourceRequest $request)
     {
-        $resource = $this->resourceService->store($request->validated());
+        // $resource = $this->resourceService->store($request->validated());
+        UploadResources::dispatch($request->user(), $request->validated());
         return redirect()->route('admin.resources.index')->with('success', 'Resource created successfully.');
     }
 
@@ -173,7 +175,9 @@ class ResourceController extends Controller
      */
     public function update(UpdateResourceRequest $request, Resource $resource)
     {
-        $this->resourceService->update($resource, $request->validated());
+        // $this->resourceService->update($resource, $request->validated());
+        UploadResources::dispatch($request->user(), $request->validated(), $resource);
+
         return redirect()->route('admin.resources.index')->with('success', 'Resource updated successfully.');
     }
 
