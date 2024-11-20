@@ -13,6 +13,7 @@
     <!-- Favicons -->
     <link href="{{ asset('assets/global/svg/logo.svg') }} }}" rel="icon">
     <link href="{{ asset('assets/global/svg/logo.svg') }} }}" rel="apple-touch-icon">
+    <link rel="shortcut icon" href="{{ asset('assets/global/svg/logo.svg') }}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
