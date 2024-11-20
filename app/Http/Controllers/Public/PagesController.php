@@ -80,10 +80,10 @@ class PagesController extends Controller
             'name' => request('name', ''),
             'module' => request('module', 0),
             'schoolYear' => request('schoolYear', 0),
-            'limit' => 0
+            'limit' => 0,
+            'layout' => request('layout', null)
         ];
         $resources = $this->resourceService->index($params);
-
         return view(
             'public.pages.search_advance',
             compact(
@@ -93,7 +93,8 @@ class PagesController extends Controller
                 'resources',
                 'schoolYears',
                 'programs',
-                'modules'
+                'modules',
+                'params'
             )
         );
     }

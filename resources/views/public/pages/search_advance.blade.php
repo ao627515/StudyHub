@@ -22,7 +22,7 @@
             <!--/.row -->
             <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
                 <form action="{{ route('public.resources.seachAdvance') }}" method="get">
-                    @csrf
+                    <input type="hidden" name="layout" value="{{ $params['layout'] }}">
                     <div class="row g-4">
                         <div class="col-md-6">
                             <div class="mb-3">

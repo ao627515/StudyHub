@@ -16,7 +16,7 @@
               </a>
           @else
               <a href="{{ request()->fullUrlWithQuery(['layout' => 'list']) }}"
-                  class="btn btn-sm {{ request('layout') === 'list' || !request()->has('layout') ? 'btn-primary' : 'btn-outline-primary' }}"
+                  class="btn btn-sm {{ request('layout') === 'list' || request('layout') === null || !request()->has('layout') ? 'btn-primary' : 'btn-outline-primary' }}"
                   title="Vue liste">
                   <i class="uil uil-list-ul"></i>
               </a>
