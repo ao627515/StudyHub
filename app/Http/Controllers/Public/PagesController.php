@@ -79,7 +79,7 @@ class PagesController extends Controller
             'category' => request('category', 0),
             'name' => request('name', ''),
             'module' => request('module', 0),
-            'schoolYear' => request('schoolYear', 0),
+            'school_year' => request('school_year', 0),
             'limit' => 0,
             'layout' => request('layout', null)
         ];
