@@ -1,8 +1,8 @@
 <div>
     <div class="card h-100">
         <!-- Image de la ressource -->
-        <img src="{{ $resource->getImageUrl() }}" class="card-img-top" alt="Image de {{ $resource->name }}"
-            style="height: 200px; object-fit: cover;">
+        {{-- <img src="{{ $resource->getImageUrl() }}" class="card-img-top" alt="Image de {{ $resource->name }}"
+            style="height: 200px; object-fit: cover;"> --}}
 
         <div class="card-body">
             <!-- Nom et Catégorie -->
