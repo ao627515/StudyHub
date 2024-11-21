@@ -37,9 +37,9 @@
           @if (request('layout') == 'list')
               <x:resource-table :resources="$resources" />
           @else
-              <div class="row">
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
                   @foreach ($resources as $resource)
-                      <div class="col-md-4 mb-4">
+                      <div class="col mb-3">
                           <x:resource-card :resource="$resource" :datatable="$datatable" />
                       </div>
                   @endforeach
