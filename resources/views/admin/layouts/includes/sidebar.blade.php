@@ -262,13 +262,13 @@
                           <i class="bi bi-collection"></i><span>Liste</span>
                       </a>
                   </li>
-                  @if (Auth::user()->isUploader())
-                      <li>
-                          <a href="{{ route('admin.resources.create') }}" @class(['active' => Route::currentRouteNamed('*resources.create')])>
-                              <i class="bi bi-file-earmark-plus"></i><span>Créer</span>
-                          </a>
-                      </li>
-                  @endif
+                  {{-- @if (Auth::user()->isUploader()) --}}
+                  <li>
+                      <a href="{{ route('admin.resources.create') }}" @class(['active' => Route::currentRouteNamed('*resources.create')])>
+                          <i class="bi bi-file-earmark-plus"></i><span>Créer</span>
+                      </a>
+                  </li>
+                  {{-- @endif --}}
               </ul>
           </li>
           <!-- End resources Nav -->
