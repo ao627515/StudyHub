@@ -36,6 +36,7 @@
                                     <th>Taille</th>
                                     <th>Téléchargements</th>
                                     <th>Uploader le</th>
+                                    <th>Actions</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($resources as $resource)
@@ -59,6 +60,22 @@
                                             <td>{{ $resource->getFileSize(format: true) }}</td>
                                             <td>{{ $resource->download_count }}</td>
                                             <td>{{ $resource->created_at->format('d M y') }}</td>
+
+                                            @if ($resource->created_by_id === Auth::id())
+                                                <td>
+                                                    <a href="{{ route('admin.resources.edit', $resource->id) }}"
+                                                        class="btn btn-sm btn-primary">Edit</a>
+                                                    <form action="{{ route('admin.resources.destroy', $resource->id) }}"
+                                                        method="POST" style="display: inline-block">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            onclick="return confirm('Ete vous surs de vouloir supprimer cette resource ?')"
+                                                            class="btn btn-sm btn-danger">Delete</button>
+                                                    </form>
+                                                </td>
+                                            @endif
+
                                         </tr>
                                     @endforeach
                                 </tbody>
