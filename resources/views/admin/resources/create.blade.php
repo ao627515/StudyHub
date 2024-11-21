@@ -70,7 +70,7 @@
                                     @foreach ($courseModules as $courseModule)
                                         <option value="{{ $courseModule->id }}" @selected(old('course_module_id') === $courseModule->id)>
                                             {{ $courseModule->name }}
-                                            {{ !Auth::user()->isUploader() ? "({$courseModule->university->name})" : '' }}
+                                            {{ !Auth::user()->isUploader() ? " ({$courseModule->academicLevel->abb}) ({$courseModule->university->name})" : '' }}
                                         </option>
                                     @endforeach
 
