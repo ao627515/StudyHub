@@ -42,16 +42,17 @@ class StoreCourseModuleRequest extends FormRequest
      */
     public function withValidator(Validator $validator): void
     {
+        // apres la validation
         $validator->after(function ($validator) {
+            // verifi si le niveau academic existe
             $academicProgramLevel = AcademicProgramLevel::where('id', $this->academic_program_level_id)->first();
             if (!$academicProgramLevel) {
                 $validator->errors()->add('academic_program_level_id', 'Le niveau académique n\'existe pas.');
             }
 
+            // verifie si un module avec le meme et le meme niveau academic n'exists:,column
             $existingModule = CourseModule::where('name', $this->name)
-                ->whereHas('academicProgramLevel', function ($query) use ($academicProgramLevel) {
-                    $query->where('academic_program_id', $academicProgramLevel->academic_program_id);
-                })
+                ->where('academic_program_level_id', $academicProgramLevel->id)
                 ->exists();
 
             if ($existingModule) {
