@@ -182,9 +182,9 @@
                     <h3 class="display-4 mb-7">Découvrez les ressources les plus populaires et les plus téléchargées par
                         nos
                         utilisateurs.</h3>
-                    <div class="row">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
                         @foreach ($moreResourcesDownload as $resource)
-                            <div class="col-md-4 mb-4">
+                            <div class="mb-4">
                                 < <x:resource-card :resource="$resource" />
                             </div>
                         @endforeach
