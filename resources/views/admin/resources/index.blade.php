@@ -61,7 +61,7 @@
                                             <td>{{ $resource->download_count }}</td>
                                             <td>{{ $resource->created_at->format('d M y') }}</td>
 
-                                            @if ($resource->created_by_id === Auth::id())
+                                            @if ($resource->created_by_id === Auth::id() || Auth::user()->isAdmin())
                                                 <td>
                                                     <a href="{{ route('admin.resources.edit', $resource->id) }}"
                                                         class="btn btn-sm btn-primary">Edit</a>
