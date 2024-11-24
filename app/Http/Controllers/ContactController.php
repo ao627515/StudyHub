@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\NotifiableHelpers;
 use Exception;
 use App\Models\Contact;
 use Illuminate\Http\Request;
@@ -30,8 +31,9 @@ class ContactController extends Controller
         $status = 'Votre message a été envoyé avec succès!';
         try {
             // Envoi de la notification par mail
-            $recipientEmail = env('MAIL_ADMIN_ADDRESS'); // Tu peux paramétrer une adresse spécifique ici
-            Notification::route('mail', $recipientEmail)->notify(new ContactNotification($contact));
+            NotifiableHelpers::SystemNotifiable()->notify(
+                new ContactNotification($contact)
+            );
         } catch (Exception $ex) {
             // En cas d'erreur d'envoi
             $status = 'Une erreur est survenue lors de l\'envoi du mail. Veuillez réessayer plus tard.';

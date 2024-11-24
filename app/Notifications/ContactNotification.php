@@ -26,7 +26,7 @@ class ContactNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -52,7 +52,11 @@ class ContactNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'user' => [
+                'name' => $this->contact->name,
+                'email' => $this->contact->email,
+            ],
+            'message' => $this->contact->message
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\NotifiableHelpers;
 use App\Models\User;
 use App\Models\Resource;
 use App\Models\Uploader;
@@ -11,11 +12,16 @@ use App\Models\CourseModule;
 use App\Models\AcademicLevel;
 use App\Models\Administrator;
 use App\Models\CategoryResource;
+use App\Notifications\ResourceNotification;
 use App\Services\ResourceService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\StoreResourceRequest;
 use App\Http\Requests\UpdateResourceRequest;
+use App\Models\Teacher;
+// use App\Models\SystemNotifiable;
+use App\Notifications\Notifiable\SystemNotifiable;
+use Illuminate\Support\Facades\Notification;
 
 class ResourceController extends Controller
 {
@@ -113,6 +119,12 @@ class ResourceController extends Controller
     public function store(StoreResourceRequest $request)
     {
         $resource = $this->resourceService->store($request->validated());
+
+        NotifiableHelpers::SystemNotifiable()->notify(new ResourceNotification(
+            Auth::user(),
+            $resource,
+            'store'
+        ));
         return redirect()->route('admin.resources.index')->with('success', 'Resource created successfully.');
     }
 
@@ -174,6 +186,12 @@ class ResourceController extends Controller
     public function update(UpdateResourceRequest $request, Resource $resource)
     {
         $this->resourceService->update($resource, $request->validated());
+        // $system = new SystemNotifiable();
+        // $system->notify(new ResourceNotification(
+        //     Auth::user(),
+        //     $resource,
+        //     'update'
+        // ));
         return redirect()->route('admin.resources.index')->with('success', 'Resource updated successfully.');
     }
 
